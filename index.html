@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" id="mainHtml">
     <!--begin::Head-->
     <head>
         <title>New Project</title>
@@ -25,27 +25,6 @@
         <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
-
-        <script>
-            (function (w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != "dataLayer" ? "&l=" + l : "";
-                j.async = true;
-                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, "script", "dataLayer", "GTM-5FS8GGP");
-        </script>
-        <!--End::Google Tag Manager -->
-
-        <script>
-            // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
-            if (window.top != window.self) {
-                window.top.location.replace(window.self.location.href);
-            }
-        </script>
     </head>
     <!--end::Head-->
 
@@ -87,12 +66,9 @@
                 document.documentElement.setAttribute("data-bs-theme", themeMode);
             }
         </script>
-        <!--end::Theme mode setup on page load-->
-        <!--Begin::Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
-        <!--End::Google Tag Manager (noscript) -->
 
-        <!--begin::App-->        <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+        <!--begin::App-->        
+        <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
             <!--begin::Page-->
             <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
                 <!--begin::Header-->
@@ -1285,7 +1261,9 @@
                                 <!--end::Menu wrapper-->
                             </div>
                             <!--end::My apps-->
-
+                            <button  id="themeToggle" class="btn btn-icon btn-topbar w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-moon  fs-1"></i>
+                            </button>
                             <!--begin::Chat-->
                             <div class="app-navbar-item ms-2 ms-lg-3">
                                 <!--begin::Menu wrapper-->
@@ -1295,6 +1273,237 @@
                                 <!--end::Menu wrapper-->
                             </div>
                             <!--end::Chat-->
+                            
+                            <!--User Profile-->
+
+                            <div class="d-flex align-items-center ms-3 ms-lg-5" id="kt_header_user_menu_toggle">
+                                <!--begin::Menu wrapper-->
+                                <div class="btn btn-icon w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                    <img class="h-100 w-100 rounded" src="assets/media/avatars/1.jpg" alt="">
+                                </div>
+                                
+                        <!--begin::User account menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true" style="">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <div class="menu-content d-flex align-items-center px-3">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-50px me-5">
+                                        <img alt="Logo" src="assets/media/avatars/1.jpg">
+                                    </div>
+                                    <!--end::Avatar-->
+                        
+                                    <!--begin::Username-->
+                                    <div class="d-flex flex-column">
+                                        <div class="fw-bold d-flex align-items-center fs-5">
+                                            John Due                    
+                                            <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+                                        </div>
+                        
+                                        <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
+                                            max@kt.com                </a>
+                                    </div>
+                                    <!--end::Username-->
+                                </div>
+                            </div>
+                            <!--end::Menu item-->
+                        
+                            <!--begin::Menu separator-->
+                            <div class="separator my-2"></div>
+                            <!--end::Menu separator-->
+                        
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5">
+                                <a href="../demo12/account/overview.html" class="menu-link px-5">
+                                    My Profile
+                                </a>
+                            </div>
+                            <!--end::Menu item-->
+                            
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5">
+                                <a href="../demo12/apps/projects/list.html" class="menu-link px-5">
+                                    <span class="menu-text">My Projects</span>
+                                    <span class="menu-badge">
+                                        <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end::Menu item-->
+                        
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+                                <a href="#" class="menu-link px-5">
+                                    <span class="menu-title">My Subscription</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                        
+                                <!--begin::Menu sub-->
+                                <div class="menu-sub menu-sub-dropdown w-175px py-4" style="">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/referrals.html" class="menu-link px-5">
+                                            Referrals
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/billing.html" class="menu-link px-5">
+                                            Billing
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->            
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/statements.html" class="menu-link px-5">
+                                            Payments
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->            
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/statements.html" class="menu-link d-flex flex-stack px-5">
+                                            Statements
+                        
+                                            <span class="ms-2 lh-0" data-bs-toggle="tooltip" aria-label="View your statements" data-bs-original-title="View your statements" data-kt-initialized="1">
+                                                <i class="ki-duotone ki-information-5 fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>                    </span>
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    
+                                    <!--begin::Menu separator-->
+                                    <div class="separator my-2"></div>
+                                    <!--end::Menu separator-->
+                        
+                                    <!--begin::Menu item-->            
+                                    <div class="menu-item px-3">
+                                        <div class="menu-content px-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                                <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications">
+                                                <span class="form-check-label text-muted fs-7">
+                                                    Notifications
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu sub-->
+                            </div>
+                            <!--end::Menu item-->
+                        
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5">
+                                <a href="../demo12/account/statements.html" class="menu-link px-5">
+                                    My Statements
+                                </a>
+                            </div>
+                            <!--end::Menu item-->
+                        
+                            <!--begin::Menu separator-->
+                            <div class="separator my-2"></div>
+                            <!--end::Menu separator-->
+                        
+                            
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+                                <a href="#" class="menu-link px-5">
+                                    <span class="menu-title position-relative">
+                                        Language 
+                        
+                                        <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+                                            English <img class="w-15px h-15px rounded-1 ms-2" src="assets/media/flags/united-states.svg" alt="">
+                                        </span>
+                                    </span>
+                                </a>
+                        
+                                <!--begin::Menu sub-->
+                                <div class="menu-sub menu-sub-dropdown w-175px py-4" style="">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/settings.html" class="menu-link d-flex px-5 active">
+                                            <span class="symbol symbol-20px me-4">
+                                                <img class="rounded-1" src="assets/media/flags/united-states.svg" alt="">
+                                            </span>
+                                            English
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/settings.html" class="menu-link d-flex px-5">
+                                            <span class="symbol symbol-20px me-4">
+                                                <img class="rounded-1" src="assets/media/flags/spain.svg" alt="">
+                                            </span>
+                                            Spanish
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/settings.html" class="menu-link d-flex px-5">
+                                            <span class="symbol symbol-20px me-4">
+                                                <img class="rounded-1" src="assets/media/flags/germany.svg" alt="">
+                                            </span>
+                                            German
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/settings.html" class="menu-link d-flex px-5">
+                                            <span class="symbol symbol-20px me-4">
+                                                <img class="rounded-1" src="assets/media/flags/japan.svg" alt="">
+                                            </span>
+                                            Japanese
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                        
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="../demo12/account/settings.html" class="menu-link d-flex px-5">
+                                            <span class="symbol symbol-20px me-4">
+                                                <img class="rounded-1" src="assets/media/flags/france.svg" alt="">
+                                            </span>
+                                            French
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu sub-->
+                            </div>
+                            <!--end::Menu item-->
+                        
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5 my-1">
+                                <a href="" class="menu-link px-5">
+                                    Account Settings
+                                </a>
+                            </div>
+                            <!--end::Menu item-->
+                        
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5">
+                                <a href="" class="menu-link px-5">
+                                    Sign Out
+                                </a>
+                            </div>
+                            <!--end::Menu item-->
+                        </div>
+                        <!--end::User account menu-->
+                                <!--end::Menu wrapper-->
+                            </div>
+                            
+                            <!--End User Profile-->
+                           
                         </div>
                         <!--end::Navbar-->
                     </div>
@@ -1322,7 +1531,7 @@
                         <!--begin::Logo-->
                         <div class="app-sidebar-logo d-none d-md-flex flex-center pt-10 pb-2" id="kt_app_sidebar_logo">
                             <!--begin::Logo image-->
-                            <a href="../demo50/index.html">
+                            <a href="#">
                                 <!-- <img alt="Logo" src="assets/media/logos/demo50.svg" class="h-30px"/> -->
                                 <h1 class="text-white">Logo</h1>
                             </a>
@@ -3404,278 +3613,7 @@
                         <!--end::Primary menu-->
                         <!--begin::Footer-->
                         <div class="d-flex flex-column flex-center pb-4 pb-lg-8" id="kt_app_sidebar_footer">
-                            <!--begin::User menu-->
-                            <div class="cursor-pointer symbol symbol-40px mb-9" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-attach="parent" data-kt-menu-placement="right-end">
-                                <img src="assets/media/avatars/1.jpg" alt="user" />
-                            </div>
-
-                            <!--begin::User account menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content d-flex align-items-center px-3">
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-50px me-5">
-                                            <!-- <img alt="Logo" src="assets/media/avatars/1.jpg"/> -->
-                                            <h1 class="text-white">Logo</h1>
-                                        </div>
-                                        <!--end::Avatar-->
-
-                                        <!--begin::Username-->
-                                        <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">Max Smith <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-
-                                            <a href="#" class="fw-semibold text-muted text-hover-primary fs-7"> max@kt.com </a>
-                                        </div>
-                                        <!--end::Username-->
-                                    </div>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="../demo50/account/overview.html" class="menu-link px-5">
-                                        My Profile
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="../demo50/apps/projects/list.html" class="menu-link px-5">
-                                        <span class="menu-text">My Projects</span>
-                                        <span class="menu-badge">
-                                            <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-                                        </span>
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-end" data-kt-menu-offset="-15px, 0">
-                                    <a href="#" class="menu-link px-5">
-                                        <span class="menu-title">My Subscription</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/referrals.html" class="menu-link px-5">
-                                                Referrals
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/billing.html" class="menu-link px-5">
-                                                Billing
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/statements.html" class="menu-link px-5">
-                                                Payments
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/statements.html" class="menu-link d-flex flex-stack px-5">
-                                                Statements
-
-                                                <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="View your statements"> <i class="bi bi-information-5 fs-5"></i> </span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content px-3">
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                                    <span class="form-check-label text-muted fs-7">
-                                                        Notifications
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="../demo50/account/statements.html" class="menu-link px-5">
-                                        My Statements
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-                                    <a href="#" class="menu-link px-5">
-                                        <span class="menu-title position-relative">
-                                            Mode
-
-                                            <span class="ms-5 position-absolute translate-middle-y top-50 end-0"> <i class="bi bi-night-day theme-light-show fs-2"></i> <i class="bi bi-moon theme-dark-show fs-2"></i> </span>
-                                        </span>
-                                    </a>
-
-                                    <!--begin::Menu-->
-                                    <div
-                                        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px"
-                                        data-kt-menu="true"
-                                        data-kt-element="theme-mode-menu"
-                                    >
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
-                                                <span class="menu-icon" data-kt-element="icon"> <i class="bi bi-night-day fs-2"></i> </span>
-                                                <span class="menu-title">
-                                                    Light
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
-                                                <span class="menu-icon" data-kt-element="icon"> <i class="bi bi-moon fs-2"></i> </span>
-                                                <span class="menu-title">
-                                                    Dark
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
-                                                <span class="menu-icon" data-kt-element="icon"> <i class="bi bi-screen fs-2"></i> </span>
-                                                <span class="menu-title">
-                                                    System
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="0, 0">
-                                    <a href="#" class="menu-link px-5">
-                                        <span class="menu-title position-relative">
-                                            Language
-
-                                            <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
-                                                English <img class="w-15px h-15px rounded-1 ms-2" src="assets/media/flags/united-states.svg" alt="" />
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/settings.html" class="menu-link d-flex px-5 active">
-                                                <span class="symbol symbol-20px me-4">
-                                                    <img class="rounded-1" src="assets/media/flags/united-states.svg" alt="" />
-                                                </span>
-                                                English
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/settings.html" class="menu-link d-flex px-5">
-                                                <span class="symbol symbol-20px me-4">
-                                                    <img class="rounded-1" src="assets/media/flags/spain.svg" alt="" />
-                                                </span>
-                                                Spanish
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/settings.html" class="menu-link d-flex px-5">
-                                                <span class="symbol symbol-20px me-4">
-                                                    <img class="rounded-1" src="assets/media/flags/germany.svg" alt="" />
-                                                </span>
-                                                German
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/settings.html" class="menu-link d-flex px-5">
-                                                <span class="symbol symbol-20px me-4">
-                                                    <img class="rounded-1" src="assets/media/flags/japan.svg" alt="" />
-                                                </span>
-                                                Japanese
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../demo50/account/settings.html" class="menu-link d-flex px-5">
-                                                <span class="symbol symbol-20px me-4">
-                                                    <img class="rounded-1" src="assets/media/flags/france.svg" alt="" />
-                                                </span>
-                                                French
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5 my-1">
-                                    <a href="../demo50/account/settings.html" class="menu-link px-5">
-                                        Account Settings
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="../demo50/authentication/layouts/corporate/sign-in.html" class="menu-link px-5">
-                                        Sign Out
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::User account menu-->
-
-                            <!--begin::Action-->
+                           
                             <div
                                 class="app-navbar-item <br /> <b>Warning</b>: Undefined variable $itemClass in <b>/var/www/preview.keenthemes.com/kt-products/metronic/releases/2023-03-24-032718/themes/metronic/html/demo50/dist/view/layout/partials/sidebar/_primary-footer.php</b> on line <b>15</b><br />"
                             >
@@ -3900,7 +3838,7 @@
                             <!--begin::Content container-->
                             <div id="kt_app_content_container" class="app-container container-xxl">
                                 <!--begin::Row-->
-                                <div class="row gx-5 gx-xl-10">
+                                <div class="row">
                                     <!--begin::Col-->
                                     <div class="col-xl-8 mb-5 mb-xl-10">
                                         <!--begin::Timeline Widget 4-->
@@ -4012,7 +3950,7 @@
                                                     <div class="tab-pane blockui active show" id="kt_timeline_widget_4_tab_day" role="tabpanel" aria-labelledby="day-tab" data-kt-timeline-widget-4-blockui="true" style="">
                                                         <div class="table-responsive pb-10">
                                                             <!--begin::Timeline-->
-                                                            <div id="kt_timeline_widget_4_1" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="/assets/media/" style="position: relative;">
+                                                            <div id="kt_timeline_widget_4_1" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="assets/media/" style="position: relative;">
                                                                 <div
                                                                     class="vis-timeline vis-bottom vis-ltr"
                                                                     style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); visibility: visible; height: 354px;"
@@ -4065,8 +4003,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-6.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Meeting</a>
@@ -4090,7 +4028,7 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/2.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Testing</a>
@@ -4114,8 +4052,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/2.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/3.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/3.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Landing page</a>
@@ -4139,9 +4077,9 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/2.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/3.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/4.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/3.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/4.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Products module</a>
@@ -4206,7 +4144,7 @@
                                                     <div class="tab-pane blockui" id="kt_timeline_widget_4_tab_week" role="tabpanel" aria-labelledby="week-tab" data-kt-timeline-widget-4-blockui="true" style="">
                                                         <div class="table-responsive pb-10">
                                                             <!--begin::Timeline-->
-                                                            <div id="kt_timeline_widget_4_2" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="/assets/media/" style="position: relative;">
+                                                            <div id="kt_timeline_widget_4_2" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="assets/media/" style="position: relative;">
                                                                 <div
                                                                     class="vis-timeline vis-bottom vis-ltr"
                                                                     style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); visibility: visible; height: 269px;"
@@ -4283,8 +4221,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/2.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Framework</a>
@@ -4308,7 +4246,7 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Accessibility</a>
@@ -4332,8 +4270,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/1.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/2.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Microsites</a>
@@ -4357,9 +4295,9 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-23.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-12.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-9.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/300-23.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Deployment</a>
@@ -4442,7 +4380,7 @@
                                                     <div class="tab-pane blockui" id="kt_timeline_widget_4_tab_month" role="tabpanel" aria-labelledby="month-tab" data-kt-timeline-widget-4-blockui="true" style="">
                                                         <div class="table-responsive pb-10">
                                                             <!--begin::Timeline-->
-                                                            <div id="kt_timeline_widget_4_3" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="/assets/media/" style="position: relative;">
+                                                            <div id="kt_timeline_widget_4_3" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="assets/media/" style="position: relative;">
                                                                 <div
                                                                     class="vis-timeline vis-bottom vis-ltr"
                                                                     style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); visibility: visible; height: 228px;"
@@ -4519,8 +4457,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-6.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Tags</a>
@@ -4544,7 +4482,7 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Testing</a>
@@ -4568,8 +4506,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-5.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-20.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/300-20.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Media</a>
@@ -4593,9 +4531,9 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-23.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-12.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-9.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/300-23.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Plugins</a>
@@ -4678,7 +4616,7 @@
                                                     <div class="tab-pane blockui" id="kt_timeline_widget_4_tab_2022" role="tabpanel" aria-labelledby="week-tab" data-kt-timeline-widget-4-blockui="true" style="">
                                                         <div class="table-responsive pb-10">
                                                             <!--begin::Timeline-->
-                                                            <div id="kt_timeline_widget_4_4" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="/assets/media/" style="position: relative;">
+                                                            <div id="kt_timeline_widget_4_4" class="vis-timeline-custom h-350px min-w-700px" data-kt-timeline-widget-4-image-root="assets/media/" style="position: relative;">
                                                                 <div
                                                                     class="vis-timeline vis-bottom vis-ltr"
                                                                     style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); visibility: visible; height: 228px;"
@@ -4755,8 +4693,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-7.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Tags</a>
@@ -4780,7 +4718,7 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-2.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Testing</a>
@@ -4804,8 +4742,8 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-5.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-21.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/300-21.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Media</a>
@@ -4829,9 +4767,9 @@
 
                                                                                                         <div class="d-flex align-items-center position-relative z-index-2">
                                                                                                             <div class="symbol-group symbol-hover flex-nowrap me-3">
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-3.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-11.jpg" /></div>
-                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="/assets/media/avatars/300-13.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
+                                                                                                                <div class="symbol symbol-circle symbol-25px"><img alt="" src="assets/media/avatars/1.jpg" /></div>
                                                                                                             </div>
 
                                                                                                             <a href="#" class="fw-bold text-white text-hover-dark">Plugins</a>
@@ -5659,7 +5597,7 @@
                                 </div>
                                 <!--end::Table Widget 5-->
                                 <!--begin::Row-->
-                                <div class="row g-5 g-xl-10 g-xl-10">
+                                <div class="row g-5 g-xl-4 g-xl-4">
                                     <!--begin::Col-->
                                     <div class="col-xl-4 mb-xl-10">
                                         <!--begin::List widget 8-->
@@ -6550,6 +6488,10 @@
 
                                     <!--begin::Options-->
                                     <div class="row" data-kt-buttons="true" data-kt-buttons-target=".form-check-image,.form-check-input">
+                                      
+                                      
+                                        
+                                      
                                         <!--begin::Col-->
                                         <div class="col-6">
                                             <!--begin::Option-->
@@ -6838,7 +6780,7 @@
             <!--end::Card-->
         </div>
         <!--end::App layout builder-->
-
+        
         <!--begin::App settings toggle-->
         <button
             id="kt_app_layout_builder_toggle"
@@ -6950,7 +6892,7 @@
                                             <div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px pe-2">
                                                 <!--begin::User-->
                                                 <div class="symbol symbol-circle symbol-25px">
-                                                    <img src="assets/media/avatars/300-2.jpg" alt="img" />
+                                                    <img src="assets/media/avatars/1.jpg" alt="img" />
                                                 </div>
                                                 <!--end::User-->
 
@@ -7055,7 +6997,7 @@
 
                                             <!--begin::User-->
                                             <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Alan Nilson">
-                                                <img src="assets/media/avatars/300-1.jpg" alt="img" />
+                                                <img src="assets/media/avatars/1.jpg" alt="img" />
                                             </div>
                                             <!--end::User-->
                                         </div>
@@ -9382,7 +9324,7 @@
                                                 <div class="col-lg-4">
                                                     <!--begin::Preview-->
                                                     <a
-                                                        href="https://preview.keenthemes.com/metronic8/demo12/index.html"
+                                                        href="https://preview.keenthemes.comindex.html"
                                                         data-kt-href="true"
                                                         class="preview-thumbnail bg-light border d-flex flex-column rounded-3 hover-elevate-up overflow-hidden"
                                                     >
@@ -10276,7 +10218,7 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane fade show active" id="kt_app_engage_prebuilts_tab_pages_authentication" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -10601,7 +10543,7 @@
                                                         <!--begin::Collapse content-->
                                                         <div class="show" id="kt_app_engage_prebuilts_tab_pages_general_user-profile">
                                                             <!--begin::Row-->
-                                                            <div class="row g-10 pt-2 pb-5">
+                                                            <div class="row g-5 pt-2 pb-5">
                                                                 <!--begin::Col-->
                                                                 <div class="col-lg-4">
                                                                     <!--begin::Preview-->
@@ -10763,7 +10705,7 @@
                                                         <!--begin::Collapse content-->
                                                         <div class="collapse" id="kt_app_engage_prebuilts_tab_pages_general_corporate">
                                                             <!--begin::Row-->
-                                                            <div class="row g-10 pt-2 pb-5">
+                                                            <div class="row g-5 pt-2 pb-5">
                                                                 <!--begin::Col-->
                                                                 <div class="col-lg-4">
                                                                     <!--begin::Preview-->
@@ -10881,7 +10823,7 @@
                                                         <!--begin::Collapse content-->
                                                         <div class="collapse" id="kt_app_engage_prebuilts_tab_pages_general_social">
                                                             <!--begin::Row-->
-                                                            <div class="row g-10 pt-2 pb-5">
+                                                            <div class="row g-5 pt-2 pb-5">
                                                                 <!--begin::Col-->
                                                                 <div class="col-lg-4">
                                                                     <!--begin::Preview-->
@@ -10979,7 +10921,7 @@
                                                         <!--begin::Collapse content-->
                                                         <div class="collapse" id="kt_app_engage_prebuilts_tab_pages_general_others">
                                                             <!--begin::Row-->
-                                                            <div class="row g-10 pt-2 pb-5">
+                                                            <div class="row g-5 pt-2 pb-5">
                                                                 <!--begin::Col-->
                                                                 <div class="col-lg-4">
                                                                     <!--begin::Preview-->
@@ -11067,7 +11009,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_app_engage_prebuilts_tab_pages_account" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -11252,7 +11194,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_app_engage_prebuilts_tab_pages_modals" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -11661,7 +11603,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_app_engage_prebuilts_tab_pages_wizards" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -11726,7 +11668,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_app_engage_prebuilts_tab_pages_search" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -11815,7 +11757,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_app_engage_prebuilts_tab_pages_widgets" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -11940,7 +11882,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_app_engage_prebuilts_tab_pages_email-templates" role="tabpanel">
                                                     <!--begin::Row-->
-                                                    <div class="row g-10">
+                                                    <div class="row g-5">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-4">
                                                             <!--begin::Preview-->
@@ -12246,7 +12188,7 @@
 
                                                     <a class="fw-6 fw-semibold" href="https://preview.keenthemes.com/metronic8/demo13/index.html"> Classic Dashboard </a>
 
-                                                    <a class="fw-6 fw-semibold" href="https://preview.keenthemes.com/metronic8/demo12/index.html"> Data Analyzer </a>
+                                                    <a class="fw-6 fw-semibold" href="https://preview.keenthemes.comindex.html"> Data Analyzer </a>
 
                                                     <a class="fw-6 fw-semibold" href="https://preview.keenthemes.com/metronic8/demo48/index.html"> Cloud ERP </a>
 
@@ -13166,7 +13108,7 @@
 
                                             <!--begin::Info-->
                                             <div class="fw-semibold">
-                                                <span class="fs-6 text-gray-800 me-2">Max Smith</span>
+                                                <span class="fs-6 text-gray-800 me-2">John Due</span>
                                                 <span class="badge badge-light">Software Enginer</span>
                                             </div>
                                             <!--end::Info-->
@@ -13315,7 +13257,7 @@
 
                                                 <!--begin::Details-->
                                                 <div class="ms-5">
-                                                    <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
+                                                    <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">John Due</a>
 
                                                     <div class="fw-semibold text-muted">max@kt.com</div>
                                                 </div>
@@ -14099,7 +14041,7 @@
 
                                         <!--begin::Details-->
                                         <div class="ms-5">
-                                            <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
+                                            <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">John Due</a>
 
                                             <div class="fw-semibold text-muted">max@kt.com</div>
                                         </div>
@@ -14533,7 +14475,7 @@
 
                                         <!--begin::Details-->
                                         <div class="ms-5">
-                                            <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Max Smith</a>
+                                            <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">John Due</a>
 
                                             <div class="fw-semibold text-muted">max@kt.com</div>
                                         </div>
@@ -14595,29 +14537,16 @@
         <!--begin::Global Javascript Bundle(mandatory for all pages)-->
         <script src="assets/plugins/global/plugins.bundle.js"></script>
         <script src="assets/js/scripts.bundle.js"></script>
+        <script src="assets/js/main.js"></script>
         <!--end::Global Javascript Bundle-->
 
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
-        <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
-        <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
         <!--end::Vendors Javascript-->
 
         <!--begin::Custom Javascript(used for this page only)-->
         <script src="assets/js/widgets.bundle.js"></script>
         <script src="assets/js/custom/widgets.js"></script>
-        <script src="assets/js/custom/apps/chat/chat.js"></script>
-        <script src="assets/js/custom/utilities/modals/users-search.js"></script>
         <!--end::Custom Javascript-->
         <!--end::Javascript-->
     </body>
