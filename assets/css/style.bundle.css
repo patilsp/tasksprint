@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
  /* Light Theme */
-:root[data-bs-theme="light"] {
+ :root[data-bs-theme="light"] {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
@@ -81,6 +81,7 @@
     --bs-body-color-rgb: 24,28,50;
     --bs-body-bg: #ffffff;
     --bs-body-bg-rgb: 255,255,255;
+    --bs-body-bg-content: #ECEEF7;
     --bs-emphasis-color: #000000;
     --bs-emphasis-color-rgb: 0,0,0;
     --bs-secondary-color: rgba(24, 28, 50, 0.75);
@@ -123,7 +124,7 @@
     --bs-form-invalid-color: #ef6b3f;
     --bs-form-invalid-border-color: #ef6b3f;
   }
-  
+
   /* Dark Theme */
   :root[data-bs-theme="dark"] {
     --bs-blue: #0d6efd;
@@ -140,7 +141,7 @@
     --bs-white: #ffffff;
     --bs-gray: #FFFFFF;
     --bs-gray-dark: #edeef2;
-    --bs-gray-100: #1e1e2d;
+    --bs-gray-100: #191c2f;
     --bs-gray-200: #2d2d2f;
     --bs-gray-300: #2c2f43;
     --bs-gray-400: #3B3E4E;
@@ -149,7 +150,7 @@
     --bs-gray-700: #87888C;
     --bs-gray-800: #A1A5B7;
     --bs-gray-900: #181C32;
-    --bs-light: #1e1e2d;
+    --bs-light: #191c2f;
     --bs-primary: #89d876;
     --bs-secondary: #a2e49b;
     --bs-success: #63b44e;
@@ -200,8 +201,9 @@
     --bs-body-line-height: 1.5;
     --bs-body-color: #FFFFFF;
     --bs-body-color-rgb: 255,255,255;
-    --bs-body-bg: #1e1e2d;
+    --bs-body-bg: #191c2f;
     --bs-body-bg-rgb: 30,30,45;
+    --bs-body-bg-content: #111424;
     --bs-emphasis-color: #ffffff;
     --bs-emphasis-color-rgb: 255,255,255;
     --bs-secondary-color: rgba(255, 255, 255, 0.75);
@@ -3390,7 +3392,7 @@ textarea.form-control-lg {
     --bs-btn-border-color: transparent;
     --bs-btn-border-radius: 0.65rem;
     --bs-btn-hover-border-color: transparent;
-    --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),0 1px 1px rgba(0, 0, 0, 0.075);
+    --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15);
     --bs-btn-disabled-opacity: 0.65;
     --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
     display: inline-block;
@@ -3773,7 +3775,7 @@ textarea.form-control-lg {
 .btn-group-sm>.btn,.btn-sm {
     --bs-btn-padding-y: 0.55rem;
     --bs-btn-padding-x: 1.25rem;
-    --bs-btn-font-size: 0.95rem;
+    --bs-btn-font-size: 0.75rem;
     --bs-btn-border-radius: 0.425rem
 }
 
@@ -4913,7 +4915,7 @@ textarea.form-control-lg {
     --bs-card-spacer-y: 1rem;
     --bs-card-spacer-x: 1rem;
     --bs-card-title-spacer-y: 0.5rem;
-    --bs-card-border-width: 2px;
+    --bs-card-border-width: 1px;
     --bs-card-border-color: var(--bs-border-color);
     --bs-card-border-radius: 0.75rem;
     --bs-card-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03);
@@ -5385,7 +5387,7 @@ textarea.form-control-lg {
 .pagination-sm {
     --bs-pagination-padding-x: 0.5rem;
     --bs-pagination-padding-y: 0.25rem;
-    --bs-pagination-font-size: 0.95rem;
+    --bs-pagination-font-size: 0.65rem;
     --bs-pagination-border-radius: var(--bs-border-radius-sm)
 }
 
@@ -34318,7 +34320,7 @@ textarea.form-control-lg {
     --bs-card-box-shadow: none;
     --bs-table-striped-bg: rgba(27, 27, 41, 0.75);
     --bs-table-loading-message-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
-    --bs-dropdown-bg: #1e1e2d;
+    --bs-dropdown-bg: #191c2f;
     --bs-dropdown-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
     --bs-code-bg: #2B2B40;
     --bs-code-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.08);
@@ -34336,10 +34338,10 @@ textarea.form-control-lg {
     --bs-scrolltop-icon-color: #FFFFFF;
     --bs-scrolltop-icon-color-hover: #FFFFFF;
     --bs-drawer-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
-    --bs-drawer-bg-color: #1e1e2d;
+    --bs-drawer-bg-color: #191c2f;
     --bs-drawer-overlay-bg-color: rgba(0, 0, 0, 0.4);
     --bs-menu-dropdown-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
-    --bs-menu-dropdown-bg-color: #1e1e2d;
+    --bs-menu-dropdown-bg-color: #191c2f;
     --bs-menu-heading-color: #565674;
     --bs-menu-link-color-hover: #50cd89;
     --bs-menu-link-color-show: #50cd89;
@@ -39449,9 +39451,6 @@ textarea.form-control-lg {
     transition: all .2s ease-in-out
 }
 
-.card {
-    border: 2px solid var(--bs-card-border-color);
-}
 
 .card .card-header {
     display: flex;
@@ -39925,10 +39924,10 @@ textarea.form-control-lg {
     box-shadow: none
 } */
 
-.btn:not(.btn-outline):not(.btn-dashed):not(.btn-bordered):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon) {
+/* .btn:not(.btn-outline):not(.btn-dashed):not(.btn-bordered):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon) {
     border: 0;
     padding: calc(.775rem + 1px) calc(1.5rem + 1px)
-}
+} */
 
 .btn-group-lg>.btn:not(.btn-outline):not(.btn-dashed):not(.btn-bordered):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon),.btn:not(.btn-outline):not(.btn-dashed):not(.btn-bordered):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon).btn-lg {
     padding: calc(.825rem + 1px) calc(1.75rem + 1px)
@@ -54820,15 +54819,15 @@ body[data-kt-sticky-landing-header=on] {
     --bs-app-toolbar-sticky-bg-color: #ffffff;
     --bs-app-toolbar-sticky-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
     --bs-app-sidebar-base-bg-color: #111424;
-    --bs-app-sidebar-primary-base-bg-color: #111424
+    --bs-app-sidebar-primary-base-bg-color: #111424;
 }
 
 [data-bs-theme=dark] {
-    --bs-app-bg-color: #1e1e2d;
-    --bs-app-blank-bg-color: #1e1e2d;
-    --bs-app-header-base-bg-color: #1e1e2d;
+    --bs-app-bg-color: #191c2f;
+    --bs-app-blank-bg-color: #191c2f;
+    --bs-app-header-base-bg-color: #191c2f;
     --bs-app-header-minimize-bg-color: rgba(30, 30, 45, 0.5);
-    --bs-app-toolbar-sticky-bg-color: #1e1e2d;
+    --bs-app-toolbar-sticky-bg-color: #191c2f;
     --bs-app-toolbar-sticky-box-shadow: none;
     --bs-app-sidebar-base-bg-color: #111424;
     --bs-app-sidebar-primary-base-bg-color: #111424
@@ -56706,8 +56705,8 @@ router-outlet {
     .app-content {
         padding-top:0;
         padding-bottom: 0;
-        padding-left: 0;
-        padding-right: 0
+        padding-left: 10px;
+        padding-right: 10px
     }
 }
 
@@ -56943,4 +56942,9 @@ router-outlet {
     [data-bs-theme=dark] .app-sidebar {
         border-right:var(--bs-app-separator-border)
     }
+}
+
+
+#kt_app_content{
+    background-color: var(--bs-body-bg-content);
 }
