@@ -262,7 +262,6 @@ body {
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    zoom: 90%
 }
 
 hr {
@@ -276,7 +275,7 @@ hr {
 .h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6 {
     margin-top: 0;
     margin-bottom: .5rem;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.2;
     color: var(--bs-heading-color,inherit)
 }
@@ -4917,7 +4916,7 @@ textarea.form-control-lg {
     --bs-card-border-width: 2px;
     --bs-card-border-color: var(--bs-border-color);
     --bs-card-border-radius: 0.75rem;
-    --bs-card-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.03);
+    --bs-card-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03);
     --bs-card-inner-border-radius: calc(0.75rem - 1px);
     --bs-card-cap-padding-y: 0.5rem;
     --bs-card-cap-padding-x: 1rem;
@@ -39459,8 +39458,8 @@ textarea.form-control-lg {
     justify-content: space-between;
     align-items: stretch;
     flex-wrap: wrap;
-    min-height: 70px;
-    padding: 0 2.25rem;
+    min-height: 60px;
+    padding: 0 1.25rem;
     color: var(--bs-card-cap-color);
     background-color: var(--bs-card-cap-bg);
     border-bottom: 1px solid var(--bs-card-border-color)
@@ -53762,13 +53761,9 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
     color: var(--bs-text-dark)!important
 }
 
-.text-muted {
-    color: var(--bs-text-muted)!important
-}
-
 .text-hover-muted {
     transition: color .2s ease
-}
+}   
 
 .text-hover-muted i {
     transition: color .2s ease
@@ -54993,12 +54988,12 @@ router-outlet {
 
 @media (min-width: 992px) {
     :root {
-        --bs-app-header-height: 75px;
+        --bs-app-header-height: 65px;
         --bs-app-header-height-actual: 100px
     }
 
     [data-kt-app-header-sticky=on] {
-        --bs-app-header-height: 70px;
+        --bs-app-header-height: 60px;
         --bs-app-header-height-actual: 100px
     }
 
@@ -55745,8 +55740,8 @@ router-outlet {
     }
 
     :root {
-        --bs-app-sidebar-width: 295px;
-        --bs-app-sidebar-width-actual: 295px;
+        --bs-app-sidebar-width: 320px;
+        --bs-app-sidebar-width-actual: 320px;
         --bs-app-sidebar-gap-start: 0px;
         --bs-app-sidebar-gap-end: 0px;
         --bs-app-sidebar-gap-top: 0px;
