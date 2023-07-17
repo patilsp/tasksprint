@@ -31,3 +31,70 @@
     background-color: #eae1cf;
     border-radius: 24px;
 }
+.bg-white{
+  background-color: #fff !important
+}
+.header-bg{
+  background-color: lightblue
+}
+.launcher {
+  padding: 50px;
+}
+.launcher .sidebar {
+  position: fixed;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 425px;
+  top: 50px;
+  right: 50px;
+  bottom: 50px;
+  background-color: rgba(19, 0, 97, 0.3);
+  border-radius: 1.75rem;
+}
+.launcher .sidebar .timeline .timeline-line {
+  opacity: 0.2;
+}
+.launcher .sidebar .timeline .timeline-icon .symbol-label {
+  background-color: #244cab;
+}
+.launcher .sidebar .border {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.launcher .sidebar .hover-scroll-y {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+.launcher .sidebar .hover-scroll-y::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.launcher .sidebar .hover-scroll-y::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.launcher .sidebar .hover-scroll-y:hover {
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+.launcher .sidebar .hover-scroll-y:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.launcher .sidebar .hover-scroll-y:hover::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.launcher.sidebar-enabled {
+  padding-right: 475px;
+}
+
+@media (max-width: 991.98px) {
+  .launcher {
+    padding: 15px;
+  }
+  .launcher.sidebar-enabled {
+    padding: 15px;
+  }
+  .launcher .sidebar {
+    display: none;
+    background-color: rgba(19, 0, 97, 0.75);
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+}
