@@ -54987,7 +54987,7 @@ router-outlet {
 
 @media (min-width: 992px) {
     :root {
-        --bs-app-header-height: 65px;
+        --bs-app-header-height: 60px;
         --bs-app-header-height-actual: 100px
     }
 
