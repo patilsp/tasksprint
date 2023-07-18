@@ -46,7 +46,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  width: 475px;
+  min-width: 420px;
+  max-width: 400px;
   top: 45px;
   right: 45px;
   bottom: 45px;

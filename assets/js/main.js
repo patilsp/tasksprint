@@ -1,15 +1,26 @@
-// Function to toggle the theme
-function toggleTheme() {
-    var htmlElement = document.getElementById('mainHtml');
-  
-    if (htmlElement.getAttribute('data-bs-theme') === 'light') {
-      htmlElement.setAttribute('data-bs-theme', 'dark');
+
+var defaultThemeMode = "dark";
+var themeMode;
+
+if (document.documentElement) {
+    if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+        themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
     } else {
-      htmlElement.setAttribute('data-bs-theme', 'light');
+        if (localStorage.getItem("data-bs-theme") !== null) {
+            themeMode = localStorage.getItem("data-bs-theme");
+        } else {
+            themeMode = defaultThemeMode;
+        }
     }
-  }
-  
-  // Event listener for the toggle button
-  var themeToggle = document.getElementById('themeToggle');
-  themeToggle.addEventListener('click', toggleTheme);
-  
+
+    if (themeMode === "system") {
+        themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    document.documentElement.setAttribute("data-bs-theme", themeMode);
+}
+
+function changeThemeMode(mode) {
+    document.documentElement.setAttribute("data-bs-theme", mode);
+    localStorage.setItem("data-bs-theme", mode);
+}

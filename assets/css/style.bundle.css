@@ -56095,7 +56095,7 @@ router-outlet {
     }
 
     [data-kt-app-sidebar-secondary-enabled=true] {
-        --bs-app-sidebar-secondary-width-actual: calc( 295px - 60px - 0px - 0px - 0px - 0px )
+        --bs-app-sidebar-secondary-width-actual: calc( 325px - 60px - 0px - 0px - 0px - 0px )
     }
 
     [data-kt-app-sidebar-secondary-enabled=true][data-kt-app-sidebar-stacked=true] {

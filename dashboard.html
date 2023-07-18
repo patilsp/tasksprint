@@ -42,7 +42,7 @@
     >
         <!--begin::Theme mode setup on page load-->
         <script>
-            var defaultThemeMode = "light";
+            var defaultThemeMode = "dark";
             var themeMode;
 
             if (document.documentElement) {
@@ -168,19 +168,7 @@
                                         <i class="bi bi-bar-chart-line fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     </div>
                                 </div>
-
-                                <div class="app-navbar-item ms-2 ms-lg-3">
-                                    <button
-                                        id="themeToggle"
-                                        class="btn btn-icon btn-icon-gray-500 btn-active-light btn-active-color-primary w-35px h-35px w-lg-40px h-lg-40px position-relative"
-                                        data-kt-menu-trigger="{default:'click', lg: 'hover'}"
-                                        data-kt-menu-attach="parent"
-                                        data-kt-menu-placement="bottom-end"
-                                    >
-                                        <i class="bi bi-moon fs-1"></i>
-                                    </button>
-                                </div>
-
+                       
                                 <div class="d-flex align-items-center ms-2 ms-lg-3">
                                     <div
                                         class="btn btn-icon btn-icon-gray-500 btn-active-light btn-active-color-primary w-35px h-35px w-lg-40px h-lg-40px position-relative"
@@ -669,14 +657,54 @@
                                         </div>
                                         <!--end::Menu item-->
 
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="account/statements.html" class="menu-link px-5">
-                                                My Statements
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
+                                    
 
+                                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" >
+                                            <a href="#" class="menu-link px-5">
+                                                <span class="menu-title position-relative">
+                                                    Mode 
+                                
+                                                    <span class="ms-5 position-absolute translate-middle-y top-50 end-0">
+                                                        <i class="ki bi-night-day theme-light-show fs-2"></i>                        
+                                                        <i class="bi bi-moon fs-2 fs-2"></i>                    
+                                                    </span>
+                                                </span>
+                                            </a>
+                                
+                                            <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3 my-0">
+                                                <a href="#" class="menu-link px-3 py-2 active" onclick="changeThemeMode('light')">
+                                                    <span class="menu-icon" data-kt-element="icon">
+                                                        <i class="bi bi-brightness-high fs-2"></i>            
+                                                    </span>
+                                                    <span class="menu-title">
+                                                        Light
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3 my-0">
+                                                <a href="#" class="menu-link px-3 py-2" onclick="changeThemeMode('dark')">
+                                                    <span class="menu-icon" data-kt-element="icon">
+                                                        <i class="bi bi-moon fs-2"></i>            
+                                                    </span>
+                                                    <span class="menu-title">
+                                                        Dark
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        
+                                        </div>
+                                        <!--end::Menu-->
+                                        
+                                        </div>
+
+                                                
                                         <!--begin::Menu separator-->
                                         <div class="separator my-2"></div>
                                         <!--end::Menu separator-->
@@ -4490,7 +4518,7 @@
                                                 <!--end::Image-->
 
                                                 <!--begin::Check-->
-                                                <div style="visibility: hidden; height: 0 !important; width: 0 !importnat; overflow: hidden;">
+                                                <div style="visibility: hidden; height: 0 !important; width: 0 !important; overflow: hidden;">
                                                     <input class="form-check-input" type="radio" value="duotone" name="layout-builder[layout][app][general][icons]" />
                                                 </div>
                                                 <!--end::Check-->
@@ -4507,7 +4535,7 @@
                                                 <!--end::Image-->
 
                                                 <!--begin::Check-->
-                                                <div style="visibility: hidden; height: 0 !important; width: 0 !importnat; overflow: hidden;">
+                                                <div style="visibility: hidden; height: 0 !important; width: 0 !important; overflow: hidden;">
                                                     <input class="form-check-input" type="radio" value="outline" checked name="layout-builder[layout][app][general][icons]" />
                                                 </div>
                                                 <!--end::Check-->
@@ -4524,7 +4552,7 @@
                                                 <!--end::Image-->
 
                                                 <!--begin::Check-->
-                                                <div style="visibility: hidden; height: 0 !important; width: 0 !importnat; overflow: hidden;">
+                                                <div style="visibility: hidden; height: 0 !important; width: 0 !important; overflow: hidden;">
                                                     <input class="form-check-input" type="radio" value="solid" name="layout-builder[layout][app][general][icons]" />
                                                 </div>
                                                 <!--end::Check-->
@@ -4657,7 +4685,7 @@
 
                         <div class="card-toolbar">
                             <button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_activities_close">
-                                <i class="bi bi-three-dots-vertical fs1"></i>
+                                <i class="bi bi-x-circle-fill fs1"></i>
                             </button>
                         </div>
                     </div>
