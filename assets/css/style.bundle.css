@@ -70,8 +70,8 @@
     --bs-dark-border-subtle: #A1A5B7;
     --bs-white-rgb: 255,255,255;
     --bs-black-rgb: 0,0,0;
-    --bs-font-sans-serif: Inter,Helvetica,"sans-serif";
-    --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    --bs-font-sans-serif: "Roboto", "Helvetica", "sans-serif";
+    --bs-font-monospace: "Roboto Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace; 
     --bs-gradient: linear-gradient(90deg, #FEB85C 0%, #FF7347 100%) 0% 0% no-repeat padding-box;
     --bs-body-font-family: var(--bs-font-sans-serif);
     --bs-body-font-size: 14px;
@@ -42172,7 +42172,7 @@ code:not([class*=language-]) {
 }
 
 .form-control.form-control-solid {
-    background-color: var(--bs-gray-100);
+    background-color: var(--bs-gray-200);
     border-color: var(--bs-gray-100);
     color: var(--bs-gray-700);
     transition: color .2s ease
