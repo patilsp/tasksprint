@@ -81,7 +81,7 @@
     --bs-body-color-rgb: 24,28,50;
     --bs-body-bg: #ffffff;
     --bs-body-bg-rgb: 255,255,255;
-    --bs-body-bg-content: #ECEEF7;
+    --bs-body-bg-content: #e8e8e8;
     --bs-emphasis-color: #000000;
     --bs-emphasis-color-rgb: 0,0,0;
     --bs-secondary-color: rgba(24, 28, 50, 0.75);
@@ -42315,7 +42315,7 @@ code:not([class*=language-]) {
 }
 
 .form-check.form-check-solid .form-check-input:not(:checked) {
-    background-color: var(--bs-gray-200)
+    background-color: var(--bs-gray-400)
 }
 
 .form-check.form-check-solid .form-check-input[type=checkbox]:indeterminate {
@@ -50609,7 +50609,8 @@ code:not([class*=language-]) {
 
 .badge {
     display: inline-flex;
-    align-items: center
+    align-items: center;
+    padding: 5px 10px
 }
 
 .badge.badge-circle,.badge.badge-square {
@@ -56099,7 +56100,7 @@ router-outlet {
     }
 
     [data-kt-app-sidebar-secondary-enabled=true][data-kt-app-sidebar-stacked=true] {
-        --bs-app-sidebar-secondary-width: calc( 295px - 60px - 0px - 0px - 0px - 0px );
+        --bs-app-sidebar-secondary-width: calc( 325px - 60px - 0px - 0px - 0px - 0px );
         --bs-app-sidebar-secondary-gap-start: 0px;
         --bs-app-sidebar-secondary-gap-end: 0px;
         --bs-app-sidebar-secondary-gap-top: 0px;
@@ -56115,7 +56116,7 @@ router-outlet {
     }
 
     [data-kt-app-sidebar-secondary-enabled=true][data-kt-app-sidebar-secondary-collapse-mobile=on] {
-        --bs-app-sidebar-secondary-width-actual: calc( 295px - 60px - 0px - 0px - 0px - 0px );
+        --bs-app-sidebar-secondary-width-actual: calc( 325px - 60px - 0px - 0px - 0px - 0px );
         --bs-app-sidebar-secondary-width: 0px
     }
 
