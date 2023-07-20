@@ -46,13 +46,12 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-width: 420px;
-  max-width: 400px;
-  top: 45px;
-  right: 45px;
-  bottom: 45px;
-  background-color: #37c375;
-  border-radius: 1.75rem;
+  width: 425px;
+  top: 50px;
+  right: 50px;
+  bottom: 30px;
+  background-color: rgba(19,0,97,.3);
+  border-radius: 10px;
 }
 .launcher .sidebar .timeline .timeline-line {
   opacity: 0.2;
@@ -96,7 +95,7 @@
     display: none;
     background-color: rgba(19, 0, 97, 0.75);
     top: 15px;
-    right: 15px;
+    right: 7px;
     bottom: 15px;
   }
 }
