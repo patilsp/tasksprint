@@ -164,7 +164,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 95%
     }
     .menu-sub-dropdown {
       display: none;
@@ -174,30 +173,71 @@
       box-shadow: var(--bs-menu-dropdown-box-shadow);
       z-index: 107;
   }
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: #fff;
+    pointer-events: auto;
+    background-color: #1e1e2d;
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: var(--bs-modal-border-radius);
+    box-shadow: var(--bs-modal-box-shadow);
+    outline: 0;
+}
+.btn-check:checked+.btn.btn-active-light-primary, .btn.btn-active-light-primary.active, .btn.btn-active-light-primary {
+    color: var(--bs-primary);
+    border-color: var(--bs-primary-light);
+    background-color: var(--bs-primary-light)!important;
+}
   </style>
 
   <body id="kt_body" class="page-bg">
+    <script>
+      var defaultThemeMode = "dark";
+      var themeMode;
+
+      if (document.documentElement) {
+        if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+          themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+        } else {
+          if (localStorage.getItem("data-bs-theme") !== null) {
+            themeMode = localStorage.getItem("data-bs-theme");
+          } else {
+            themeMode = defaultThemeMode;
+          }
+        }
+
+        if (themeMode === "system") {
+          themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+
+        document.documentElement.setAttribute("data-bs-theme", themeMode);
+      }
+    </script>
+
     <div class="d-flex flex-column flex-root">
       <div class="page launcher sidebar-enabled d-flex flex-row flex-column-fluid me-lg-5" id="kt_page">
         <div class="d-flex flex-row-fluid">
-          <div class="d-flex flex-column flex-row-fluid align-items-center ">
-
-            <div class="d_flex p-2 mb-3">
-               <!--begin::Logo-->
-               <a href="index.html">
-                <img alt="Logo" src="assets/media/logos/logo.png" class="h-60px text-center nb-2" />
-              </a>
-              <!--end::Logo-->
-              <h3 class="text-center text-white text-uppercase fs-2">Welcome to Task Sprint</h3>
-              <!--begin::Sidebar toggle-->
-              <!-- <div class="btn btn-icon btn-active-color-primary w-30px h-30px d-lg-none me-4 ms-n15" id="kt_sidebar_toggle">
-                  <i class="bi-duotone bi-pencil fs-1"><span class="path1"></span><span class="path2"></span></i>   
-              </div> -->
-              <!--end::Sidebar toggle-->         
-             
-          </div>
-            
+          <div class="d-flex flex-column flex-row-fluid align-items-center ">       
             <div class="d-flex flex-column flex-column-fluid mb-4 mb-lg-10">
+              <div class="d_flex p-2 mb-3">
+                <!--begin::Logo-->
+                <a href="index.html">
+                 <img alt="Logo" src="assets/media/logos/logo.png" class="h-60px text-center nb-2" />
+               </a>
+               <!--end::Logo-->
+               <h3 class="text-center text-white text-uppercase fs-2">Welcome to Task Sprint</h3>
+               <!--begin::Sidebar toggle-->
+               <!-- <div class="btn btn-icon btn-active-color-primary w-30px h-30px d-lg-none me-4 ms-n15" id="kt_sidebar_toggle">
+                   <i class="bi-duotone bi-pencil fs-1"><span class="path1"></span><span class="path2"></span></i>   
+               </div> -->
+               <!--end::Sidebar toggle-->         
+              
+           </div>
+              
               <div class="row g-7 w-xxl-850px">               
                 <div class="col-md-5">
                   <div class="card border-0 h-lg-100" style="background: linear-gradient(45deg, #ffbc00, #f9666e);">
@@ -444,7 +484,7 @@
             </h2>
 
             <div class="btn btn-sm btn-icon btn-color-white btn-active-color-primary" data-bs-dismiss="modal">
-              <i class="bi bi-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+              <i class="bi bi-x-circle-fill fs-2"><span class="path1"></span><span class="path2"></span></i>
             </div>
           </div>
 
@@ -472,13 +512,13 @@
 
                   <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
                     <h3 class="stepper-title">
-                      Build A Team
+                      Set Team
                     </h3>
                   </div>
 
                   <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
                     <h3 class="stepper-title">
-                      Set First Target
+                      Set Task
                     </h3>
                   </div>
 
@@ -501,7 +541,7 @@
                       <div class="pb-7 pb-lg-12">
                         <h1 class="text-dark">Project Type</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check out
                           <a href="#" class="link-primary">FAQ Page</a>
                         </div>
@@ -517,7 +557,7 @@
                             <span class="ms-4">
                               <span class="fs-3 text-gray-900 mb-2 d-block">Personal Project</span>
 
-                              <span class="fs-4 text-muted">
+                              <span class="fs-4 ">
                                 If you need more info, please check it out
                               </span>
                             </span>
@@ -533,7 +573,7 @@
                             <span class="ms-4">
                               <span class="fs-3 text-gray-900 mb-2 d-block">Team Project</span>
 
-                              <span class="fs-4 text-muted">
+                              <span class="fs-4 ">
                                 Create corporate account to manage users
                               </span>
                             </span>
@@ -557,7 +597,7 @@
                       <div class="pb-12">
                         <h1 class="text-dark">Project Settings</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check
                           <a href="#" class="link-primary">Project Guidelines</a>
                         </div>
@@ -570,7 +610,7 @@
 
                             <div class="ms-4">
                               <h3 class="dfs-3 text-gray-900 mb-1">Drop files here or click to upload.</h3>
-                              <span class="fs-4 text-muted">Upload up to 10 files</span>
+                              <span class="fs-4 ">Upload up to 10 files</span>
                             </div>
                           </div>
                         </div>
@@ -624,7 +664,7 @@
                         <div class="d-flex flex-stack">
                           <div class="me-5">
                             <label class="required fs-6">Notifications</label>
-                            <div class="fs-6 text-muted">Allow Notifications by Phone or Email</div>
+                            <div class="fs-6 ">Allow Notifications by Phone or Email</div>
                           </div>
 
                           <div class="d-flex">
@@ -667,7 +707,7 @@
                       <div class="pb-10 pb-lg-12">
                         <h1 class="text-dark">Budget</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check
                           <a href="#" class="link-primary">Project Guidelines</a>
                         </div>
@@ -684,7 +724,7 @@
                             data-bs-html="true"
                             data-bs-content='
 		&lt;div class=&#039;p-4 rounded bg-light&#039;&gt;
-			&lt;div class=&#039;d-flex flex-stack text-muted mb-4&#039;&gt;
+			&lt;div class=&#039;d-flex flex-stack  mb-4&#039;&gt;
 				&lt;i class="bi bi-bank fs-3 me-3"&gt;&lt;span class="path1"&gt;&lt;/span&gt;&lt;span class="path2"&gt;&lt;/span&gt;&lt;/i&gt;
 				&lt;div class=&#039;&#039;&gt;INCBANK **** 1245 STATEMENT&lt;/div&gt;
 			&lt;/div&gt;
@@ -701,12 +741,12 @@
 				&lt;div&gt;KEENTHEMES*&lt;/div&gt;
 			&lt;/div&gt;
 
-			&lt;div class=&#039;d-flex flex-stack text-muted mb-2&#039;&gt;
+			&lt;div class=&#039;d-flex flex-stack  mb-2&#039;&gt;
 				&lt;div&gt;USD75.00&lt;/div&gt;
 				&lt;div&gt;Hosting fee&lt;/div&gt;
 			&lt;/div&gt;
 
-			&lt;div class=&#039;d-flex flex-stack text-muted&#039;&gt;
+			&lt;div class=&#039;d-flex flex-stack &#039;&gt;
 				&lt;div&gt;USD3,950.00&lt;/div&gt;
 				&lt;div&gt;Payrol&lt;/div&gt;
 			&lt;/div&gt;
@@ -780,12 +820,12 @@
                         <div class="d-flex flex-stack">
                           <div class="me-5">
                             <label class="fs-6">Allow Changes in Budget</label>
-                            <div class="fs-6 text-muted">If you need more info, please check budget planning</div>
+                            <div class="fs-6 ">If you need more info, please check budget planning</div>
                           </div>
 
                           <label class="form-check form-switch form-check-custom form-check-solid">
                             <input class="form-check-input" type="checkbox" value="1" name="budget_allow" checked="checked" />
-                            <span class="form-check-label text-muted">
+                            <span class="form-check-label ">
                               Allowed
                             </span>
                           </label>
@@ -812,7 +852,7 @@
                       <div class="pb-12">
                         <h1 class="text-dark">Build a Team</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check
                           <a href="#" class="link-primary">Project Guidelines</a>
                         </div>
@@ -837,7 +877,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Emma Smith</a>
 
-                                <div class="text-muted">smith@kpmg.com</div>
+                                <div class="">smith@kpmg.com</div>
                               </div>
                             </div>
 
@@ -859,7 +899,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Melody Macy</a>
 
-                                <div class="text-muted">melody@altbox.com</div>
+                                <div class="">melody@altbox.com</div>
                               </div>
                             </div>
 
@@ -881,7 +921,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Max Smith</a>
 
-                                <div class="text-muted">max@kt.com</div>
+                                <div class="">max@kt.com</div>
                               </div>
                             </div>
 
@@ -903,7 +943,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Sean Bean</a>
 
-                                <div class="text-muted">sean@dellito.com</div>
+                                <div class="">sean@dellito.com</div>
                               </div>
                             </div>
 
@@ -925,7 +965,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Brian Cox</a>
 
-                                <div class="text-muted">brian@exchange.com</div>
+                                <div class="">brian@exchange.com</div>
                               </div>
                             </div>
 
@@ -947,7 +987,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Mikaela Collins</a>
 
-                                <div class="text-muted">mik@pex.com</div>
+                                <div class="">mik@pex.com</div>
                               </div>
                             </div>
 
@@ -969,7 +1009,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Francis Mitcham</a>
 
-                                <div class="text-muted">f.mit@kpmg.com</div>
+                                <div class="">f.mit@kpmg.com</div>
                               </div>
                             </div>
 
@@ -991,7 +1031,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Olivia Wild</a>
 
-                                <div class="text-muted">olivia@corpmail.com</div>
+                                <div class="">olivia@corpmail.com</div>
                               </div>
                             </div>
 
@@ -1013,7 +1053,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Neil Owen</a>
 
-                                <div class="text-muted">owen.neil@gmail.com</div>
+                                <div class="">owen.neil@gmail.com</div>
                               </div>
                             </div>
 
@@ -1035,7 +1075,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Dan Wilson</a>
 
-                                <div class="text-muted">dam@consilting.com</div>
+                                <div class="">dam@consilting.com</div>
                               </div>
                             </div>
 
@@ -1057,7 +1097,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Emma Bold</a>
 
-                                <div class="text-muted">emma@intenso.com</div>
+                                <div class="">emma@intenso.com</div>
                               </div>
                             </div>
 
@@ -1079,7 +1119,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Ana Crown</a>
 
-                                <div class="text-muted">ana.cf@limtel.com</div>
+                                <div class="">ana.cf@limtel.com</div>
                               </div>
                             </div>
 
@@ -1101,7 +1141,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Robert Doe</a>
 
-                                <div class="text-muted">robert@benko.com</div>
+                                <div class="">robert@benko.com</div>
                               </div>
                             </div>
 
@@ -1123,7 +1163,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">John Miller</a>
 
-                                <div class="text-muted">miller@mapple.com</div>
+                                <div class="">miller@mapple.com</div>
                               </div>
                             </div>
 
@@ -1145,7 +1185,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Lucy Kunic</a>
 
-                                <div class="text-muted">lucy.m@fentech.com</div>
+                                <div class="">lucy.m@fentech.com</div>
                               </div>
                             </div>
 
@@ -1167,7 +1207,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Ethan Wilder</a>
 
-                                <div class="text-muted">ethan@loop.com.au</div>
+                                <div class="">ethan@loop.com.au</div>
                               </div>
                             </div>
 
@@ -1189,7 +1229,7 @@
                               <div class="ms-5">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Mikaela Collins</a>
 
-                                <div class="text-muted">mik@pex.com</div>
+                                <div class="">mik@pex.com</div>
                               </div>
                             </div>
 
@@ -1207,7 +1247,7 @@
                       <div class="d-flex flex-stack mb-15">
                         <div class="me-5">
                           <label class="fs-6">Adding Users by Team Members</label>
-                          <div class="fs-6 text-muted">If you need more info, please check budget planning</div>
+                          <div class="fs-6 ">If you need more info, please check budget planning</div>
                         </div>
 
                         <label class="form-check form-switch form-check-custom form-check-solid">
@@ -1235,7 +1275,7 @@
                       <div class="pb-12">
                         <h1 class="text-dark">Set First Target</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check
                           <a href="#" class="link-primary">Project Guidelines</a>
                         </div>
@@ -1289,12 +1329,12 @@
                         <div class="d-flex flex-stack">
                           <div class="me-5">
                             <label class="fs-6">Allow Changes in Budget</label>
-                            <div class="fs-6 text-muted">If you need more info, please check budget planning</div>
+                            <div class="fs-6 ">If you need more info, please check budget planning</div>
                           </div>
 
                           <label class="form-check form-switch form-check-custom form-check-solid">
                             <input class="form-check-input" type="checkbox" value="1" name="target_allow" checked="checked" />
-                            <span class="form-check-label text-muted">
+                            <span class="form-check-label ">
                               Allowed
                             </span>
                           </label>
@@ -1305,7 +1345,7 @@
                         <div class="d-flex flex-stack">
                           <div class="me-5">
                             <label class="fs-6">Notifications</label>
-                            <div class="fs-6 text-muted">Allow Notifications by Phone or Email</div>
+                            <div class="fs-6 ">Allow Notifications by Phone or Email</div>
                           </div>
 
                           <div class="d-flex">
@@ -1348,7 +1388,7 @@
                       <div class="pb-10 pb-lg-12">
                         <h1 class="text-dark">Upload Files</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check
                           <a href="#" class="link-primary">Project Guidelines</a>
                         </div>
@@ -1361,7 +1401,7 @@
 
                             <div class="ms-4">
                               <h3 class="dfs-3 text-gray-900 mb-1">Drop files here or click to upload.</h3>
-                              <span class="fs-4 text-muted">Upload up to 10 files</span>
+                              <span class="fs-4 ">Upload up to 10 files</span>
                             </div>
                           </div>
                         </div>
@@ -1379,7 +1419,7 @@
 
                               <div class="ms-6">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Avionica Technical Requirements</a>
-                                <div class="text-muted">230kb</div>
+                                <div class="">230kb</div>
                               </div>
                             </div>
 
@@ -1401,7 +1441,7 @@
 
                               <div class="ms-6">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">9 Degree CURD draftplan</a>
-                                <div class="text-muted">3.6mb</div>
+                                <div class="">3.6mb</div>
                               </div>
                             </div>
 
@@ -1423,7 +1463,7 @@
 
                               <div class="ms-6">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">User CRUD Styles</a>
-                                <div class="text-muted">85kb</div>
+                                <div class="">85kb</div>
                               </div>
                             </div>
 
@@ -1445,7 +1485,7 @@
 
                               <div class="ms-6">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Design Initial Logo</a>
-                                <div class="text-muted">40kb</div>
+                                <div class="">40kb</div>
                               </div>
                             </div>
 
@@ -1467,7 +1507,7 @@
 
                               <div class="ms-6">
                                 <a href="#" class=" text-gray-900 text-hover-primary mb-2">Tower Hill Bilboard</a>
-                                <div class="text-muted">27mb</div>
+                                <div class="">27mb</div>
                               </div>
                             </div>
 
@@ -1487,12 +1527,12 @@
                         <div class="d-flex flex-stack">
                           <div class="me-5">
                             <label class="fs-6">Allow Changes in Budget</label>
-                            <div class="fs-6 text-muted">If you need more info, please check budget planning</div>
+                            <div class="fs-6 ">If you need more info, please check budget planning</div>
                           </div>
 
                           <label class="form-check form-switch form-check-custom form-check-solid">
                             <input class="form-check-input" type="checkbox" value="1" name="target_allow" checked="checked" />
-                            <span class="form-check-label text-muted">
+                            <span class="form-check-label ">
                               Allowed
                             </span>
                           </label>
@@ -1519,7 +1559,7 @@
                       <div class="pb-12 text-center">
                         <h1 class="text-dark">Project Created!</h1>
 
-                        <div class="text-muted fs-4">
+                        <div class=" fs-4">
                           If you need more info, please check how to create project
                         </div>
                       </div>
@@ -1557,7 +1597,7 @@
             </h2>
 
             <div class="btn btn-sm btn-icon btn-color-white btn-active-color-primary" data-bs-dismiss="modal">
-              <i class="bi bi-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+              <i class="bi bi-x-circle-fill fs-2"><span class="path1"></span><span class="path2"></span></i>
             </div>
           </div>
 
@@ -1607,7 +1647,7 @@
                         </span>
                       </h2>
 
-                      <div class="text-muted fs-6">
+                      <div class=" fs-6">
                         If you need more info, please check out
                         <a href="#" class="link-primary">Help Page</a>.
                       </div>
@@ -1624,7 +1664,7 @@
                               <span class="text-dark d-block fs-4 mb-2">
                                 Personal Account
                               </span>
-                              <span class="text-muted fs-6">If you need more info, please check it out</span>
+                              <span class=" fs-6">If you need more info, please check it out</span>
                             </span>
                           </label>
                         </div>
@@ -1636,7 +1676,7 @@
 
                             <span class="d-block text-start">
                               <span class="text-dark d-block fs-4 mb-2">Corporate Account</span>
-                              <span class="text-muted fs-6">Create corporate account to mane users</span>
+                              <span class=" fs-6">Create corporate account to mane users</span>
                             </span>
                           </label>
                         </div>
@@ -1650,7 +1690,7 @@
                     <div class="pb-10 pb-lg-15">
                       <h2 class="text-dark">Account Info</h2>
 
-                      <div class="text-muted fs-6">
+                      <div class=" fs-6">
                         If you need more info, please check out
                         <a href="#" class="link-primary">Help Page</a>.
                       </div>
@@ -1726,7 +1766,7 @@
 
                             <span class="d-flex flex-column">
                               <span class="text-gray-800 text-hover-primary ">Company Account</span>
-                              <span class="fs-6 text-muted">Use images to enhance your post flow</span>
+                              <span class="fs-6 ">Use images to enhance your post flow</span>
                             </span>
                           </span>
 
@@ -1745,7 +1785,7 @@
 
                             <span class="d-flex flex-column">
                               <span class="text-gray-800 text-hover-primary ">Developer Account</span>
-                              <span class="fs-6 text-muted">Use images to your post time</span>
+                              <span class="fs-6 ">Use images to your post time</span>
                             </span>
                           </span>
 
@@ -1764,7 +1804,7 @@
 
                             <span class="d-flex flex-column">
                               <span class="text-gray-800 text-hover-primary ">Testing Account</span>
-                              <span class="fs-6 text-muted">Use images to enhance time travel rivers</span>
+                              <span class="fs-6 ">Use images to enhance time travel rivers</span>
                             </span>
                           </span>
 
@@ -1782,7 +1822,7 @@
                     <div class="pb-10 pb-lg-12">
                       <h2 class="text-dark">Business Details</h2>
 
-                      <div class="text-muted fs-6">
+                      <div class=" fs-6">
                         If you need more info, please check out
                         <a href="#" class="link-primary">Help Page</a>.
                       </div>
@@ -1835,7 +1875,7 @@
                     <div class="pb-10 pb-lg-15">
                       <h2 class="text-dark">Billing Details</h2>
 
-                      <div class="text-muted fs-6">
+                      <div class=" fs-6">
                         If you need more info, please check out
                         <a href="#" class="text-primary">Help Page</a>.
                       </div>
@@ -1931,12 +1971,12 @@
                     <div class="d-flex flex-stack">
                       <div class="me-5">
                         <label class="fs-6 form-label">Save Card for further billing?</label>
-                        <div class="fs-6 text-muted">If you need more info, please check budget planning</div>
+                        <div class="fs-6 ">If you need more info, please check budget planning</div>
                       </div>
 
                       <label class="form-check form-switch form-check-custom form-check-solid">
                         <input class="form-check-input" type="checkbox" value="1" checked="checked" />
-                        <span class="form-check-label text-muted">
+                        <span class="form-check-label ">
                           Save Card
                         </span>
                       </label>
@@ -1949,7 +1989,7 @@
                     <div class="pb-8 pb-lg-10">
                       <h2 class="text-dark">Your Are Done!</h2>
 
-                      <div class="text-muted fs-6">
+                      <div class=" fs-6">
                         If you need more info, please
                         <a href="/metronic8/demo10/../demo10/.html" class="link-primary">
                           Sign In
@@ -2028,7 +2068,7 @@
 
     <script src="assets/plugins/global/plugins.bundle.js"></script>
     <script src="assets/js/scripts.bundle.js"></script>
-
+    <script src="assets/js/custom/modals/create-account.js"></script>
     <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
   </body>
 </html>

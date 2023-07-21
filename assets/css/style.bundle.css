@@ -4393,7 +4393,7 @@ textarea.form-control-lg {
 }
 
 .nav-underline .nav-link.active,.nav-underline .show>.nav-link {
-    font-weight: 600;
+    font-weight: 400;
     color: var(--bs-nav-underline-link-active-color);
     border-bottom-color: currentcolor
 }
@@ -5443,7 +5443,7 @@ textarea.form-control-lg {
 }
 
 .alert-link {
-    font-weight: 600;
+    font-weight: 400;
     color: var(--bs-alert-link-color)
 }
 
@@ -42400,7 +42400,7 @@ code:not([class*=language-]) {
 }
 
 .form-check-image .form-check-label {
-    font-weight: 600;
+    font-weight: 400;
     margin-left: .5rem
 }
 
@@ -42649,7 +42649,7 @@ code:not([class*=language-]) {
     box-shadow: var(--bs-table-loading-message-box-shadow);
     background-color: var(--bs-body-bg);
     color: var(--bs-gray-700);
-    font-weight: 600;
+    font-weight: 400;
     margin: 0!important;
     width: auto;
     padding: .85rem 2rem!important;
@@ -51357,7 +51357,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 }
 
 .stepper.stepper-pills .stepper-item .stepper-icon .stepper-number {
-    font-weight: 600;
+    font-weight: 400;
     color: var(--bs-stepper-icon-number-color);
     font-size: 1.25rem
 }
@@ -51371,7 +51371,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 .stepper.stepper-pills .stepper-item .stepper-label .stepper-title {
     color: var(--bs-stepper-label-title-color);
     opacity: var(--bs-stepper-label-title-opacity);
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1.25rem;
     margin-bottom: .3rem
 }
@@ -51493,7 +51493,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 
 .stepper.stepper-links .stepper-nav .stepper-item .stepper-title {
     color: var(--bs-dark);
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1.25rem
 }
 
@@ -51722,7 +51722,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
     box-shadow: var(--bs-blockui-message-box-shadow);
     background-color: var(--bs-blockui-message-bg);
     color: var(--bs-gray-700);
-    font-weight: 600;
+    font-weight: 400;
     margin: 0!important;
     width: auto;
     padding: .85rem 1.75rem!important
@@ -51838,7 +51838,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
     border-width: 1px;
     border-style: solid;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 8px;
     border-radius: 6px;
     width: 66px;
