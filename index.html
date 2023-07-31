@@ -180,7 +180,6 @@
     width: 100%;
     color: #fff;
     pointer-events: auto;
-    background-color: #1e1e2d;
     background-clip: padding-box;
     border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
     border-radius: var(--bs-modal-border-radius);
@@ -192,6 +191,37 @@
     border-color: var(--bs-primary-light);
     background-color: var(--bs-primary-light)!important;
 }
+
+/* Basic styles for the button */
+.button {
+  color: #fff;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+}
+
+/* Hover state */
+.button:hover {
+  background-color: transparent;
+}
+
+/* Focus state */
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.5);
+}
+
+/* Focus ring when the button is active */
+.button:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+
   </style>
 
   <body id="kt_body" class="page-bg">
@@ -242,7 +272,7 @@
                 <div class="col-md-5">
                   <div class="card border-0 h-lg-100" style="background: linear-gradient(45deg, #ffbc00, #f9666e);">
                     <div class="card-body d-flex flex-column flex-center">
-                      <a href="dashboard.html" class="btn btn-hover-rise text-white bg-opacity-10 text-uppercase ">Go To Dashboard</a>
+                      <a href="user-dashboard.html" class="btn btn-active-color-primary button">Go To Dashboard</a>
 
                       <img class="mw-100 h-225px mx-auto mb-lg-n18" src="assets/media/illustrations/sigma-1/12.png" />
                     </div>

@@ -40122,7 +40122,7 @@ textarea.form-control-lg {
 
 .btn.btn-primary {
     color: var(--bs-primary-inverse);
-    border-color: var(--bs-primary);
+    border-color: var(--bs-primary-inverse);
     background-color: var(--bs-primary)
 }
 

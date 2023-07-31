@@ -2545,8 +2545,8 @@ progress {
     display: block;
     width: 100%;
     padding: .775rem 1rem;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 400;
     line-height: 1.5;
     color: var(--bs-gray-700);
     background-color: var(--bs-body-bg);

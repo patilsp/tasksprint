@@ -2667,7 +2667,7 @@ var KTSearch = function(element, options) {
             if ( responsiveFormMode === 'on' && the.contentElement.contains(the.formElement) === false ) {
                 the.contentElement.prepend(the.formElement);
                 the.formElement.classList.remove('d-none');                
-            } else if ( responsiveFormMode === 'off' && the.contentElement.contains(the.formElement) === true ) {
+            } else if ( responsiveFormMode === 'off') {
                 the.element.prepend(the.formElement);
                 the.formElement.classList.add('d-none');
             }
