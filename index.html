@@ -13,8 +13,9 @@
     <meta property="og:url" content="" />
     <meta property="og:site_name" content="" />
     <link rel="shortcut icon" href="assets/media/logos/favicon.png" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
 
@@ -30,9 +31,6 @@
         background-repeat: no-repeat;
         background-position: center;
         background-image: url('assets/media/images/page-bg.jpg');
-    }
-    .text-white {
-        color: #fff !important;
     }
    .card {
       z-index: 999;
@@ -192,34 +190,6 @@
     background-color: var(--bs-primary-light)!important;
 }
 
-/* Basic styles for the button */
-.button {
-  color: #fff;
-  font-weight: 500;
-  padding: 12px 24px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  background-color: transparent;
-}
-
-/* Hover state */
-.button:hover {
-  background-color: transparent;
-}
-
-/* Focus state */
-.button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.5);
-}
-
-/* Focus ring when the button is active */
-.button:focus:not(:focus-visible) {
-  box-shadow: none;
-}
 
 
   </style>
@@ -272,7 +242,7 @@
                 <div class="col-md-5">
                   <div class="card border-0 h-lg-100" style="background: linear-gradient(45deg, #ffbc00, #f9666e);">
                     <div class="card-body d-flex flex-column flex-center">
-                      <a href="user-dashboard.html" class="btn btn-active-color-primary button">Go To Dashboard</a>
+                      <a href="user-dashboard.html" class="btn btn-active-color-primary">Go To Dashboard</a>
 
                       <img class="mw-100 h-225px mx-auto mb-lg-n18" src="assets/media/illustrations/sigma-1/12.png" />
                     </div>
