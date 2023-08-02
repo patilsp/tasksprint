@@ -21,6 +21,7 @@
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/board.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body
@@ -1801,7 +1802,7 @@
                           </div>
                         </div>
 
-                        <div class="col-lg-6 ">
+                        <div class="col-lg-6 mt-4">
                           <div class="card card-flush h-lg-100">
                             <div class="card-header mt-6">
                               <div class="card-title flex-column">
@@ -2458,7 +2459,7 @@
                           </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-4">
                           <div class="card card-flush h-lg-100">
                             <div class="card-header mt-6">
                               <div class="card-title flex-column">
@@ -2693,7 +2694,7 @@
                           </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-4">
                           <div class="card card-flush h-lg-100">
                             <div class="card-header mt-6">
                               <div class="card-title flex-column">
@@ -2803,7 +2804,7 @@
                           </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-4">
                           <div class="card card-flush h-lg-100">
                             <div class="card-header mt-6">
                               <div class="card-title flex-column">
@@ -3272,194 +3273,155 @@
                         <div class="card-body">
                           <div class="d-flex flex-wrap flex-stack pt-10 pb-8">
                             <h3 class="my-2">
-                              Projects
+                              Tasks
                               <span class="fs-6 text-gray-400 ms-1">by Recent Updates ↓</span>
                             </h3>
     
                             <div class="d-flex flex-wrap my-1">
-                              <ul class="nav nav-pills me-5" role="tablist">
-                                <li class="nav-item m-0" role="presentation">
-                                  <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary mb-1 me-3" data-bs-toggle="tab" href="#kt_project_tasks_card_pane" aria-selected="true" role="tab">
-                                    <i class="bi bi-pencil fs-3"></i>
-                                  </a>
-                                </li>
-    
-                                <li class="nav-item m-0" role="presentation">
-                                  <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary mb-1" data-bs-toggle="tab" href="#kt_project_tasks_table_pane" aria-selected="false" tabindex="-1" role="tab">
-                                    <i class="bi bi-plus fs-2"></i>
-                                  </a>
-                                </li>
-                              </ul>
+                              <div class="search me-2">
+                                <i class="bi bi-search search-icon fs-2 text-gray-500 position-absolute top-50 translate-middle-y ms-5"></i>
+                                <input type="text" id="search-input" class="search-input form-control ps-13" name="search" value="" placeholder="Search Task...">
+
+                              </div>
+                              
+                              <button class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary mb-1 add-task-board w-200px" >
+                                <i class="bi bi-plus fs-2"></i> Add New Board
+                              </button>
+                           
     
                             </div>
                           </div>
     
-                          <div class="row">
-                            <div class="col-md-4 col-lg-12 col-xl-4">
-                              <div class="mb-9">
-                                <div class="d-flex flex-stack">
-                                  <div class="fs-4">
-                                    Yet to start
-                                    <span class="fs-6 text-gray-400 ms-2">2</span>
-                                  </div>
-    
-                                  <div>
-                                    <button type="button" class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary mb-1" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                      <i class="bi bi-plus fs-2"></i>
-                                    </button>
-    
-                                  </div>
+                        <div class="container py-4" style="background-color: #E5E5E5; border-radius: 10px">
+                            <div class="board" >
+                                <div class="btn-board">
                                 </div>
-    
-                                <div class="h-3px w-100 bg-warning"></div>
-                              </div>
-    
-                              <div class="card mb-6 mb-xl-9">
-                                <div class="card-body">
-                                  <div class="d-flex flex-stack mb-3">
-                                    <div class="badge badge-light">UI Design</div>
-                                  </div>
-    
-                                  <div class="mb-2">
-                                    <a href="#" class="fs-4 mb-1 text-gray-900 text-hover-primary">Front-End Development - User-Facing</a>
-                                  </div>
-    
-                                  <div class="fs-6 text-gray-600 mb-5"> Building interactive interfaces with HTML, CSS, JS.</div>
-    
-                                  <div class="d-flex flex-stack flex-wrapr">
-                                    <div class="symbol-group symbol-hover my-1">
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Melody Macy" data-bs-original-title="Melody Macy" data-kt-initialized="1">
-                                        <img alt="Pic" src="assets/media/avatars/1.jpg" />
-                                      </div>
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Harry Mcpherson" data-bs-original-title="Harry Mcpherson" data-kt-initialized="1">
-                                        <img alt="Pic" src="assets/media/avatars/3.jpg" />
-                                      </div>
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-                                        <span class="symbol-label bg-primary text-inverse-primary">S</span>
-                                      </div>
-                                    </div>
-    
-                                    <div class="d-flex my-1">
-                                      <div class="border border-dashed border-gray-300 rounded d-flex align-items-center py-2 px-3"><i class="bi bi-paper-clip fs-3"></i> <span class="ms-1 fs-7 text-gray-600">7</span></div>
-    
-                                      <div class="border border-dashed border-gray-300 d-flex align-items-center rounded py-2 px-3 ms-3"><i class="bi bi-chat-text fs-3"></i> <span class="ms-1 fs-7 text-gray-600">4</span></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-    
-                              <a href="#" class="btn btn-primary er w-100 fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Create New Project</a>
+                    
                             </div>
-    
-                            <div class="col-md-4 col-lg-12 col-xl-4">
-                              <div class="mb-9">
-                                <div class="d-flex flex-stack">
-                                  <div class="fs-4">
-                                    In Progress
-                                    <span class="fs-6 text-gray-400 ms-2">4</span>
-                                  </div>
-    
-                                  <div>
-                                    <button type="button" class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary mb-1" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                      <i class="bi bi-plus fs-2"></i>
+                    
+                        </div>
+                        <div class="popup" id="new-task">
+                            <div class="popup-content">
+                                <div class="d-flex heading">
+                                    <h4>
+                                        New Tasks
+                                    </h4>
+                                    <span class="close">
+                                        <svg height="14px" style="margin-top:3px" viewBox="0 0 311 311.07733" width="14px"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="m16.035156 311.078125c-4.097656 0-8.195312-1.558594-11.308594-4.695313-6.25-6.25-6.25-16.382812 0-22.632812l279.0625-279.0625c6.25-6.25 16.382813-6.25 22.632813 0s6.25 16.382812 0 22.636719l-279.058594 279.058593c-3.136719 3.117188-7.234375 4.695313-11.328125 4.695313zm0 0" />
+                                            <path
+                                                d="m295.117188 311.078125c-4.097657 0-8.191407-1.558594-11.308594-4.695313l-279.082032-279.058593c-6.25-6.253907-6.25-16.386719 0-22.636719s16.382813-6.25 22.636719 0l279.058594 279.0625c6.25 6.25 6.25 16.382812 0 22.632812-3.136719 3.117188-7.230469 4.695313-11.304687 4.695313zm0 0" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <form action="" id="add-task">
+                                    <label for="">Title</label>
+                                    <input type="text" name="title" autocomplete="off">
+                                    <label for="">Description</label>
+                                    <textarea name="desc" id="" cols="30" rows="10"></textarea>
+                    
+                                    <label for="">Priority</label>
+                                    <select name="priority" id="">
+                                        <option value="low">
+                                            Low
+                                        </option>
+                                        <option value="medium">
+                                            Medium
+                                        </option>
+                                        <option value="high">
+                                            High
+                                        </option>
+                                    </select>
+                                </form>
+                                <div class="footer">
+                                    <button class="primary" id="bt-task">
+                                        Add
                                     </button>
-    
-                                  </div>
-                                </div>
-    
-                                <div class="h-3px w-100 bg-primary"></div>
-                              </div>
-    
-                              <div class="card mb-6 mb-xl-9">
-                                <div class="card-body">
-                                  <div class="d-flex flex-stack mb-3">
-                                    <div class="badge badge-light">Development</div>
-    
-                                  </div>
-    
-                                  <div class="mb-2">
-                                    <a href="#" class="fs-4 mb-1 text-gray-900 text-hover-primary">Back-End Development - Build the logic</a>
-                                  </div>
-    
-                                  <div class="fs-6 text-gray-600 mb-5">Managing servers, databases, server-side logic.</div>
-    
-                                  <div class="d-flex flex-stack flex-wrapr">
-                                    <div class="symbol-group symbol-hover my-1">
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" data-bs-original-title="Alan Warden" data-kt-initialized="1">
-                                        <span class="symbol-label bg-warning text-inverse-warning">A</span>
-                                      </div>
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Michelle Swanston" data-bs-original-title="Michelle Swanston" data-kt-initialized="1">
-                                        <img alt="Pic" src="assets/media/avatars/2.jpg" />
-                                      </div>
-                                    </div>
-    
-                                    <div class="d-flex my-1">
-                                      <div class="border border-dashed border-gray-300 rounded d-flex align-items-center py-2 px-3"><i class="bi bi-paper-clip fs-3"></i> <span class="ms-1 fs-7 text-gray-600">5</span></div>
-    
-                                      <div class="border border-dashed border-gray-300 d-flex align-items-center rounded py-2 px-3 ms-3"><i class="bi bi-chat-text fs-3"></i> <span class="ms-1 fs-7 text-gray-600">2</span></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-    
-                            </div>
-    
-                            <div class="col-md-4 col-lg-12 col-xl-4">
-                              <div class="mb-9">
-                                <div class="d-flex flex-stack">
-                                  <div class="fs-4">
-                                    Completed
-                                    <span class="fs-6 text-gray-400 ms-2">3</span>
-                                  </div>
-    
-                                  <div>
-                                    <button type="button" class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary mb-1" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                      <i class="bi bi-plus fs-2"></i>
+                                    <button class="close">
+                                        Cancel
                                     </button>
-    
-                                  </div>
                                 </div>
-    
-                                <div class="h-3px w-100 bg-success"></div>
-                              </div>
-    
-                              <div class="card mb-6 mb-xl-9">
-                                <div class="card-body">
-                                  <div class="d-flex flex-stack mb-3">
-                                    <div class="badge badge-light">UI Design</div>
-    
-                                  </div>
-    
-                                  <div class="mb-2">
-                                    <a href="#" class="fs-4 mb-1 text-gray-900 text-hover-primary">Mobile App Development - Reach Users</a>
-                                  </div>
-    
-                                  <div class="fs-6 text-gray-600 mb-5">Creating apps for smartphones & tablets with UI.</div>
-    
-                                  <div class="d-flex flex-stack flex-wrapr">
-                                    <div class="symbol-group symbol-hover my-1">
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" data-bs-original-title="Perry Matthew" data-kt-initialized="1">
-                                        <span class="symbol-label bg-success text-inverse-success">R</span>
-                                      </div>
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Barry Walter" data-bs-original-title="Barry Walter" data-kt-initialized="1">
-                                        <img alt="Pic" src="assets/media/avatars/2.jpg" />
-                                      </div>
-                                      <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-                                        <span class="symbol-label bg-primary text-inverse-primary">S</span>
-                                      </div>
-                                    </div>
-    
-                                    <div class="d-flex my-1">
-                                      <div class="border border-dashed border-gray-300 rounded d-flex align-items-center py-2 px-3"><i class="bi bi-paper-clip fs-3"></i> <span class="ms-1 fs-7 text-gray-600">2</span></div>
-    
-                                      <div class="border border-dashed border-gray-300 d-flex align-items-center rounded py-2 px-3 ms-3"><i class="bi bi-chat-text fs-3"></i> <span class="ms-1 fs-7 text-gray-600">2</span></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-    
                             </div>
-                          </div>
+                        </div>
+                        <div class="popup" id="edit-task">
+                            <div class="popup-content">
+                                <div class="d-flex heading">
+                                    <h4>
+                                        Edit Tasks
+                                    </h4>
+                                    <span class="close">
+                                        <svg height="14px" style="margin-top:3px" viewBox="0 0 311 311.07733" width="14px"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="m16.035156 311.078125c-4.097656 0-8.195312-1.558594-11.308594-4.695313-6.25-6.25-6.25-16.382812 0-22.632812l279.0625-279.0625c6.25-6.25 16.382813-6.25 22.632813 0s6.25 16.382812 0 22.636719l-279.058594 279.058593c-3.136719 3.117188-7.234375 4.695313-11.328125 4.695313zm0 0" />
+                                            <path
+                                                d="m295.117188 311.078125c-4.097657 0-8.191407-1.558594-11.308594-4.695313l-279.082032-279.058593c-6.25-6.253907-6.25-16.386719 0-22.636719s16.382813-6.25 22.636719 0l279.058594 279.0625c6.25 6.25 6.25 16.382812 0 22.632812-3.136719 3.117188-7.230469 4.695313-11.304687 4.695313zm0 0" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <form action="" id="editfrm-task">
+                                    <label for="">Title</label>
+                                    <input type="text" name="title" autocomplete="off">
+                                    <label for="">Description</label>
+                                    <textarea name="desc" id="" cols="30" rows="10"></textarea>
+                    
+                                    <label for="">Priority</label>
+                                    <select name="priority" id="">
+                                        <option value="low">
+                                            Low
+                                        </option>
+                                        <option value="medium">
+                                            Medium
+                                        </option>
+                                        <option value="high">
+                                            High
+                                        </option>
+                                    </select>
+                                </form>
+                                <div class="footer">
+                                    <button class="primary" id="update-task">
+                                       Update
+                                    </button>
+                                    <button class="close">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                        <div class="popup" id="new-task-board">
+                            <div class="popup-content">
+                                <div class="d-flex heading">
+                                    <h4>
+                                        New Tasks board
+                                    </h4>
+                                    <span class="close">
+                                        <svg height="14px" style="margin-top:3px" viewBox="0 0 311 311.07733" width="14px"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="m16.035156 311.078125c-4.097656 0-8.195312-1.558594-11.308594-4.695313-6.25-6.25-6.25-16.382812 0-22.632812l279.0625-279.0625c6.25-6.25 16.382813-6.25 22.632813 0s6.25 16.382812 0 22.636719l-279.058594 279.058593c-3.136719 3.117188-7.234375 4.695313-11.328125 4.695313zm0 0" />
+                                            <path
+                                                d="m295.117188 311.078125c-4.097657 0-8.191407-1.558594-11.308594-4.695313l-279.082032-279.058593c-6.25-6.253907-6.25-16.386719 0-22.636719s16.382813-6.25 22.636719 0l279.058594 279.0625c6.25 6.25 6.25 16.382812 0 22.632812-3.136719 3.117188-7.230469 4.695313-11.304687 4.695313zm0 0" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <form action="" id="add-task-board">
+                                    <label for="">Title</label>
+                                    <input type="text" name="task-board-title" autocomplete="off">
+                                </form>
+                                <div class="footer">
+                                    <button class="primary" id="bt-task-board">
+                                        Add
+                                    </button>
+                                    <button  class="close">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         </div>
                      
