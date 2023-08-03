@@ -4,9 +4,7 @@ nav{
   display: flex;
   justify-content: space-between;
 }
-h2 {
-  padding:2px 16px;
-}
+
 button,
 .close,
 .task-item-close{
@@ -49,7 +47,7 @@ button,
 .task-list {
   border: 1px solid #d9d9d9;
   width: 25%;
-  flex: 0 0 300px;
+  flex: 0 0 345px;
   margin: 0 15px;
   border-radius: 14px;
   height: 76vh;
@@ -91,9 +89,7 @@ background: #555;
   top: 0;
   z-index: 100;
 }
-.header h2{
-  padding: 2px 1px;
-}
+
 .list{
   list-style-type: none;
   padding: 0;
@@ -112,7 +108,7 @@ background: #555;
 .task-item{
   margin: 18px 15px;
   background: #fff;
-  padding: 10px;
+  padding: 15px;
   border-radius: 4px;
   position: relative;
   cursor: all-scroll;
@@ -140,9 +136,9 @@ background: #555;
 .status{
   font-size: 12px;
   margin: 10px 0;
-  font-style: italic;
   border-radius: 4px;
-  padding: 3px 9px;
+  padding: 5px 20px;
+
 }
 .medium {
   background: #fca311;
@@ -175,8 +171,7 @@ background: #555;
   display: none;
 }
 .popup-content{
-  width: 451px;
-
+  width: 800px;
   display: block;
   margin: 30px auto;
   background: #fff;
@@ -220,4 +215,11 @@ background: #555;
   margin-bottom: 20px;
   padding-bottom:19px ;
   border-bottom: 1px solid #eee;
+}
+
+.search-icon{
+  
+  position: absolute;
+  padding: 12px;
+
 }

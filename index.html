@@ -217,7 +217,11 @@
         document.documentElement.setAttribute("data-bs-theme", themeMode);
       }
     </script>
-
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+    </div>
+    <!-- End Page Loading -->
     <div class="d-flex flex-column flex-root">
       <div class="page launcher sidebar-enabled d-flex flex-row flex-column-fluid me-lg-5" id="kt_page">
         <div class="d-flex flex-row-fluid">
@@ -2070,5 +2074,19 @@
     <script src="assets/js/scripts.bundle.js"></script>
     <script src="assets/js/custom/modals/create-account.js"></script>
     <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+
+    <!-- Ensure you include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript for Preloader -->
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() {
+          $('body').addClass('loaded');
+        }, 2000); // 2000 milliseconds (2 seconds) delay
+      });
+    </script>
+
+
   </body>
 </html>
