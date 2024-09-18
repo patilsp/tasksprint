@@ -6,7 +6,7 @@
  /* Light Theme */
  :root[data-bs-theme="light"] {
     --bs-blue: #0d6efd;
-    --bs-indigo: #3950a2;
+    --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
     --bs-pink: #d63384;
     --bs-red: #dc3545;
@@ -32,7 +32,7 @@
     --bs-primary: #37c375;
     --bs-secondary: #a2e49b;
     --bs-success: #63b44e;
-    --bs-info: #3950a2;
+    --bs-info: #F582AE;
     --bs-warning: #edc267;
     --bs-danger: #ef6b3f;
     --bs-dark: #181C32;
@@ -4393,7 +4393,7 @@ textarea.form-control-lg {
 }
 
 .nav-underline .nav-link.active,.nav-underline .show>.nav-link {
-    font-weight: 400;
+    font-weight: 600;
     color: var(--bs-nav-underline-link-active-color);
     border-bottom-color: currentcolor
 }
@@ -4912,19 +4912,19 @@ textarea.form-control-lg {
 }
 
 .card {
-    --bs-card-spacer-y: 1.5rem;
-    --bs-card-spacer-x: 0.875rem;
+    --bs-card-spacer-y: 1rem;
+    --bs-card-spacer-x: 1rem;
     --bs-card-title-spacer-y: 0.5rem;
-    --bs-card-border-width: 0;
+    --bs-card-border-width: 1px;
     --bs-card-border-color: var(--bs-border-color);
-    --bs-card-border-radius: 0.5rem;
-    --bs-card-box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+    --bs-card-border-radius: 0.75rem;
+    --bs-card-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03);
     --bs-card-inner-border-radius: calc(0.75rem - 1px);
-    --bs-card-cap-padding-y: 1.5rem;
-    --bs-card-cap-padding-x: 1.5rem;
+    --bs-card-cap-padding-y: 0.5rem;
+    --bs-card-cap-padding-x: 1rem;
     --bs-card-cap-bg: transparent;
     --bs-card-bg: var(--bs-body-bg);
-    --bs-card-img-overlay-padding: 1.5rem;
+    --bs-card-img-overlay-padding: 1rem;
     --bs-card-group-margin: 0.75rem;
     position: relative;
     display: flex;
@@ -5443,7 +5443,7 @@ textarea.form-control-lg {
 }
 
 .alert-link {
-    font-weight: 400;
+    font-weight: 600;
     color: var(--bs-alert-link-color)
 }
 
@@ -34098,7 +34098,7 @@ textarea.form-control-lg {
     --bs-primary-active: #47be7d;
     --bs-secondary-active: #B5B5C3;
     --bs-light-active: #F1F4FF;
-    --bs-success-active: #4BEFBC;
+    --bs-success-active: #2884EF;
     --bs-info-active: #5014D0;
     --bs-warning-active: #CE7317;
     --bs-danger-active: #DD4339;
@@ -34250,7 +34250,7 @@ textarea.form-control-lg {
     --bs-primary-active: #47be7d;
     --bs-secondary-active: #474761;
     --bs-light-active: #323248;
-    --bs-success-active: #4BEFBC;
+    --bs-success-active: #2884EF;
     --bs-info-active: #5014D0;
     --bs-warning-active: #CE7317;
     --bs-danger-active: #DD4339;
@@ -35312,7 +35312,7 @@ textarea.form-control-lg {
 
 .menu-sub-dropdown {
     display: none;
-    border-radius: .5rem;
+    border-radius: .65rem;
     background-color: var(--bs-menu-dropdown-bg-color);
     box-shadow: var(--bs-menu-dropdown-box-shadow);
     z-index: 107
@@ -40121,9 +40121,9 @@ textarea.form-control-lg {
 }
 
 .btn.btn-primary {
-    color: #fff;
-    border-color: #00B78A;
-    background: transparent linear-gradient(90deg, #14EB8F 0%, #00B78A 100%) 0% 0% no-repeat padding-box;
+    color: var(--bs-primary-inverse);
+    border-color: var(--bs-primary);
+    background-color: var(--bs-primary)
 }
 
 .btn.btn-primary .svg-icon,.btn.btn-primary i {
@@ -40356,10 +40356,8 @@ textarea.form-control-lg {
 
 .btn.btn-success {
     color: var(--bs-success-inverse);
-    background: transparent linear-gradient(90deg, #14EB8F 0%, #00B78A 100%) 0% 0% no-repeat padding-box;
-    border: 1px solid #4BEFBC;
-    -webkit-box-shadow: 0px 10px 11px transparent;
-    box-shadow: 0px 10px 11px transparent;
+    border-color: var(--bs-success);
+    background-color: var(--bs-success)
 }
 
 .btn.btn-success .svg-icon,.btn.btn-success i {
@@ -40709,9 +40707,8 @@ textarea.form-control-lg {
 
 .btn.btn-danger {
     color: var(--bs-danger-inverse);
-    border: 2px solid #FE5F85;
-    box-shadow: 0px 24px 30px #A7265D36;
-    background: transparent linear-gradient(91deg, #FE924A 0%, #EC099A 50%, #FE924A) padding-box;
+    border-color: var(--bs-danger);
+    background-color: var(--bs-danger)
 }
 
 .btn.btn-danger .svg-icon,.btn.btn-danger i {
@@ -42403,7 +42400,7 @@ code:not([class*=language-]) {
 }
 
 .form-check-image .form-check-label {
-    font-weight: 400;
+    font-weight: 600;
     margin-left: .5rem
 }
 
@@ -42652,7 +42649,7 @@ code:not([class*=language-]) {
     box-shadow: var(--bs-table-loading-message-box-shadow);
     background-color: var(--bs-body-bg);
     color: var(--bs-gray-700);
-    font-weight: 400;
+    font-weight: 600;
     margin: 0!important;
     width: auto;
     padding: .85rem 2rem!important;
@@ -51360,7 +51357,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 }
 
 .stepper.stepper-pills .stepper-item .stepper-icon .stepper-number {
-    font-weight: 400;
+    font-weight: 600;
     color: var(--bs-stepper-icon-number-color);
     font-size: 1.25rem
 }
@@ -51374,7 +51371,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 .stepper.stepper-pills .stepper-item .stepper-label .stepper-title {
     color: var(--bs-stepper-label-title-color);
     opacity: var(--bs-stepper-label-title-opacity);
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1.25rem;
     margin-bottom: .3rem
 }
@@ -51496,7 +51493,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 
 .stepper.stepper-links .stepper-nav .stepper-item .stepper-title {
     color: var(--bs-dark);
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1.25rem
 }
 
@@ -51725,7 +51722,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
     box-shadow: var(--bs-blockui-message-box-shadow);
     background-color: var(--bs-blockui-message-bg);
     color: var(--bs-gray-700);
-    font-weight: 400;
+    font-weight: 600;
     margin: 0!important;
     width: auto;
     padding: .85rem 1.75rem!important
@@ -51841,7 +51838,7 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
     border-width: 1px;
     border-style: solid;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 8px;
     border-radius: 6px;
     width: 66px;
@@ -53270,6 +53267,10 @@ label.rating-label:hover~.rating-label>.svg-icon,label.rating-label:hover~.ratin
 
 .shadow-lg {
     box-shadow: var(--bs-box-shadow-lg)
+}
+
+.text-white {
+    color: var(--bs-text-white)!important
 }
 
 .text-hover-white {
@@ -56947,12 +56948,4 @@ router-outlet {
 
 #kt_app_content{
     background-color: var(--bs-body-bg-content);
-}
-.close-btn{
-    cursor: pointer;
-    user-select: none;
-}
-
-.close-btn:hover{
-    transform: translateY(3px);
 }

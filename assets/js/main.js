@@ -24,10 +24,3 @@ function changeThemeMode(mode) {
     document.documentElement.setAttribute("data-bs-theme", mode);
     localStorage.setItem("data-bs-theme", mode);
 }
-
-  /*Preloader*/
-  $(window).load(function() {
-    setTimeout(function() {
-      $('body').addClass('loaded');
-    }, 100);
-  });
