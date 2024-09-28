@@ -7,6 +7,20 @@ import { MoreVertical, PenSquare, Bell, Trash2, FileText } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const Welcome = () => {
   return (
@@ -139,16 +153,33 @@ const Welcome = () => {
             <CardContent className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Task Activity</h2>
-                <Button variant="ghost" size="icon">
-                  <MoreVertical className="h-5 w-5" />
-                </Button>
+               
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                    <MoreVertical className="h-5 w-5" />
+                  </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-44 mr-16 flex flex-col justify-start ">
+                    <DropdownMenuLabel>Quick Actions</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem>Create Tasks </DropdownMenuItem>
+                      <DropdownMenuItem>View Assigned Tasks </DropdownMenuItem>
+                      <DropdownMenuItem>Completed Tasks </DropdownMenuItem>
+                    
+                    </DropdownMenuGroup>
+                    <Button variant="outline" className="w-full mt-4">Generate Report</Button>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
               <div className="space-y-4 ">
                 <div className="flex items-start">
                   <PenSquare className="h-6 w-6 mr-2 mt-1 flex-shrink-0 p-1 text-white bg-blue-900 shadow rounded-full" />
                   <div>
                     <p className="font-semibold">Created 2 new tasks in "Development"</p>
-                    <p className="text-sm text-blue-300">Added at 4:23 PM by <span className="inline-block w-6 h-6 bg-blue-500 rounded-full ml-1"></span></p>
+                    <p className="text-sm text-blue-300">Added at 4:23 PM by Demo User</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between bg-blue-700 p-2 rounded-md">
@@ -179,10 +210,11 @@ const Welcome = () => {
                       <p className="text-sm text-blue-300">1.9mb</p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-blue-300 border border-blue-300">View</Button>
+                  <Button variant="ghost" size="sm" className="text-blue-300 border border-blue-300 mt-">View</Button>
                 </div>
+                
               </div>
-              <Button variant="outline" className="w-full mt-4">VIEW ALL TASKS</Button>
+              <Button variant="outline" className="w-full my-5"><Link href="/tasks">VIEW ALL TASKS</Link></Button>
             </CardContent>
           </Card>
         </motion.div>

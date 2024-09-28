@@ -18,7 +18,7 @@ function Task() {
       <Card className="border-none shadow-none">
         <CardHeader className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
           <CardTitle className="text-3xl font-bold text-primary">Tasks Dashboard</CardTitle>
-          <Link href="/create-task">
+          <Link href="/board">
             <Button className="w-full sm:w-auto">
               <PlusCircle className="mr-2 h-4 w-4" />
               Create New Task

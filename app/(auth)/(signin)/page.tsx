@@ -1,11 +1,14 @@
 "use client";
 
+import React from 'react'
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserAuthForm from '@/components/forms/user-auth-form';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Lottie from"lottie-react";
+import animationData from "@/assets/animation1.json";
 
 
 export default function AuthenticationPage() {
@@ -54,7 +57,7 @@ export default function AuthenticationPage() {
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
-        <div className="relative z-20 flex items-center text-lg font-medium">
+        {/* <div className="relative z-20 flex items-center text-lg font-medium">
           <Image
             src="/images/logo.png"
             height={50}
@@ -72,6 +75,9 @@ export default function AuthenticationPage() {
             alt="banner"
             className="object-contain"
           />
+        </div> */}
+        <div className="relative z-20 flex items-center mt-20 mb-5">
+          <Lottie animationData={animationData} /> 
         </div>
 
         <div className="relative z-20 mt-auto">

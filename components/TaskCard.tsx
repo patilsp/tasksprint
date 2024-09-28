@@ -43,28 +43,10 @@ const TaskCard = ({ task, handleEdit, handleDelete, handleStatusToggle }) => {
         {/* Display due date if available */}
         {task.dueDate && (
           <p className="text-sm text-gray-600">
-            Due: {new Date(task.dueDate).toLocaleDateString("en-GB")}
+             Due: {new Date(task.dueDate).toLocaleDateString("en-GB")}
           </p>
         )}
 
-
-        {/* Show edit and delete buttons for the task creator */}
-        {session?.user.id === task.creator?._id && (
-          <div className="mt-6 pt-4 border-t border-gray-200 flex justify-end space-x-4">
-            <button
-              className="text-sm font-medium text-green-600 hover:text-green-800"
-              onClick={handleEdit}
-            >
-              Edit
-            </button>
-            <button
-              className="text-sm font-medium text-red-600 hover:text-red-800"
-              onClick={handleDelete}
-            >
-              Delete
-            </button>
-          </div>
-        )}
       </div>
     </motion.div>
   );

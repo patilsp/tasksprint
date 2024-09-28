@@ -38,7 +38,7 @@ export default function Sidebar({ className }: SidebarProps) {
   };
 
   return (
-    <div className="relative ">
+    <div className="relative hidden md:block">
     <nav
       className={cn(
         'left-0 top-20 h-full bg-background border-r shadow-lg transition-all duration-300 ease-in-out z-40',
