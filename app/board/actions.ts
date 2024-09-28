@@ -86,16 +86,16 @@ export async function deleteTask(taskId: string) {
 //   }
 // }
 
-// export async function getProjects() {
-//   try {
-//     await connectToDB();
-//     const projects = await Project.find({});
-//     return JSON.parse(JSON.stringify(projects));
-//   } catch (error) {
-//     console.error('Error fetching projects:', error);
-//     throw new Error('Failed to fetch projects');
-//   }
-// }
+export async function getProjects() {
+  try {
+    await connectToDB();
+    const projects = await Project.find({});
+    return JSON.parse(JSON.stringify(projects));
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    throw new Error('Failed to fetch projects');
+  }
+}
 
 // // Update createTask and updateTask functions to handle full objects
 // export async function createTask(taskData: {
