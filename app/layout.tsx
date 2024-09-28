@@ -1,4 +1,5 @@
 import './globals.css';
+import { Metadata } from "next";
 import { Roboto } from 'next/font/google';
 import { cn } from "@/lib/utils";
 import { Toaster } from 'react-hot-toast';
@@ -12,6 +13,23 @@ const roboto = Roboto({
   weight: ['400', '500', '700'], 
   variable: '--font-roboto',
 });
+
+export const metadata: Metadata = {
+	title: {
+		default: "Task Sprint",
+		template: `%s - Task Sprint`,
+	},
+	description: "Task Sprint is a simple employee management system application",
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "white" },
+		{ media: "(prefers-color-scheme: dark)", color: "black" },
+	],
+  icons: {
+		icon: "/favicon.png",
+		shortcut: "/favicon.png",
+		apple: "/favicon.png",
+	},
+};
 
 export default async function RootLayout({
   children
@@ -29,10 +47,10 @@ export default async function RootLayout({
       >
         <NextTopLoader showSpinner={false} />
         <Providers session={session}>
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
+            <Toaster
+              position="bottom-center"
+              reverseOrder={false}
+            />
           <div className="relative flex min-h-screen flex-col bg-background">
             {children}
           </div>
