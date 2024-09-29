@@ -66,9 +66,9 @@ export function AttendanceDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="bg-red-400 text-white p-1 text-center">
         {/* <Button className="w-full mt-4 bg-gray-950 hover:bg-black">Mark Attendance</Button> */}
-        <Button variant="link" className="text-sm text-white border border-gray-200 rounded-md px-2 py-1"> <Clock className="h-3 w-3 text-sm" />Login for the day</Button>
+        <Button variant="link" className="text-sm text-white border border-gray-200 rounded-md px-2 py-1 gap-2"> <Clock className="h-3 w-3 text-sm mr-1" />Login for the day</Button>
 
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
