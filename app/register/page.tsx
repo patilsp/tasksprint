@@ -18,19 +18,45 @@ const Register = () => {
     email: '',
     password: ''
   })
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    password: ''
+  })
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value })
+    setErrors({ ...errors, [e.target.name]: '' }) // Clear error on input change
+  }
+
+  const validate = () => {
+    let valid = true
+    const newErrors = { name: '', email: '', password: '' }
+
+    // Custom validation messages
+    if (!state.name) {
+      newErrors.name = "Username must be at least 3 characters."
+      valid = false
+    }
+    if (!state.email) {
+      newErrors.email = "Please enter a valid email address."
+      valid = false
+    }
+    if (!state.password) {
+      newErrors.password = "Password cannot be empty."
+      valid = false
+    }
+
+    setErrors(newErrors)
+    return valid
   }
 
   const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!state.email || !state.password || !state.name) {
-      toast.error("Please fill all fields")
-      return
-    }
+
+    if (!validate()) return // Stop if validation fails
 
     setLoading(true)
     try {
@@ -54,6 +80,10 @@ const Register = () => {
     setShowPassword(!showPassword)
   }
 
+  const handleFocus = (field: string) => {
+    setErrors({ ...errors, [field]: '' }) // Clear error on focus
+  }
+
   return (
     <div className="relative h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url(/images/bg/bg.png)" }}>
       <div className="absolute"></div>
@@ -71,10 +101,13 @@ const Register = () => {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="Enter your username"
                   value={state.name}
                   onChange={onChangeHandler}
+                  onFocus={() => handleFocus('name')}  // Remove error on focus
+                  className={errors.name ? 'border-red-500' : ''}
                 />
+                {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
@@ -85,7 +118,10 @@ const Register = () => {
                   placeholder="Enter your email"
                   value={state.email}
                   onChange={onChangeHandler}
+                  onFocus={() => handleFocus('email')}  // Remove error on focus
+                  className={errors.email ? 'border-red-500' : ''}
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
@@ -97,6 +133,8 @@ const Register = () => {
                     placeholder="Enter your password"
                     value={state.password}
                     onChange={onChangeHandler}
+                    onFocus={() => handleFocus('password')}  // Remove error on focus
+                    className={errors.password ? 'border-red-500' : ''}
                   />
                   <button
                     type="button"
@@ -110,14 +148,15 @@ const Register = () => {
                     )}
                   </button>
                 </div>
+                {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button type="submit" className="w-full" disabled={loading}> 
+              <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? (
-                   <span className="flex items-center justify-center">
-                   <Loader2 className="animate-spin h-5 w-5 mr-3" /> Registering...
-                 </span>
+                  <span className="flex items-center justify-center">
+                    <Loader2 className="animate-spin h-5 w-5 mr-3" /> Registering...
+                  </span>
                 ) : (
                   "Register"
                 )}
