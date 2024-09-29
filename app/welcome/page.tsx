@@ -1,5 +1,6 @@
 "use client";
-
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,11 +21,55 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import { AttendanceDialog } from '@/components/AttendanceDialog';
+import axios from 'axios';
+import { useUserStore } from '@/store/useUserStore';
 
 const Welcome = () => {
+  const { user, fetchUser } = useUserStore();
+  const [attendanceData, setAttendanceData] = useState([]);
+  const [isAttendanceDialogOpen, setIsAttendanceDialogOpen] = useState(false);
+
+  useEffect(() => {
+    fetchUser(); // Fetch the user on component mount
+  }, [fetchUser]);
+
+  useEffect(() => {
+    const fetchAttendanceStatus = async (userId) => {
+      try {
+        // Fetch attendance data for the specified user
+        const response = await axios.get(`/api/attendance?userId=${userId}`);
+
+        // Log the received data
+        console.log("Attendance Data:", response.data);
+        
+        // Set attendance data
+        setAttendanceData(response.data);
+        
+        // Check if user is present in attendance data
+        const userPresent = response.data.some(attendance => attendance.creator === userId);
+        
+        // Open the attendance dialog if the user is logged in and not present
+        if (userId && !userPresent) {
+          setIsAttendanceDialogOpen(true);
+        }
+      } catch (error) {
+        console.error("Error fetching attendance data:", error.message || error);
+      }
+    };
+
+    if (user && user._id) {
+      fetchAttendanceStatus(user._id); // Fetch attendance only if user is defined
+    }
+  }, [user]); // Run this effect whenever `user` changes
+
+  const loggedInUserId = user?._id;
+
   return (
-    <div className="bg-gradient-to-br from-blue-900 to-blue-700 min-h-screen p-4 md:p-8">
+      
+    
+     <div className="bg-gradient-to-br from-blue-900 to-blue-700 min-h-screen p-4 md:p-8">
       <header className="flex flex-col md:flex-row items-center justify-between mb-8">
         <div className="mb-4 md:mb-0">
           <Link href="/dashboard" target="_blank">
@@ -40,6 +85,14 @@ const Welcome = () => {
         <div className="text-center md:text-left">
           <h1 className="text-sm md:text-2xl font-bold text-white mb-2">WELCOME TO <span className='text-orange-500 '> TASK SPRINT</span></h1>
           {/* <p className="text-sm md:text-base text-white">Task Sprint is a project management tool that helps you get things done.</p> */}
+          {loggedInUserId && attendanceData.length > 0 ? (
+            <p className="text-center text-white bg-green-400 p-1 rounded shadow border">You mark as Present Today </p>
+          ) : (
+            <div className="flex justify-between gap-2">
+              {/* <p>Please mark your attendance</p> */}
+              <AttendanceDialog />
+            </div>
+          )}
         </div>
       </header>
 
@@ -118,7 +171,7 @@ const Welcome = () => {
                   height={180}
                   width={180}
                 />
-                <div className="flex flex-col items-center md:items-start">
+                <div className="flex flex-col items-center text-center md:text-start md:items-start">
                     <div className="text-white mb-6 pt-6">
                       <span className="text-sm font-normal block pb-2 opacity-75">Get best offer</span>
                       <span className="text-xl font-bold">Upgrade Your Plan</span>
@@ -126,13 +179,13 @@ const Welcome = () => {
                   <span className="font-base text-white text-sm mb-8 block opacity-75">
                       Supercharge your team's productivity with our Task Sprint project management solutions.
                     </span>
-                  <div className="flex flex-col sm:flex-row gap-3">
-                      <Button className="w-full sm:w-auto bg-[#ebee51] text-gray-900 hover:bg-[#d5d83d]">
+                  <div className="w-full flex flex-row gap-3">
+                      <Button className="w-full bg-[#ebee51] text-gray-900 hover:bg-[#d5d83d]">
                         <Link href="/subscription">
                           Upgrade Plan
                         </Link>
                       </Button>
-                      <Button variant="outline"> Read Guid </Button>
+                      <Button variant="outline" className="w-full"> Read Guid </Button>
                     </div>
                 </div>
               </CardContent>
@@ -151,7 +204,7 @@ const Welcome = () => {
         >
           <Card className="bg-blue-800 text-white">
             <CardContent className="p-6">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-8">
                 <h2 className="text-xl font-bold">Task Activity</h2>
                
 

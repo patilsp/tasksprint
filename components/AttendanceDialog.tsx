@@ -1,31 +1,35 @@
 'use client'
 
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import AttendanceForm from '@/components/AttendanceForm'
 import { useUserStore } from '@/store/useUserStore'
+import { CheckCircle, Clock, ListChecks, UserCheck } from 'lucide-react';
 
 export function AttendanceDialog() {
   const router = useRouter()
   
   const { user, fetchUser } = useUserStore()
-
-  useEffect(() => {
-    fetchUser()
-  }, [fetchUser])
-
   const [attendance, setAttendance] = useState({
     status: 'Present',
     remarks: '',
     date: new Date(),
     checkInTime: new Date(),
-    userId: user?._id
+    userId: '',  // Initialize as an empty string
   })
+
   const [submitting, setIsSubmitting] = useState(false)
   const [open, setOpen] = useState(false)
+
+  // Update userId when user changes
+  useEffect(() => {
+    if (user?._id) {
+      setAttendance(prev => ({ ...prev, userId: user._id }))
+    }
+  }, [user])
 
   const createAttendance = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,7 +38,6 @@ export function AttendanceDialog() {
         toast.error('You must be logged in to mark attendance');
         return;
     }
-
 
     setIsSubmitting(true)
 
@@ -49,7 +52,7 @@ export function AttendanceDialog() {
 
       if (response.ok) {
         toast.success('Attendance has been created! 🔥')
-        router.push('/attendance')
+        router.push('/welcome')
         setOpen(false)
       } else {
         throw new Error('Failed to create attendance record')
@@ -64,11 +67,13 @@ export function AttendanceDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full mt-4 bg-gray-950 hover:bg-black">Mark Attendance</Button>
+        {/* <Button className="w-full mt-4 bg-gray-950 hover:bg-black">Mark Attendance</Button> */}
+        <Button variant="link" className="text-sm text-white border border-gray-200 rounded-md px-2 py-1"> <Clock className="h-3 w-3 text-sm" />Login for the day</Button>
+
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create Attendance</DialogTitle>
+          <DialogTitle className="text-center" >Mark your Attendance</DialogTitle>
         </DialogHeader>
         <AttendanceForm
           type='Create'
