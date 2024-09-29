@@ -15,7 +15,7 @@ export default function DashboardLayout({
   return (
     <>
       {/* <Header /> */}
-      <div className="flex h-screen">
+      <div className="flex">
         <TopBar />
         <main className="flex-1 pt-16">{children}</main>
       </div>

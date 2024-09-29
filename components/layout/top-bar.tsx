@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -34,9 +35,21 @@ const TopBar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="font-bold text-xl">
-            Task Sprint
+          <div className="hidden lg:block">
+          <Link
+            href="/dashboard"
+            target="_blank"
+          >
+            <Image 
+              src="/images/logo.png"
+              height={35}
+              width={35}
+              alt="logo"
+              className="object-contain"             
+
+            />           
           </Link>
+        </div>
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden md:flex">
