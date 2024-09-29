@@ -95,7 +95,7 @@ const Welcome = () => {
               </CardContent>
               </Card>
             </Link>
-            <Link href="/tasks">
+            <Link href="/khanban">
               <Card className="border min-h-[200px] bg-[#35d29a]">
                 <CardContent className="flex flex-col items-center justify-center text-center h-full p-6">
                   <Image 
@@ -123,8 +123,8 @@ const Welcome = () => {
                       <span className="text-sm font-normal block pb-2 opacity-75">Get best offer</span>
                       <span className="text-xl font-bold">Upgrade Your Plan</span>
                     </div>
-                  <span className="font-semibold text-white text-sm mb-8 block opacity-75">
-                      Flat cartoony and illustrations with vivid unblended purple hair lady
+                  <span className="font-base text-white text-sm mb-8 block opacity-75">
+                      Supercharge your team's productivity with our Task Sprint project management solutions.
                     </span>
                   <div className="flex flex-col sm:flex-row gap-3">
                       <Button className="w-full sm:w-auto bg-[#ebee51] text-gray-900 hover:bg-[#d5d83d]">

@@ -65,7 +65,7 @@ export const docsConfig: DocsConfig = {
         },
         {
           title: "Sign Up",
-          href: "/register",
+          href: "/sign-up",
         },
         // ... other sidebarNav sub-items ...
       ],

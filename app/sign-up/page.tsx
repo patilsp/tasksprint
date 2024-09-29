@@ -81,7 +81,7 @@ const Register = () => {
   }
 
   const handleFocus = (field: string) => {
-    setErrors({ ...errors, [field]: '' }) // Clear error on focus
+    setErrors({ ...errors, [field]: '' })
   }
 
   return (
@@ -90,7 +90,7 @@ const Register = () => {
       <div className="container mx-auto flex items-center justify-center min-h-screen p-4">
         <Card className="w-full max-w-md bg-transparent shadow-lg border border-white backdrop:blur-xl">
           <CardHeader>
-            <CardTitle>Sign Up</CardTitle>
+            <CardTitle className="text-xl">Sign Up</CardTitle>
             <CardDescription>Create a new account to get started.</CardDescription>
           </CardHeader>
           <form onSubmit={onSubmitHandler}>
@@ -104,7 +104,7 @@ const Register = () => {
                   placeholder="Enter your username"
                   value={state.name}
                   onChange={onChangeHandler}
-                  onFocus={() => handleFocus('name')}  // Remove error on focus
+                  onFocus={() => handleFocus('name')} 
                   className={errors.name ? 'border-red-500' : ''}
                 />
                 {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}

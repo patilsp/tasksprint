@@ -119,6 +119,12 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Kanban Board',
+    href: '/khanban',
+    icon: 'tasks',
+    label: 'tasks'
+  },
+  {
+    title: 'Tasks',
     href: '/board',
     icon: 'tasks',
     label: 'tasks'

@@ -129,7 +129,7 @@ const UserAuthForm = () => {
           </form>
           <div className="mt-4 text-center text-sm">
             Don't have an account?{" "}
-            <Link href="/register" className="underline hover:text-blue-600">
+            <Link href="/sign-up" className="underline hover:text-blue-600">
               Sign up
             </Link>
           </div>
