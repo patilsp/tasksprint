@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { PlusCircledIcon } from '@radix-ui/react-icons';
+import { Button } from "@/components/ui/button";
+import { Plus, ArrowLeft } from 'lucide-react';
 import TaskSprintCard from '@/components/TaskSprintCard';
 
 export default function TaskSprint() {
@@ -25,9 +26,16 @@ export default function TaskSprint() {
   }, []);
 
   return (
-    <div className='p-4 h-screen'>
+    <div className='p-1 md:p-0 h-screen'>
       <div className='flex flex-col md:flex-row'>
         <div className='flex-1 space-y-4 p-1 pt-6 md:p-8'>
+          <div className="flex justify-start items-center mb-8">
+            <Link href="/welcome">
+              <Button variant="outline" size="sm">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+              </Button>
+            </Link>
+          </div>
           <div className='flex flex-col space-y-4 md:flex-row md:items-center md:justify-between'>
             <div>
               <h2 className='text-xl font-bold md:text-2xl'>Manage Your Sprints</h2>
@@ -41,7 +49,7 @@ export default function TaskSprint() {
                 href='/tasksprint/create-sprint'
                 className='inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
               >
-                <PlusCircledIcon className='mr-2 size-4' />
+                <Plus className='mr-2 size-4' />
                 Add Sprint
               </Link>
             </div>

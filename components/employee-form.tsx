@@ -16,6 +16,7 @@ import { Loader2, Upload } from "lucide-react";
 import { useUploadThing } from "@/hooks/useUploadThing";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const EmployeeForm = ({ type, employee, setEmployee, submitting, handleSubmit }) => {
@@ -294,7 +295,7 @@ const EmployeeForm = ({ type, employee, setEmployee, submitting, handleSubmit })
                 }}
                 className="w-full md:w-auto min-w-32 text-white hover:text-white bg-red-400 hover:bg-red-500"
               >
-                Cancel
+                <Link href="/employees"> Cancel </Link>
               </Button>
               <Button
                 type="submit"

@@ -28,7 +28,7 @@ export default function Employee() {
   }, []);
 
   return (
-    <div className='p-4 h-screen'>
+    <div className='p-1 h-screen'>
       <div className='flex flex-col md:flex-row'>
         <div className='flex-1 space-y-4 p-1 pt-6 md:p-8'>
           <div className='flex flex-col space-y-4 md:flex-row md:items-center md:justify-between'>

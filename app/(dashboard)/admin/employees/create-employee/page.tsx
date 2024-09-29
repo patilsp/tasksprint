@@ -79,7 +79,7 @@ const CreateEmployee = () => {
   };
   
   return (
-    <div className="p-1 scroll my-10">
+    <div className="p-1 scroll my-0 md:my-10">
       <EmployeeForm
         type="Create"
         employee={employee}

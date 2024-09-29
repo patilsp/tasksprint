@@ -5,8 +5,8 @@ const Loading = () => {
     <div className='fixed inset-0 flex items-center justify-center'>
       <Image
         src='images/icons/loader.svg'
-        width={30}
-        height={30}
+        width={40}
+        height={40}
         alt='loader'
         className='object-contain'
       />

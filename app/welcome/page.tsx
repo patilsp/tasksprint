@@ -88,7 +88,7 @@ const Welcome = () => {
           {loggedInUserId && attendanceData.length > 0 ? (
             <p className="text-center text-white bg-green-400 p-1 rounded shadow border">You mark as Present Today </p>
           ) : (
-            <div className="flex justify-between gap-2">
+            <div className="flex justify-center gap-2">
               {/* <p>Please mark your attendance</p> */}
               <AttendanceDialog />
             </div>
