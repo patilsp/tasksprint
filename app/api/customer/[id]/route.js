@@ -20,7 +20,7 @@ export const PATCH = async (request, { params }) => {
     if (!params.id) {
       return new Response("Customer ID is missing", { status: 400 });
     }
-    const { name, email, phone, address, dateofbirth, status } = await request.json();
+    const { name, email, phone, address, area, dateofbirth, status, pincode } = await request.json();
     
     if (!name || !email || !phone || !address || !status) {
       return new Response("Missing required fields", { status: 400 });
@@ -37,8 +37,10 @@ export const PATCH = async (request, { params }) => {
       existingCustomer.email = email;
       existingCustomer.phone = phone;
       existingCustomer.address = address;
+      existingCustomer.area = area;
       existingCustomer.dateofbirth = dateofbirth;
       existingCustomer.status = status;
+      existingCustomer.pincode = pincode;
       
       await existingCustomer.save();
       return new Response("Successfully updated the Customer", { status: 200 });

@@ -38,19 +38,9 @@ const Welcome = () => {
   useEffect(() => {
     const fetchAttendanceStatus = async (userId) => {
       try {
-        // Fetch attendance data for the specified user
         const response = await axios.get(`/api/attendance?userId=${userId}`);
-
-        // Log the received data
-        console.log("Attendance Data:", response.data);
-        
-        // Set attendance data
         setAttendanceData(response.data);
-        
-        // Check if user is present in attendance data
         const userPresent = response.data.some(attendance => attendance.creator === userId);
-        
-        // Open the attendance dialog if the user is logged in and not present
         if (userId && !userPresent) {
           setIsAttendanceDialogOpen(true);
         }
@@ -60,9 +50,9 @@ const Welcome = () => {
     };
 
     if (user && user._id) {
-      fetchAttendanceStatus(user._id); // Fetch attendance only if user is defined
+      fetchAttendanceStatus(user._id);
     }
-  }, [user]); // Run this effect whenever `user` changes
+  }, [user]);
 
   const loggedInUserId = user?._id;
 

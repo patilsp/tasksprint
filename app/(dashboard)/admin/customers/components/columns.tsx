@@ -32,7 +32,19 @@ export const columns: ColumnDef<Customer>[] = [
     enableSorting: true,
     enableHiding: true,
   },
-  
+  {
+    accessorKey: "id",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Customer ID" />
+    ),
+    cell: ({ row }) => {
+      const id = row.getValue("id");
+      const formattedId = Number.isInteger(id) ? `CS-${id}` : `CS-${parseInt(id, 12)}`;
+      return <div className="w-[80px]">{formattedId}</div>;
+    },
+    enableSorting: true,
+    enableHiding: false,
+  },
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -92,12 +104,27 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
-    cell: ({ row }) => <div className="rounded bg-slate-300 p-1">{row.getValue("status")}</div>,
+    cell: ({ row }) => {
+      const status = row.getValue("status");
+  
+      // Conditional class for background color based on status
+      const statusColorClass = status === "Active"
+        ? "bg-green-400"
+        : status === "Inactive"
+        ? "bg-yellow-400"
+        : status === "Blocked"
+        ? "bg-red-400"
+        : "bg-primary";
+  
+      return (
+        <Badge className={`px-1 w-20 text-center ${statusColorClass}`}>
+          {status}
+        </Badge>
+      );
+    },
     enableSorting: true,
     enableHiding: true,
-  },
-
-  
+  },  
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,

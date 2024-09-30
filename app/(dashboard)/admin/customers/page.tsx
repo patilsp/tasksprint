@@ -55,7 +55,7 @@ export default function CustomerPage() {
 
             <div className='mt-4 md:mt-0'>
               <Link
-                href='create-customer'
+                href='/admin/customers/create-customer'
                 className='inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
               >
                 <PlusCircledIcon className='mr-2 size-4' />

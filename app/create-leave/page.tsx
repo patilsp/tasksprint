@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import LeaveForm from "@/components/LeaveForm";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 const CreateLeave = () => {
   const router = useRouter();
@@ -28,7 +31,7 @@ const CreateLeave = () => {
       });
 
       if (response.ok) {
-        toast.success("Leave request submitted successfully! 🔥");
+        toast.success("Leaves requested successfully! 🔥");
         router.push("/leaves");
       } else {
         throw new Error("Failed to submit leave request");
@@ -41,13 +44,22 @@ const CreateLeave = () => {
   };
 
   return (
-    <LeaveForm
-      type="Submit"
-      leave={leave}
-      setLeave={setLeave}
-      submitting={submitting}
-      handleSubmit={createLeave}
-    />
+    <div className="bg-gray-100">
+       <div className="flex justify-start items-center pt-3 ml-2">
+          <Link href="/leaves">
+            <Button variant="outline" size="sm">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+            </Button>
+          </Link>
+        </div>
+      <LeaveForm
+        type="Submit"
+        leave={leave}
+        setLeave={setLeave}
+        submitting={submitting}
+        handleSubmit={createLeave}
+      />
+    </div>
   );
 };
 

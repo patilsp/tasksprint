@@ -16,7 +16,7 @@ export default function DashboardLayout({
     <>
       {/* <Header /> */}
       <div className="flex">
-        <TopBar />
+        <Header />
         <main className="flex-1 pt-16">{children}</main>
       </div>
     </>

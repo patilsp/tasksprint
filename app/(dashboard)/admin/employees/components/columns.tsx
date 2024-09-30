@@ -111,16 +111,24 @@ export const columns: ColumnDef<Employee>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
-      const status = row.getValue("status")
+      const status = row.getValue("status");
+      const statusColorClass = status === "Active"
+        ? "bg-green-400"
+        : status === "Inactive"
+        ? "bg-yellow-400"
+        : status === "Blocked"
+        ? "bg-red-400"
+        : "bg-primary";
+  
       return (
-        <Badge variant={status === "Active" ? "success bg-green-500 text-white" : "destructive bg-red-500 text-white"}>
+        <Badge className={`px-1 w-20 text-center ${statusColorClass}`}>
           {status}
         </Badge>
-      )
+      );
     },
     enableSorting: true,
     enableHiding: true,
-  },
+  },  
   {
     accessorKey: "actions",
     header: ({ column }) => (

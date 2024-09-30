@@ -16,8 +16,8 @@ const Posts = () => (
       <h3 className="text-xl sm:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-600 mb-4">
         Daily Employee Updates
       </h3>
-      <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Stay informed and inspired with our daily collection of AI-powered prompts and updates.
+      <p className="max-w-xl mx-auto text-base text-gray-600 dark:text-gray-300 mb-6">
+      Stay informed and motivated with our daily collection of task updates, project insights, and productivity tips at Task Sprint—empowering you to achieve more every day!
       </p>
       <div className="h-1 w-20 bg-gradient-to-r from-orange-400 to-pink-600 mx-auto rounded-full"></div>
     </div>

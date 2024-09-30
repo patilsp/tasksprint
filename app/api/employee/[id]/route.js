@@ -5,7 +5,7 @@ export const GET = async (request, { params }) => {
     try {
         await connectToDB();
 
-        const employee = await Employee.findById(params.id).populate("creator");
+        const employee = await Employee.findById(params.id);
         if (!employee) return new Response("Employee Not Found", { status: 404 });
 
         return new Response(JSON.stringify(employee), { status: 200 });

@@ -56,7 +56,7 @@ const CustomerForm = ({ type, customer, setCustomer, submitting, handleSubmit })
   };
 
   return (
-    <section className="mb-5 flex w-full max-w-full flex-col items-center justify-center px-4 py-2">
+    <section className="mb-5 flex w-full max-w-full flex-col items-center justify-center">
       <h1 className="head_text mt-4 text-center text-xl text-indigo-500">
         {type} Customer
       </h1>
@@ -109,8 +109,8 @@ const CustomerForm = ({ type, customer, setCustomer, submitting, handleSubmit })
               <SelectContent>
                 <SelectItem value="Active">Active</SelectItem>
                 <SelectItem value="In Active">Inactive</SelectItem>
-                <SelectItem value="Warranty">Warranty</SelectItem>
-                <SelectItem value="Out Of Warranty">Out Of Warranty</SelectItem>
+                <SelectItem value="Blocked">Blocked</SelectItem>
+               
               </SelectContent>
             </Select>
           </div>
@@ -149,8 +149,8 @@ const CustomerForm = ({ type, customer, setCustomer, submitting, handleSubmit })
             className="form_textarea"
           />
         </div>
-        <div className="my-4 flex justify-center gap-4">
-          <Link href="/customers" className="flex items-center rounded bg-red-400 p-1 px-4 text-sm text-primary-foreground shadow hover:bg-red-600">
+        <div className="my-2 flex justify-center gap-4">
+          <Link href="/admin/customers" className="flex items-center rounded bg-red-400 p-1 px-4 text-sm text-primary-foreground shadow hover:bg-red-600">
             Cancel
           </Link>
           <Button type="submit" disabled={submitting} className="rounded bg-primary px-5 py-1.5 text-sm text-white">

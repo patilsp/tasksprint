@@ -107,7 +107,7 @@ const PostFeed = () => {
   }
 
   return (
-    <section className='w-full max-w-screen-xl mx-auto p-4'>
+    <section className='w-full max-w-screen-xl mx-auto p-0 md:p-4 mb-10'>
       <div className="mb-6 flex justify-center items-center">
         <Input
           type='text'

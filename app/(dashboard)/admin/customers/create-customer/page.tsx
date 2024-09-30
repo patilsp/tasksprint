@@ -45,7 +45,7 @@ const CreateCustomer = () => {
 
       if (response.ok) {
         toast.success("Customer has been created! 🔥");
-        router.push("/customers");
+        router.push("/admin/customers");
       } else {
         toast.error("Failed to create customer.");
       }

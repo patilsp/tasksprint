@@ -39,7 +39,7 @@ export function DataTableRowActions<TData>({
 
   const handleEdit = () => {
     if (customer.id) {
-      router.push(`/update-customer?id=${customer.id}`);
+      router.push(`/admin/customers/update-customer?id=${customer.id}`);
     } else {
       console.error("Customer ID is undefined");
     }
@@ -57,7 +57,7 @@ export function DataTableRowActions<TData>({
         }else{
           toast.success("Customer has been deleted!");
           router.refresh();
-          router.push("/customers"); 
+          router.push("/admin/customers"); 
         }
         if (onDelete) {
           onDelete(customer.id);
@@ -82,25 +82,10 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem onSelect={handleEdit}>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Names</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={customer.label}>
-              {names.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={handleDelete}>
+        <DropdownMenuItem className="text-red-400" onSelect={handleDelete}>
           Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <DropdownMenuShortcut></DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

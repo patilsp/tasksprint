@@ -62,7 +62,7 @@ export default function LeavesPage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card>
             <CardContent className="flex flex-col items-center justify-center h-24">
               <span className="text-3xl font-bold text-blue-500">16</span>
@@ -87,7 +87,7 @@ export default function LeavesPage() {
               <span className="text-sm text-gray-500">Rejected Leaves</span>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
         <div className="space-y-4">        
           <Card>
@@ -101,7 +101,13 @@ export default function LeavesPage() {
           </Card>
         </div>
 
-        <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
+        <div className='grid grid-cols-2 md:grid-cols-5 gap-2'>
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center h-24">
+              <span className="text-3xl font-bold text-blue-500">16</span>
+              <span className="text-sm text-gray-500">Available leaves</span>
+            </CardContent>
+          </Card>
           {['All', 'Approved', 'Pending', 'Rejected'].map((status) => (
             <div
               key={status}

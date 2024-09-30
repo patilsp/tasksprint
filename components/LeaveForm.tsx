@@ -83,17 +83,12 @@ const LeaveForm = ({ type, leave, setLeave, submitting, handleSubmit }) => {
   const leaveTypes = ["Sick Leave", "Casual Leave", "Vacation", "Other"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex items-center justify-center">
       <Card className="w-full max-w-lg shadow">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl font-bold">Leave Request</CardTitle>
-            <Link href="/leaves">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
-              </Button>
-            </Link>
+           
           </div>
           <CardDescription>
             Please fill in the details for your leave request.

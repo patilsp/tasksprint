@@ -34,23 +34,32 @@ export default function Header() {
 
   const notifications = [
     {
-      title: "Your call has been confirmed.",
+      title: "New Task Assigned: Design Homepage",
+      description: "30 minutes ago",
+    },
+    {
+      title: "Task Completed: API Integration for User Auth",
       description: "1 hour ago",
     },
     {
-      title: "You have a new message!",
-      description: "1 hour ago",
-    },
-    {
-      title: "Your subscription is expiring soon!",
+      title: "Upcoming Deadline: Submit Final Report",
       description: "2 hours ago",
     },
-  ]
+    {
+      title: "Milestone Achieved: 50% of Sprint Completed",
+      description: "3 hours ago",
+    },
+    {
+      title: "Task Overdue: Fix Bug in Dashboard Module",
+      description: "5 hours ago",
+    },
+  ];
+  
 
 
   return (
     <div className="supports-backdrop-blur:bg-background/60 fixed left-0 right-0 top-0 z-20 border-b bg-background/95 backdrop-blur">
-      <nav className="flex w-full max-w-sm md:max-w-full h-14 items-center justify-between px-4">
+      <nav className="flex w-full h-14 items-center justify-between px-4">
         <div className="hidden lg:block">
           <Link
             href="/dashboard"
@@ -83,10 +92,10 @@ export default function Header() {
                 <Card className="w-[380px] border-0 shadow-none">
                   <CardHeader>
                     <CardTitle>Notifications</CardTitle>
-                    <CardDescription>You have 3 unread messages.</CardDescription>
+                    <CardDescription>You have 5 unread messages.</CardDescription>
                   </CardHeader>
                   <CardContent className="grid gap-4">
-                    <div className=" flex items-center space-x-4 rounded-md border p-4">
+                    {/* <div className=" flex items-center space-x-4 rounded-md border p-4">
                       <Bell />
                       <div className="flex-1 space-y-1">
                         <p className="text-sm font-medium leading-none">
@@ -97,7 +106,7 @@ export default function Header() {
                         </p>
                       </div>
                       
-                    </div>
+                    </div> */}
                     <div>
                       {notifications.map((notification, index) => (
                         <div

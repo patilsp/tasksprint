@@ -295,7 +295,7 @@ const EmployeeForm = ({ type, employee, setEmployee, submitting, handleSubmit })
                 }}
                 className="w-full md:w-auto min-w-32 text-white hover:text-white bg-red-400 hover:bg-red-500"
               >
-                <Link href="/employees"> Cancel </Link>
+                <Link href="/admin/employees"> Cancel </Link>
               </Button>
               <Button
                 type="submit"
