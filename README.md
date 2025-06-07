@@ -3,8 +3,8 @@
   <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/9113740/201498152-b171abb8-9225-487a-821c-6ff49ee48579.png">
 </picture>
 
-<div align="center"><strong>Task Sprint</strong></div>
-<div align="center">Project Management System</div>
+## <div align="center"><strong>Task Sprint</strong></div>
+<div align="center"> Project Management System </div>
 <br />
 
 ![image](https://github.com/user-attachments/assets/fc1a8433-804c-4f7f-92d3-3370bc646fb2)
