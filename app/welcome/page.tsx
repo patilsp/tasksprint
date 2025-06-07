@@ -72,21 +72,11 @@ const Welcome = () => {
             />
           </Link>
         </div>
-        <div className="text-center md:text-left">
-          <h1 className="text-sm md:text-2xl font-bold text-white mb-2">WELCOME TO <span className='text-orange-500 '> TASK SPRINT</span></h1>
-          {/* <p className="text-sm md:text-base text-white">Task Sprint is a project management tool that helps you get things done.</p> */}
-          {loggedInUserId && attendanceData.length > 0 ? (
-            <p className="text-center text-white bg-green-400 p-1 rounded shadow border">You mark as Present Today </p>
-          ) : (
-            <div className="flex justify-center gap-2">
-              {/* <p>Please mark your attendance</p> */}
-              <AttendanceDialog />
-            </div>
-          )}
-        </div>
-      </header>
+        <h1 className="text-sm md:text-2xl font-bold text-white mb-2">WELCOME TO <span className='text-orange-500 '> TASK SPRINT</span></h1>
+        </header>
 
-      <div className="flex justify-between flex-col lg:flex-row gap-4">
+      <div className="flex justify-center flex-col lg:flex-row gap-4">
+        
        <div className="flex md:flex-row flex-col justify-between items-center gap-2 md:gap-4">
        <motion.div
           className="flex-1 size-full"
@@ -170,12 +160,17 @@ const Welcome = () => {
                       Supercharge your team's productivity with our Task Sprint project management solutions.
                     </span>
                   <div className="w-full flex flex-row gap-3">
-                      <Button className="w-full bg-[#ebee51] text-gray-900 hover:bg-[#d5d83d]">
-                        <Link href="/subscription">
-                          Upgrade Plan
-                        </Link>
-                      </Button>
-                      <Button variant="outline" className="w-full"> Read Guid </Button>
+                  <div className="text-center md:text-left">
+                    {/* <p className="text-sm md:text-base text-white">Task Sprint is a project management tool that helps you get things done.</p> */}
+                    {loggedInUserId && attendanceData.length > 0 ? (
+                      <p className="text-center text-white bg-green-400 p-1 rounded shadow border">You mark as Present Today </p>
+                    ) : (
+                      <div className="flex justify-center gap-2">
+                        {/* <p>Please mark your attendance</p> */}
+                        <AttendanceDialog />
+                      </div>
+                    )}
+                  </div>
                     </div>
                 </div>
               </CardContent>
@@ -257,7 +252,7 @@ const Welcome = () => {
                 </div>
                 
               </div>
-              <Button variant="outline" className="w-full my-5"><Link href="/tasks">VIEW ALL TASKS</Link></Button>
+              <Button className="w-full my-6 bg-blue-900"><Link href="/tasks">VIEW ALL TASKS</Link></Button>
             </CardContent>
           </Card>
         </motion.div>

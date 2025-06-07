@@ -201,7 +201,9 @@ export default function Attendance() {
                       <>
                         <p className="text-xs text-center text-gray-500">You have not marked your attendance today!</p>
                         <p className="text-xs text-center font-semibold mt-2">Time left: {dayjs().endOf('day').diff(dayjs(), 'minute')}m</p>
-                        <AttendanceDialog />
+                        <div className="flex justify-center py-2">
+                          <AttendanceDialog />
+                        </div>
                       </>
                     )}
                   </>

@@ -47,7 +47,7 @@ const Login = () => {
     <div className="relative h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url(/images/bg/bg.png)" }}>
       <div className="w-full h-screen flex items-center justify-center px-4">
         <Card className="mx-auto max-w-md bg-transparent shadow-lg border border-white backdrop-blur-xl">
-          <CardHeader>
+          <CardHeader className="text-center">
             <CardTitle className="text-xl">Login</CardTitle>
             <CardDescription>Enter your credentials to access your account</CardDescription>
           </CardHeader>

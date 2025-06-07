@@ -1,6 +1,6 @@
 import './globals.css';
 import { Metadata } from "next";
-import { Roboto } from 'next/font/google';
+import { Inter } from 'next/font/google'
 import { cn } from "@/lib/utils";
 import { Toaster } from 'react-hot-toast';
 import NextTopLoader from 'nextjs-toploader';
@@ -8,11 +8,7 @@ import Providers from '@/components/layout/providers';
 import { auth } from '@/auth';
 
 // Load the Roboto font
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'], 
-  variable: '--font-roboto',
-});
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: {
@@ -42,19 +38,16 @@ export default async function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background antialiased",
-          roboto.variable
+          inter.variable
         )}
       >
         <NextTopLoader showSpinner={false} />
-        <Providers session={session}>
-            <Toaster
-              position="bottom-center"
-              reverseOrder={false}
-            />
+        <Providers session={session}>           
           <div className="relative flex min-h-screen flex-col bg-background">
             {children}
           </div>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

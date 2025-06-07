@@ -7,7 +7,7 @@ export default async function middleware(req: NextRequestWithAuth) {
   const isAuthenticated = !!token;
 
   if (req.nextUrl.pathname.startsWith('/protected') && !isAuthenticated) {
-    return NextResponse.redirect(new URL('/welcome', req.url));
+    return NextResponse.redirect(new URL('/onboarding', req.url));
   }
 
   return NextResponse.next();

@@ -18,7 +18,7 @@ export function AttendanceDialog() {
     remarks: '',
     date: new Date(),
     checkInTime: new Date(),
-    userId: '',  // Initialize as an empty string
+    userId: '', 
   })
 
   const [submitting, setIsSubmitting] = useState(false)
@@ -51,8 +51,8 @@ export function AttendanceDialog() {
       })
 
       if (response.ok) {
-        toast.success('Attendance has been created! 🔥')
-        router.push('/welcome')
+        toast.success('You have successfully marked today\'s attendance! ✅');
+        router.reload();  
         setOpen(false)
       } else {
         throw new Error('Failed to create attendance record')

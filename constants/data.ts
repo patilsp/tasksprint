@@ -117,14 +117,9 @@ export const navItems: NavItem[] = [
     icon: 'dashboard',
     label: 'Dashboard'
   },
+
   {
-    title: 'khanban Board',
-    href: '/khanban',
-    icon: 'tasks',
-    label: 'tasks'
-  },
-  {
-    title: 'Tasks',
+    title: 'Kanban Board',
     href: '/board',
     icon: 'tasks',
     label: 'tasks'
@@ -145,25 +140,20 @@ export const navItems: NavItem[] = [
   {
     title: 'Posts',
     href: '/posts',
-    icon: 'kanban',
+    icon: 'profile',
     label: 'Posts'
   },
   {
     title: 'Projects',
     href: '/projects',
-    icon: 'kanban',
+    icon: 'profile',
     label: 'projects'
   },
-  {
-    title: 'Payroll',
-    href: '/payroll',
-    icon: 'kanban',
-    label: 'payroll'
-  },
+  
   {
     title: 'Leaves  ',
     href: '/leaves',
-    icon: 'kanban',
+    icon: 'profile',
     label: 'leaves'
   },
   {

@@ -26,7 +26,7 @@ export const POST = async (request: NextRequest) => {
     await SendEmail(existUser.name, existUser.email, token);
 
     const response = NextResponse.json(
-      { msg: "Mail send successfully kindly" },
+      { msg: "Please check your mail" },
       {
         status: 201,
       }
