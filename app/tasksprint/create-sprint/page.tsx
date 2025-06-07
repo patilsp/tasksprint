@@ -8,8 +8,8 @@ import { useUserStore } from '@/store/useUserStore'
 
 const CreateSprint = () => {
   const router = useRouter();
-  const { user } = useUserStore();
-  const [userId, setUserId] = useState(null);  // Use state for userId
+  const { user, fetchUser } = useUserStore();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [taskSprint, setTaskSprint] = useState({
     name: '',
@@ -18,24 +18,39 @@ const CreateSprint = () => {
     dueDate: '',
     priority: 'Low',
     status: 'Planning',
-    userId: '',  // Initialize as empty, then set later
+    project: '',
   });
   
   const [submitting, setIsSubmitting] = useState(false);
 
-  // Set userId when user data is available
   useEffect(() => {
-    if (user && user._id) {
-      setUserId(user._id);
-      setTaskSprint(prevState => ({
-        ...prevState,
-        userId: user._id,  // Update userId in taskSprint when it's available
-      }));
-    }
-  }, [user]);  // Depend on user changes
+    const initializeUser = async () => {
+      try {
+        await fetchUser();
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        toast.error('Failed to load user data');
+        setIsLoading(false);
+      }
+    };
+
+    initializeUser();
+  }, [fetchUser]);
 
   const createSprint = async (e) => {
     e.preventDefault();
+    
+    if (!user?._id) {
+      toast.error('User data not available. Please try again.');
+      return;
+    }
+
+    if (!taskSprint.project) {
+      toast.error('Please select a project');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -50,18 +65,27 @@ const CreateSprint = () => {
         }),
       });
 
-      if (response.ok) {
-        toast.success('Your Sprint has been created! 🎉');
-        router.push('/tasksprint');
-      } else {
-        throw new Error('Failed to create task sprint');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to create task sprint');
       }
+
+      toast.success('Your Sprint has been created! 🎉');
+      router.push('/tasksprint');
     } catch (error) {
       toast.error(`Failed to create task sprint! ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   return (
     <TaskSprintForm

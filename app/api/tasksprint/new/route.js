@@ -4,7 +4,11 @@ import { connectToDB } from "@/utils/database";
 export const POST = async (request) => {
   try {
     await connectToDB();
-    const { userId, name, description, startDate, dueDate, priority, status } = await request.json();
+    const { userId, name, description, startDate, dueDate, priority, status, project } = await request.json();
+
+    if (!project) {
+      return new Response(JSON.stringify({ message: 'Project is required' }), { status: 400 });
+    }
 
     const newTaskSprint = new TaskSprint({
       name,
@@ -13,7 +17,8 @@ export const POST = async (request) => {
       dueDate,
       priority,
       status,
-      creator: userId
+      creator: userId,
+      project
     });
 
     await newTaskSprint.save();

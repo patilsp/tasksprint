@@ -32,6 +32,11 @@ const TaskSprintSchema = new mongoose.Schema({
     enum: ['Planning', 'In Progress', 'Completed'],
     default: 'Planning',
   },
+  project: {
+    type: Schema.Types.ObjectId,
+    ref: 'Project',
+    required: [true, 'Project is required'],
+  },
 }, { timestamps: true });
 
 export default mongoose.models.TaskSprint || mongoose.model('TaskSprint', TaskSprintSchema);

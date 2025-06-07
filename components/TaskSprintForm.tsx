@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,6 +22,7 @@ import {
   CalendarDays,
   Target,
   AlertCircle,
+  FolderGit2,
 } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
@@ -37,6 +38,7 @@ const mockProps = {
     dueDate: "",
     priority: "Medium",
     status: "Planning",
+    project: "",
   },
   setSprint: () => {},
   submitting: false,
@@ -56,6 +58,21 @@ const TaskSprintForm = ({
   onCancel = mockProps.onCancel,
 }) => {
   const [activeField, setActiveField] = useState(null)
+  const [projects, setProjects] = useState([])
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/api/project')
+        if (!response.ok) throw new Error('Failed to fetch projects')
+        const data = await response.json()
+        setProjects(data)
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+      }
+    }
+    fetchProjects()
+  }, [])
 
   const getPriorityColor = (priority) => {
     switch (priority) {
@@ -138,6 +155,36 @@ const TaskSprintForm = ({
 
             <CardContent className="space-y-6 lg:space-y-8">
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Project Selection */}
+                <motion.div
+                  className="space-y-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <Label className="text-base font-semibold text-gray-900 flex items-center space-x-2">
+                    <FolderGit2 className="h-5 w-5 text-blue-600" />
+                    <span>Project</span>
+                  </Label>
+                  <Select
+                    value={sprint.project || ""}
+                    onValueChange={(value) => setSprint({ ...sprint, project: value })}
+                  >
+                    <SelectTrigger className="h-12 text-base border-2 focus:border-blue-500">
+                      <div className="flex items-center space-x-2">
+                        <span>{sprint.project ? projects.find(p => p._id === sprint.project)?.name : "Select a project"}</span>
+                      </div>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {projects.map((project) => (
+                        <SelectItem key={project._id} value={project._id}>
+                          {project.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </motion.div>
+
                 {/* Sprint Name */}
                 <motion.div
                   className="space-y-3"
@@ -160,8 +207,6 @@ const TaskSprintForm = ({
                     required
                   />
                 </motion.div>
-
-               
 
                 {/* Date Range */}
                 <motion.div
