@@ -3,11 +3,11 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Task } from "../data/schema";
+import { format } from "date-fns";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<any>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -36,8 +36,7 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const id = row.getValue("id");
-      const formattedId = Number.isInteger(id) ? `Task-${id}` : `Task-${parseInt(id, 15)}`;
-      return <div className="w-[80px]">{formattedId}</div>;
+      return <div className="w-[80px]">{id}</div>;
     },
     enableSorting: true,
     enableHiding: false,
@@ -47,7 +46,7 @@ export const columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Task Name" />
     ),
-    cell: ({ row }) => <div className="">{row.getValue("title")}</div>,
+    cell: ({ row }) => <div className="max-w-[200px] truncate">{row.getValue("title")}</div>,
     enableSorting: true,
     enableHiding: false,
   },
@@ -58,8 +57,15 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const priority = row.getValue("priority");
+      const priorityColors = {
+        high: "bg-red-500",
+        medium: "bg-yellow-500",
+        low: "bg-green-500",
+      };
+      const color = priorityColors[priority] || "bg-gray-500";
+      
       return (
-        <Badge variant={priority === "high" ? "danger bg-red-500 text-white" : priority === "medium" ? "warning bg-yellow-500 text-white" : "success bg-green-500 text-white"}>
+        <Badge className={`${color} text-white`}>
           {priority.charAt(0).toUpperCase() + priority.slice(1)}
         </Badge>
       );
@@ -73,8 +79,8 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Due Date" />
     ),
     cell: ({ row }) => {
-      const dueDate = new Date(row.getValue("dueDate")).toLocaleDateString();
-      return <div className="">{dueDate}</div>;
+      const date = row.getValue("dueDate");
+      return <div>{format(new Date(date), "MMM dd, yyyy")}</div>;
     },
     enableSorting: true,
     enableHiding: true,
@@ -86,14 +92,24 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const status = row.getValue("status");
-      return <div className="">{status}</div>;
+      const statusColors = {
+        todo: "bg-gray-500",
+        inprogress: "bg-blue-500",
+        done: "bg-green-500",
+      };
+      const color = statusColors[status] || "bg-gray-500";
+      
+      return (
+        <Badge className={`${color} text-white`}>
+          {status.charAt(0).toUpperCase() + status.slice(1)}
+        </Badge>
+      );
     },
+    enableSorting: true,
+    enableHiding: true,
   },
   {
-    accessorKey: "actions",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Actions" />
-    ),
+    id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

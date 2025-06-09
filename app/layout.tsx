@@ -47,7 +47,7 @@ export default async function RootLayout({
             {children}
           </div>
         </Providers>
-        <Toaster />
+        <Toaster className="bottom-right"/>
       </body>
     </html>
   );

@@ -16,8 +16,8 @@ const CreateSprint = () => {
     description: '',
     startDate: '',
     dueDate: '',
-    priority: 'Low',
-    status: 'Planning',
+    priority: '',
+    status: '',
     project: '',
   });
   

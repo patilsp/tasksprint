@@ -12,7 +12,7 @@ const ProjectSchema = new Schema({
     type: Date,
     required: [true, 'Start Date is required.'],
   },
-  endDate: {
+  dueDate: {
     type: Date,
   },
   status: {
@@ -20,13 +20,26 @@ const ProjectSchema = new Schema({
     enum: ['Not Started', 'In Progress', 'Completed'],
     default: 'Not Started',
   },
-  assignedTo: {
-    type: String,
-  },
+  assignedTo: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }],
   sprintId: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'tasksprint',
   },
+  budget: {
+    type: Number,
+    default: 0,
+  },
+  priority: {
+    type: String,
+    enum: ['High', 'Medium', 'Low'],
+    default: 'Medium',
+  },
+  tags: [{
+    type: String,
+  }],
 });
 
 const Project = models.Project || model('Project', ProjectSchema);

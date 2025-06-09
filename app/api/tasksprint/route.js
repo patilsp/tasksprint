@@ -7,8 +7,32 @@ export const GET = async (request) => {
 
         const tasksprints = await TaskSprint.find({})
 
-        return new Response(JSON.stringify(tasksprints), { status: 200 })
+        // Calculate stats
+        const stats = {
+            teamVelocity: tasksprints.reduce((acc, sprint) => acc + (sprint.tasks || 0), 0) / (tasksprints.length || 1),
+            burndownEfficiency: tasksprints.reduce((acc, sprint) => acc + (sprint.completedTasks || 0), 0) / 
+                              (tasksprints.reduce((acc, sprint) => acc + (sprint.tasks || 0), 0) || 1) * 100
+        }
+
+        return new Response(JSON.stringify({
+            sprints: tasksprints,
+            stats
+        }), { 
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     } catch (error) {
-        return new Response("Failed to fetch all Sprint", { status: 500 })
+        console.error('Error fetching sprints:', error)
+        return new Response(JSON.stringify({ 
+            message: "Failed to fetch all Sprints",
+            error: error.message 
+        }), { 
+            status: 500,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
 } 

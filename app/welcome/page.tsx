@@ -14,12 +14,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AttendanceDialog } from '@/components/AttendanceDialog';
@@ -32,7 +27,7 @@ const Welcome = () => {
   const [isAttendanceDialogOpen, setIsAttendanceDialogOpen] = useState(false);
 
   useEffect(() => {
-    fetchUser(); // Fetch the user on component mount
+    fetchUser();
   }, [fetchUser]);
 
   useEffect(() => {
@@ -57,202 +52,157 @@ const Welcome = () => {
   const loggedInUserId = user?._id;
 
   return (
-      
-    
-     <div className="bg-gradient-to-br from-blue-900 to-blue-700 min-h-screen p-4 md:p-8">
+    <div className="bg-gradient-to-br from-blue-900 to-blue-700 min-h-screen p-4 md:p-8">
       <header className="flex flex-col md:flex-row items-center justify-between mb-8">
-        <div className="mb-4 md:mb-0">
-          <Link href="/dashboard" target="_blank">
-            <Image 
-              src="/images/logo.png"
-              height={35}
-              width={35}
-              alt="logo"
-              className="object-contain"
-            />
-          </Link>
-        </div>
-        <h1 className="text-sm md:text-2xl font-bold text-white mb-2">WELCOME TO <span className='text-orange-500 '> TASK SPRINT</span></h1>
-        </header>
+        <Link href="/dashboard" target="_blank">
+          <Image src="/images/logo.png" height={35} width={35} alt="logo" className="object-contain" />
+        </Link>
+        <h1 className="text-sm md:text-2xl font-bold text-white mb-2">WELCOME TO <span className='text-orange-500'>TASK SPRINT</span></h1>
+      </header>
 
-      <div className="flex justify-center flex-col lg:flex-row gap-4">
-        
-       <div className="flex md:flex-row flex-col justify-between items-center gap-2 md:gap-4">
-       <motion.div
-          className="flex-1 size-full"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-            
-          <div className="size-full grid grid-cols-1 md:grid-cols-2 gap-4">
-           
-          <Card className="border bg-gradient-to-br from-[#ffbc00] to-[#f9666e] col-span-1 md:col-span-2">
-              <CardContent className="flex flex-col items-center justify-center h-full p-4">
-                
-                <Image 
-                  className="max-w-full h-auto mx-auto mb-20" 
-                  src="/images/welcome.png"       
-                  alt="Dashboard illustration" 
-                  height={250}
-                  width={250}
-                />
-                <Link href="/dashboard">
-                  <Button className="bg-white bg-opacity-10 hover:bg-opacity-20 text-white uppercase mb-6">
-                    Go To Dashboard
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </div>
-        </motion.div>
+      <div className="flex justify-center flex-col lg:flex-row gap-6">
         <motion.div
-          className="flex-1 size-full"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-        <div className="w-full  md:w-[530px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-          <Link href="/tasksprint">
-            <Card className="border min-h-[200px] bg-[#f9666e]">
-              <CardContent className="flex flex-col items-center justify-center text-center h-full p-6">
-                <Image 
-                  className="max-w-full h-[100px] mb-7 mx-auto" 
-                  src="/images/10.png" 
-                  alt="Start Project illustration" 
-                  height={100}
-                  width={100}
-                />
-                <h4 className="text-white text-xl font-semibold">Start Sprint</h4>
-              </CardContent>
-              </Card>
-            </Link>
-            <Link href="/khanban">
-              <Card className="border min-h-[200px] bg-[#35d29a]">
-                <CardContent className="flex flex-col items-center justify-center text-center h-full p-6">
-                  <Image 
-                    className="max-w-full h-[100px] mb-7 mx-auto" 
-                    src="/images/1.png" 
-                    alt="Create account illustration" 
-                    height={100}
-                    width={100}
-                  />
-                  <h4 className="text-white text-xl font-semibold">Create Task</h4>
+          className="flex-1"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}>
+
+          <Card className="h-full bg-gradient-to-r from-yellow-400 to-pink-500 text-white shadow-xl">
+            <CardContent className="p-6 flex flex-col items-center">
+              <Image src="/images/welcome.png" height={250} width={250} alt="Welcome" className="mb-6" />
+              <p className="text-lg mb-4 text-center">Plan and launch your sprint with clearly defined goals, timelines, and responsibilities.</p>
+              <Link href="/dashboard">
+                <Button className="bg-white text-blue-700 hover:bg-gray-200">Go To Dashboard</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          className="flex-1"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Link href="/tasksprint">
+              <Card className="bg-[#f9666e] text-white shadow-md">
+                <CardContent className="p-6 flex flex-col items-center">
+                  <Image src="/images/10.png" height={100} width={100} alt="Sprint" className="mb-4" />
+                  <h4 className="text-xl font-semibold">Start Sprint</h4>
+                  <p className="text-sm mt-2 opacity-80 text-center">Organize work into time-boxed iterations and boost team efficiency.</p>
                 </CardContent>
               </Card>
             </Link>
-            <Card className="border min-h-[220px] bg-[#d5d83d] col-span-1 md:col-span-2">
+
+            <Link href="/khanban">
+              <Card className="bg-[#35d29a] text-white shadow-md">
+                <CardContent className="p-6 flex flex-col items-center">
+                  <Image src="/images/1.png" height={100} width={100} alt="Task" className="mb-4" />
+                  <h4 className="text-xl font-semibold">Create Task</h4>
+                  <p className="text-sm mt-2 opacity-80 text-center">Break projects into actionable items to monitor and complete.</p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Card className="border min-h-[220px] bg-gradient-to-br from-yellow-400 to-lime-500 col-span-1 md:col-span-2 hover:scale-105 transition-transform duration-300">
               <CardContent className="flex flex-col md:flex-row items-center justify-center p-6">
                 <Image 
                   className="max-w-full h-auto md:h-[180px] mb-5 md:mb-1 md:mr-6" 
                   src="/images/3.png" 
-                  alt="Quick guide illustration" 
+                  alt="Attendance illustration" 
                   height={180}
                   width={180}
                 />
                 <div className="flex flex-col items-center text-center md:text-start md:items-start">
-                    <div className="text-white mb-6 pt-6">
-                      <span className="text-sm font-normal block pb-2 opacity-75">Get best offer</span>
-                      <span className="text-xl font-bold">Upgrade Your Plan</span>
-                    </div>
-                  <span className="font-base text-white text-sm mb-8 block opacity-75">
-                      Supercharge your team's productivity with our Task Sprint project management solutions.
-                    </span>
+                  <h3 className="text-white text-xl font-bold mb-4">Today's Attendance</h3>
                   <div className="w-full flex flex-row gap-3">
-                  <div className="text-center md:text-left">
-                    {/* <p className="text-sm md:text-base text-white">Task Sprint is a project management tool that helps you get things done.</p> */}
                     {loggedInUserId && attendanceData.length > 0 ? (
-                      <p className="text-center text-white bg-green-400 p-1 rounded shadow border">You mark as Present Today </p>
+                      <p className="text-center text-white bg-green-500 px-4 py-2 rounded shadow border border-white text-sm font-medium">
+                        ✅ You are marked present for today
+                      </p>
                     ) : (
                       <div className="flex justify-center gap-2">
-                        {/* <p>Please mark your attendance</p> */}
                         <AttendanceDialog />
                       </div>
                     )}
                   </div>
-                    </div>
                 </div>
               </CardContent>
             </Card>
+
           </div>
-        </div>
         </motion.div>
 
-        </div>
-      
         <motion.div
-          className="flex-1 lg:max-w-md mt-8 lg:mt-0"
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="bg-blue-800 text-white">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-xl font-bold">Task Activity</h2>
-               
+          className="flex-1 mt-8 lg:mt-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}>
 
+          <Card className="bg-blue-800 text-white shadow-xl">
+            <CardContent className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold">Task Activity</h2>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon">
-                    <MoreVertical className="h-5 w-5" />
-                  </Button>
+                      <MoreVertical className="h-5 w-5" />
+                    </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-44 mr-16 flex flex-col justify-start ">
+                  <DropdownMenuContent className="w-48">
                     <DropdownMenuLabel>Quick Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem>Create Tasks </DropdownMenuItem>
-                      <DropdownMenuItem>View Assigned Tasks </DropdownMenuItem>
-                      <DropdownMenuItem>Completed Tasks </DropdownMenuItem>
-                    
+                      <DropdownMenuItem>Create Tasks</DropdownMenuItem>
+                      <DropdownMenuItem>View Assigned</DropdownMenuItem>
+                      <DropdownMenuItem>Completed Tasks</DropdownMenuItem>
                     </DropdownMenuGroup>
-                    <Button variant="outline" className="w-full mt-4">Generate Report</Button>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              <div className="space-y-4 ">
+              <div className="space-y-4">
                 <div className="flex items-start">
-                  <PenSquare className="h-6 w-6 mr-2 mt-1 flex-shrink-0 p-1 text-white bg-blue-900 shadow rounded-full" />
+                  <PenSquare className="h-6 w-6 mr-2" />
                   <div>
-                    <p className="font-semibold">Created 2 new tasks in "Development"</p>
-                    <p className="text-sm text-blue-300">Added at 4:23 PM by Demo User</p>
+                    <p className="font-semibold">2 tasks created in Development</p>
+                    <p className="text-sm text-blue-300">Today at 4:23 PM</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between bg-blue-700 p-2 rounded-md">
+                <div className="bg-blue-700 p-3 rounded-md flex items-center justify-between">
                   <div>
-                    <p className="text-white font-semibold">Improve website loading speed</p>
+                    <p className="font-semibold">Optimize Image Loading</p>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-blue-300 border border-blue-300">View</Button>
-                </div>
-                <div className="flex items-start">
-                    <Bell className="h-6 w-6 mr-2 mt-1 flex-shrink-0 p-1 text-white bg-blue-900 shadow rounded-full" />
-                  <div>
-                    <p className="font-semibold">2 new entries in "Bug Fixes"</p>
-                    <p className="text-sm text-blue-300">4:23 PM by Jane Smith</p>
-                  </div>
+                  <Button variant="ghost" size="sm" className="text-white border">View</Button>
                 </div>
                 <div className="flex items-start">
-                  <Trash2 className="h-6 w-6 mr-2 mt-1 flex-shrink-0 p-1 text-white bg-blue-900 shadow rounded-full" />
+                  <Bell className="h-6 w-6 mr-2" />
                   <div>
-                    <p className="font-semibold">Received 2 new project files</p>
-                    <p className="text-sm text-blue-300">Sent at 10:30 PM by You</p>
+                    <p className="font-semibold">New bugs reported</p>
+                    <p className="text-sm text-blue-300">Reported by QA</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between bg-blue-700 p-3 rounded-md">
+                <div className="flex items-start">
+                  <Trash2 className="h-6 w-6 mr-2" />
+                  <div>
+                    <p className="font-semibold">Deleted old design files</p>
+                    <p className="text-sm text-blue-300">Removed at 11:00 AM</p>
+                  </div>
+                </div>
+                <div className="bg-blue-700 p-3 rounded-md flex items-center justify-between">
                   <div className="flex items-center">
-                    <FileText className="h-6 w-6 mr-2 flex-shrink-0 p-1 text-white bg-blue-900 shadow rounded-full" />
+                    <FileText className="h-6 w-6 mr-2" />
                     <div>
-                      <p className="font-semibold">API Documentation</p>
-                      <p className="text-sm text-blue-300">1.9mb</p>
+                      <p className="font-semibold">Project Brief</p>
+                      <p className="text-sm text-blue-300">2.4MB</p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-blue-300 border border-blue-300 mt-">View</Button>
+                  <Button variant="ghost" size="sm" className="text-white border">View</Button>
                 </div>
-                
               </div>
-              <Button className="w-full my-6 bg-blue-900"><Link href="/tasks">VIEW ALL TASKS</Link></Button>
+              <Button className="w-full mt-6 bg-blue-900">
+                <Link href="/tasks">VIEW ALL TASKS</Link>
+              </Button>
             </CardContent>
           </Card>
         </motion.div>

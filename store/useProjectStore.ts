@@ -5,10 +5,13 @@ const projectSchema = z.object({
   name: z.string().min(1, "Project name is required"),
   description: z.string().optional(),
   startDate: z.string().min(1, "Start date is required"),
-  endDate: z.string().optional(),
-  status: z.enum(["Not Started", "In Progress", "Completed"]),
-  assignedTo: z.string().optional(),
+  dueDate: z.string().optional(),
+  status: z.enum(["Not Started", "In Progress", "Completed"]).default("Not Started"),
+  assignedTo: z.array(z.string()).optional(),
   sprintId: z.string().optional(),
+  budget: z.number().optional().default(0),
+  priority: z.enum(["High", "Medium", "Low"]).optional().default("Medium"),
+  tags: z.array(z.string()).optional(),
 });
 
 export type Project = z.infer<typeof projectSchema>;
@@ -24,10 +27,13 @@ const initialProject: Project = {
   name: '',
   description: '',
   startDate: '',
-  endDate: '',
+  dueDate: '',
   status: 'Not Started',
-  assignedTo: '',
+  assignedTo: [],
   sprintId: '',
+  budget: 0,
+  priority: 'Medium',
+  tags: [],
 };
 
 export const useProjectStore = create<ProjectState>((set, get) => ({

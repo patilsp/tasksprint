@@ -17,33 +17,27 @@ export const docsConfig: DocsConfig = {
       href: "/admin/dashboard",
     },
     {
-      title: "Tasks",
-      href: "/tasks",
+      title: "Search",
+      href: "/",
     },
+
     {
-      title: "Clients",
-      href: "/customers",
+      title: "Calendar",
+      href: "/",
     },
     {
       title: "Projects",
       href: "/projects",
     },
     {
-      title: "Invoices",
-      href: "/invoices",
+      title: "Tasks",
+      href: "/tasks",
     },
     {
       title: "Reports",
       href: "/reports",
     },
-    {
-      title: "Contact Us",
-      href: "/contact-us",
-    },
-    {
-      title: "About Us",
-      href: "/about-us",
-    },
+
      {
       title: "Settings",
       href: "/forms",

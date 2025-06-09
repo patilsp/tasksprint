@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['utfs.io', 'avatars.githubusercontent.com'],
+    domains: ['utfs.io', 'avatars.githubusercontent.com','unsplash.com'],
   },
   typescript: {
     ignoreBuildErrors: true,

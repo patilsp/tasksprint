@@ -97,7 +97,8 @@ body {
   body {
     font-family: var(--font-inter);
     overflow: auto;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 12px;
   }
   /* .min-h-screen {
     min-height: 100vh;

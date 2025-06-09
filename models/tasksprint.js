@@ -37,6 +37,18 @@ const TaskSprintSchema = new mongoose.Schema({
     ref: 'Project',
     required: [true, 'Project is required'],
   },
+  tasks: {
+    type: Number,
+    default: 0
+  },
+  completedTasks: {
+    type: Number,
+    default: 0
+  },
+  teamMembers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 }, { timestamps: true });
 
 export default mongoose.models.TaskSprint || mongoose.model('TaskSprint', TaskSprintSchema);

@@ -30,7 +30,7 @@ export default function KanbanBoard() {
     startDate: new Date(),
     dueDate: null,
     assignedTo: [],
-    project: null,
+    projectId: '',
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +97,7 @@ export default function KanbanBoard() {
         startDate: new Date(),
         dueDate: null,
         assignedTo: [],
-        project: null,
+        projectId: '',
       });
       setIsDialogOpen(false);
       toast({
@@ -259,41 +259,41 @@ export default function KanbanBoard() {
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label htmlFor="project" className="text-sm font-medium">Project</label>
-                <Select
-                  value={newTask.project ? newTask.project._id : ""}
-                  onValueChange={(value) => setNewTask({ ...newTask, project: projects.find(p => p._id === value) })}
-                >
-                  <SelectTrigger id="project">
-                    <SelectValue placeholder="Select Project" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {projects.map((project) => (
-                      <SelectItem key={project._id} value={project._id}>{project.name}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="assignedTo" className="text-sm font-medium">Assign To</label>
-                <Select
-                  value={newTask.assignedTo.map(e => e._id).join(',')}
-                  onValueChange={(value) => {
-                    const selectedIds = value.split(',');
-                    const selectedEmployees = employees.filter(e => selectedIds.includes(e._id));
-                    setNewTask({ ...newTask, assignedTo: selectedEmployees });
-                  }}
-                >
-                  <SelectTrigger id="assignedTo">
-                    <SelectValue placeholder="Assign To" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {employees.map((employee) => (
-                      <SelectItem key={employee._id} value={employee._id}>{employee.firstName} {employee.lastName}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="space-y-2">
+                  <label htmlFor="project" className="text-sm font-medium">Project</label>
+                  <Select
+                    value={newTask.projectId}
+                    onValueChange={(value) => setNewTask({ ...newTask, projectId: value })}
+                  >
+                    <SelectTrigger id="project">
+                      <SelectValue placeholder="Select Project" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {projects.map((project) => (
+                        <SelectItem key={project._id} value={project._id}>
+                          {project.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="assignedTo" className="text-sm font-medium">Assign To</label>
+                  <Select
+                    value={newTask.assignedTo}
+                    onValueChange={(value) => setNewTask({ ...newTask, assignedTo: [value] })}
+                  >
+                    <SelectTrigger id="assignedTo">
+                      <SelectValue placeholder="Assign To" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {employees.map((employee) => (
+                        <SelectItem key={employee._id} value={employee._id}>
+                          {employee.firstName} {employee.lastName}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
               <div className="space-y-2">
