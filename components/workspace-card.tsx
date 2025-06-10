@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
-import { Users, Calendar, MoreHorizontal } from "lucide-react"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Users, Calendar, MoreHorizontal, FolderOpen } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
@@ -69,7 +69,7 @@ export function WorkspaceCard({ workspace, index }: WorkspaceCardProps) {
                 {workspace.members}
               </span>
               <span className="flex items-center gap-1 text-muted-foreground">
-                <Calendar className="h-4 w-4" />
+                <FolderOpen className="h-4 w-4" />
                 {workspace.projects}
               </span>
             </div>

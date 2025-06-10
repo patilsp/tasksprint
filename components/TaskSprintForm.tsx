@@ -114,33 +114,9 @@ const TaskSprintForm = ({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Mobile Header */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200 lg:hidden">
-        <div className="flex items-center justify-between p-4">
-          <Link href="/tasksprint" className="flex items-center space-x-2 text-gray-600 hover:text-gray-900">
-            <ArrowLeft className="h-5 w-5" />
-            <span className="font-medium">Back</span>
-          </Link>
-          <h1 className="text-lg font-semibold text-gray-900">{type} Sprint</h1>
-          <div className="w-16" /> {/* Spacer for centering */}
-        </div>
-      </div>
-
-      {/* Desktop Header */}
-      <div className="hidden lg:block pt-8 pb-4">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link
-            href="/tasksprint"
-            className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6"
-          >
-            <ArrowLeft className="h-5 w-5" />
-            <span className="font-medium">Back to Sprints</span>
-          </Link>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto p-4 lg:p-6">
+    <div className="min-h-screen">
+    
+      <div className="mx-auto p-1 lg:p-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <Card className="bg-gradient">
             <CardHeader className="text-center pb-6 lg:pb-8">
