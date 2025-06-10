@@ -1,56 +1,66 @@
-import { NextResponse } from 'next/server'
-import { connectToDatabase } from '@/lib/mongodb'
-import { ObjectId } from 'mongodb'
+import { type NextRequest, NextResponse } from "next/server"
+import { connectToDB } from "@/utils/database"
+import Sprint from "@/models/Sprint"
+import type { CreateSprintData } from "@/types/sprint"
 
 export async function GET() {
   try {
-    const { db } = await connectToDatabase()
-    const sprints = await db.collection('sprints').find({}).toArray()
-    return NextResponse.json(sprints)
+    await connectToDB()
+    const sprints = await Sprint.find({}).sort({ createdAt: -1 })
+
+    // Convert MongoDB documents to plain objects
+    const plainSprints = sprints.map((sprint) => ({
+      id: sprint._id.toString(),
+      name: sprint.name,
+      description: sprint.description,
+      status: sprint.status,
+      startDate: sprint.startDate,
+      endDate: sprint.endDate,
+      progress: sprint.progress,
+      tasks: sprint.tasks,
+      completedTasks: sprint.completedTasks,
+      teamMembers: sprint.teamMembers,
+      priority: sprint.priority,
+    }))
+
+    return NextResponse.json(plainSprints)
   } catch (error) {
-    console.error('Error fetching sprints:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch sprints' },
-      { status: 500 }
-    )
+    console.error("Error fetching sprints:", error)
+    return NextResponse.json({ error: "Failed to fetch sprints" }, { status: 500 })
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const { db } = await connectToDatabase()
-    const sprintData = await request.json()
+    await connectToDB()
+    const data: CreateSprintData = await request.json()
 
     // Validate required fields
-    if (!sprintData.name || !sprintData.project) {
-      return NextResponse.json(
-        { error: 'Name and project are required' },
-        { status: 400 }
-      )
+    if (!data.name || !data.startDate || !data.endDate) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Add default values and timestamps
-    const newSprint = {
-      ...sprintData,
-      tasks: 0,
-      completedTasks: 0,
-      teamMembers: [],
-      progress: 0,
-      status: sprintData.status || 'Planning',
-      priority: sprintData.priority || 'Medium',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+    const newSprint = new Sprint(data)
+    await newSprint.save()
+
+    // Convert to plain object
+    const plainSprint = {
+      id: newSprint._id.toString(),
+      name: newSprint.name,
+      description: newSprint.description,
+      status: newSprint.status,
+      startDate: newSprint.startDate,
+      endDate: newSprint.endDate,
+      progress: newSprint.progress,
+      tasks: newSprint.tasks,
+      completedTasks: newSprint.completedTasks,
+      teamMembers: newSprint.teamMembers,
+      priority: newSprint.priority,
     }
 
-    const result = await db.collection('sprints').insertOne(newSprint)
-    const createdSprint = await db.collection('sprints').findOne({ _id: result.insertedId })
-
-    return NextResponse.json(createdSprint)
+    return NextResponse.json(plainSprint, { status: 201 })
   } catch (error) {
-    console.error('Error creating sprint:', error)
-    return NextResponse.json(
-      { error: 'Failed to create sprint' },
-      { status: 500 }
-    )
+    console.error("Error creating sprint:", error)
+    return NextResponse.json({ error: "Failed to create sprint" }, { status: 500 })
   }
-} 
+}
