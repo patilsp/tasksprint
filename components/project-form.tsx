@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Plus, Loader2, X } from "lucide-react"
-import { useProjectStore } from "@/store/project-store"
+import { useProjectStore } from "@/store/useProjectStore"
 import type { CreateProjectData, Project } from "@/types/project"
 
 interface ProjectFormProps {

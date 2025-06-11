@@ -17,37 +17,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AttendanceDialog } from '@/components/AttendanceDialog';
 import axios from 'axios';
 import { useUserStore } from '@/store/useUserStore';
 
 const Welcome = () => {
   const { user, fetchUser } = useUserStore();
   const [attendanceData, setAttendanceData] = useState([]);
-  const [isAttendanceDialogOpen, setIsAttendanceDialogOpen] = useState(false);
-
-  useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
-
-  useEffect(() => {
-    const fetchAttendanceStatus = async (userId) => {
-      try {
-        const response = await axios.get(`/api/attendance?userId=${userId}`);
-        setAttendanceData(response.data);
-        const userPresent = response.data.some(attendance => attendance.creator === userId);
-        if (userId && !userPresent) {
-          setIsAttendanceDialogOpen(true);
-        }
-      } catch (error) {
-        console.error("Error fetching attendance data:", error.message || error);
-      }
-    };
-
-    if (user && user._id) {
-      fetchAttendanceStatus(user._id);
-    }
-  }, [user]);
 
   const loggedInUserId = user?._id;
 

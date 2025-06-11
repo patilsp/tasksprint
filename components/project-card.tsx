@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Calendar, Users, CheckCircle, Edit, Trash2, DollarSign, Code } from "lucide-react"
 import type { Project } from "@/types/project"
 import { ProjectForm } from "./project-form"
-import { useProjectStore } from "@/store/project-store"
+import { useProjectStore } from "@/store/useProjectStore"
 import { motion } from "framer-motion"
 
 interface ProjectCardProps {

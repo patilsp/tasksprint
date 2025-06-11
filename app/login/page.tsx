@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import React, { ChangeEvent, FormEvent, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
@@ -46,9 +47,18 @@ const Login = () => {
   return (
     <div className="relative h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url(/images/bg/bg.png)" }}>
       <div className="w-full h-screen flex items-center justify-center px-4">
-        <Card className="mx-auto max-w-md bg-transparent shadow-lg border border-white backdrop-blur-xl">
+        <Card className="rounded-lg text-card-foreground mx-auto max-w-md bg-transparent shadow-none md:shadow-lg border border-none md:border-white backdrop-blur-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-xl">Login</CardTitle>
+            <div className="flex justify-center m-auto">
+                <Image
+                      src="/images/logo.png"
+                      width={70}
+                      height={70}
+                      className="object-contain mb-2"
+                      alt="logo"
+                  />
+            </div>
+            <CardTitle className="text-2xl m-2">Login</CardTitle>
             <CardDescription>Enter your credentials to access your account</CardDescription>
           </CardHeader>
           <CardContent>

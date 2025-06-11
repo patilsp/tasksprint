@@ -22,7 +22,7 @@ import {
   FolderOpen,
   ArrowRight,
 } from "lucide-react"
-import { useSprintStore } from "@/store/sprint-store"
+import { useSprintStore } from "@/store/useSprintStore"
 import { SprintForm } from "@/components/sprint-form"
 import { motion } from "framer-motion"
 import type { Sprint } from "@/types/sprint"

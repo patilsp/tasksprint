@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { useProjectStore } from "@/store/project-store"
+import { useProjectStore } from "@/store/useProjectStore"
 import { ProjectCard } from "./project-card"
 import { FolderOpen } from "lucide-react"
 import { ProjectForm } from "./project-form"

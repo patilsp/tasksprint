@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Calendar, Users, CheckCircle, Edit, Trash2, ArrowRight } from "lucide-react"
 import type { Sprint } from "@/types/sprint"
 import { SprintForm } from "./sprint-form"
-import { useSprintStore } from "@/store/sprint-store"
+import { useSprintStore } from "@/store/useSprintStore"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 

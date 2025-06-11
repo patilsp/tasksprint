@@ -1,117 +1,119 @@
-import { create } from 'zustand';
-import { z } from 'zod';
+import { create } from "zustand"
+import type { Project, CreateProjectData } from "@/types/project"
 
-const projectSchema = z.object({
-  name: z.string().min(1, "Project name is required"),
-  description: z.string().optional(),
-  startDate: z.date().optional(),
-  dueDate: z.date().optional(),
-  status: z.enum(["Not Started", "In Progress", "Completed"]).default("Not Started"),
-  assignedTo: z.array(z.string()).default([]),
-  workspaceId: z.string().min(1, "Workspace ID is required"),
-  budget: z.number().default(0),
-  priority: z.enum(["High", "Medium", "Low"]).default("Medium"),
-  tags: z.array(z.string()).default([]),
-  tasks: z.number().default(0),
-  progress: z.number().default(0),
-});
+interface ProjectStore {
+  projects: Project[]
+  currentProject: Project | null
+  loading: boolean
+  error: string | null
 
-export type Project = z.infer<typeof projectSchema>;
-
-interface ProjectState {
-  project: Project;
-  projects: Project[];
-  isLoading: boolean;
-  error: string | null;
-  setProject: (project: Partial<Project>) => void;
-  validateProject: () => z.ZodError | null;
-  resetProject: () => void;
-  fetchProjects: () => Promise<void>;
-  createProject: (projectData: Project) => Promise<void>;
+  // Actions
+  fetchProjects: (sprintId?: string) => Promise<void>
+  fetchProject: (id: string) => Promise<void>
+  createProject: (data: CreateProjectData) => Promise<void>
+  updateProject: (id: string, data: Partial<Project>) => Promise<void>
+  deleteProject: (id: string) => Promise<void>
+  clearError: () => void
+  clearCurrentProject: () => void
+  clearProjects: () => void
 }
 
-const initialProject: Project = {
-  name: '',
-  description: '',
-  startDate: undefined,
-  dueDate: undefined,
-  status: 'Not Started',
-  assignedTo: [],
-  workspaceId: '',
-  budget: 0,
-  priority: 'Medium',
-  tags: [],
-  tasks: 0,
-  progress: 0,
-};
-
-export const useProjectStore = create<ProjectState>((set, get) => ({
-  project: initialProject,
+export const useProjectStore = create<ProjectStore>((set, get) => ({
   projects: [],
-  isLoading: false,
+  currentProject: null,
+  loading: false,
   error: null,
-  setProject: (newProjectData) => set((state) => {
-    const updatedProject = { ...state.project, ...newProjectData };
-    return { 
-      project: updatedProject,
-      error: null 
-    };
-  }),
-  validateProject: () => {
+
+  fetchProjects: async (sprintId?: string) => {
+    set({ loading: true, error: null })
     try {
-      const project = get().project;
-      projectSchema.parse(project);
-      return null;
+      const url = sprintId ? `/api/projects?sprintId=${sprintId}` : "/api/projects"
+      const response = await fetch(url)
+      if (!response.ok) throw new Error("Failed to fetch projects")
+      const projects = await response.json()
+      set({ projects, loading: false })
     } catch (error) {
-      return error as z.ZodError;
+      set({ error: (error as Error).message, loading: false })
     }
   },
-  resetProject: () => set({ project: initialProject, error: null }),
-  fetchProjects: async () => {
-    set({ isLoading: true, error: null });
+
+  fetchProject: async (id: string) => {
+    set({ loading: true, error: null })
     try {
-      const response = await fetch('/api/project');
+      const response = await fetch(`/api/projects/${id}`)
+      if (!response.ok) throw new Error("Failed to fetch project")
+      const project = await response.json()
+      set({ currentProject: project, loading: false })
+    } catch (error) {
+      set({ error: (error as Error).message, loading: false })
+    }
+  },
+
+  createProject: async (data: CreateProjectData) => {
+    set({ loading: true, error: null })
+    try {
+      const response = await fetch("/api/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      if (!response.ok) throw new Error("Failed to create project")
+      const newProject = await response.json()
+      set((state) => ({
+        projects: [newProject, ...state.projects],
+        loading: false,
+      }))
+    } catch (error) {
+      set({ error: (error as Error).message, loading: false })
+    }
+  },
+
+  updateProject: async (id: string, data: Partial<Project>) => {
+    set({ loading: true, error: null })
+    try {
+      const response = await fetch("/api/projects", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, ...data }),
+      })
       if (!response.ok) {
-        throw new Error('Failed to fetch projects');
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to update project")
       }
-      const data = await response.json();
-      set({ projects: data, isLoading: false });
+      const updatedProject = await response.json()
+      set((state) => ({
+        projects: state.projects.map((project) => (project.id === id ? updatedProject : project)),
+        currentProject: state.currentProject?.id === id ? updatedProject : state.currentProject,
+        loading: false,
+      }))
     } catch (error) {
-      set({ error: error instanceof Error ? error.message : 'Failed to fetch projects', isLoading: false });
+      set({ error: (error as Error).message, loading: false })
+      throw error
     }
   },
-  createProject: async (projectData: Project) => {
-    set({ isLoading: true, error: null });
+
+  deleteProject: async (id: string) => {
+    set({ loading: true, error: null })
     try {
-      // Validate the project data before sending
-      const validationResult = projectSchema.safeParse(projectData);
-      if (!validationResult.success) {
-        throw new Error(validationResult.error.errors[0].message);
-      }
-      
-      const response = await fetch('/api/project/new', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(projectData),
-      });
-      
+      const response = await fetch(`/api/projects?id=${id}`, {
+        method: "DELETE",
+      })
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create project');
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to delete project")
       }
-      
-      const newProject = await response.json();
-      set((state) => ({ 
-        projects: [...state.projects, newProject],
-        isLoading: false,
-        error: null
-      }));
+      set((state) => ({
+        projects: state.projects.filter((project) => project.id !== id),
+        currentProject: state.currentProject?.id === id ? null : state.currentProject,
+        loading: false,
+      }))
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to create project';
-      set({ error: errorMessage, isLoading: false });
-      throw error;
+      set({ error: (error as Error).message, loading: false })
+      throw error
     }
   },
-}));
+
+  clearError: () => set({ error: null }),
+  clearCurrentProject: () => set({ currentProject: null }),
+  clearProjects: () => set({ projects: [] }),
+}))
