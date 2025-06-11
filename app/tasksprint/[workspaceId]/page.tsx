@@ -55,12 +55,12 @@ export default function SprintDetailPage() {
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this sprint?")) {
       await deleteSprint(sprintId)
-      router.push("/sprints")
+      router.push("/tasksprint")
     }
   }
 
   const handleBack = () => {
-    router.push("/sprints")
+    router.push("/tasksprint")
   }
 
   const getPriorityColor = (priority: Sprint["priority"]) => {
