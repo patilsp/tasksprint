@@ -71,12 +71,15 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
   updateProject: async (id: string, data: Partial<Project>) => {
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`/api/projects/${id}`, {
+      const response = await fetch("/api/projects", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ id, ...data }),
       })
-      if (!response.ok) throw new Error("Failed to update project")
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to update project")
+      }
       const updatedProject = await response.json()
       set((state) => ({
         projects: state.projects.map((project) => (project.id === id ? updatedProject : project)),
@@ -85,22 +88,28 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
       }))
     } catch (error) {
       set({ error: (error as Error).message, loading: false })
+      throw error
     }
   },
 
   deleteProject: async (id: string) => {
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`/api/projects/${id}`, {
+      const response = await fetch(`/api/projects?id=${id}`, {
         method: "DELETE",
       })
-      if (!response.ok) throw new Error("Failed to delete project")
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to delete project")
+      }
       set((state) => ({
         projects: state.projects.filter((project) => project.id !== id),
+        currentProject: state.currentProject?.id === id ? null : state.currentProject,
         loading: false,
       }))
     } catch (error) {
       set({ error: (error as Error).message, loading: false })
+      throw error
     }
   },
 

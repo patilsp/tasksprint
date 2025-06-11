@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { connectToDB } from "@/lib/database"
-import Project from "@/lib/models/project"
+import { connectToDB } from "@/utils/database"
+import Project from "@/models/project"
 
 export async function POST(request: NextRequest) {
   try {
