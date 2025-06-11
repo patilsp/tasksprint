@@ -366,7 +366,7 @@ export default function SprintDetailPage() {
                     Projects in this Sprint
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <Button variant="outline" size="sm" onClick={() => router.push(`/sprints/${sprintId}/projects`)}>
+                    <Button variant="outline" size="sm" onClick={() => router.push(`/tasksprint/${sprintId}/project`)}>
                       View All Projects
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>

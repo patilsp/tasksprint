@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Loader2, RefreshCw, Search, Filter, ArrowLeft, Zap, FolderOpen } from "lucide-react"
+import { Loader2, RefreshCw, Search, Filter, ArrowLeft, Zap, CheckSquare } from "lucide-react"
+import { useTaskStore } from "@/store/task-store"
 import { useProjectStore } from "@/store/useProjectStore"
-import { useSprintStore } from "@/store/useSprintStore"
-import { ProjectCard } from "@/components/project-card"
-import { ProjectForm } from "@/components/project-form"
-import type { Project } from "@/types/project"
+import { TaskCard } from "@/components/task-card"
+import { TaskForm } from "@/components/task-form"
+import type { Task } from "@/types/task"
 import { motion } from "framer-motion"
 
 const fadeInUp = {
@@ -28,52 +28,56 @@ const staggerContainer = {
   },
 }
 
-export default function ProjectsPage() {
+export default function TasksPage() {
   const params = useParams()
   const router = useRouter()
-  const sprintId = params.workspaceId as string
+  const workspaceId = params.workspaceId as string
+  const projectId = params.projectId as string
 
-  const { projects, loading, error, fetchProjects, clearError, clearProjects } = useProjectStore()
-  const { currentSprint, fetchSprint } = useSprintStore()
+  const { tasks, loading, error, fetchTasks, clearError, clearTasks } = useTaskStore()
+  const { currentProject, fetchProject } = useProjectStore()
 
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [priorityFilter, setPriorityFilter] = useState<string>("all")
-  const [sortBy, setSortBy] = useState<string>("name")
+  const [sortBy, setSortBy] = useState<string>("title")
 
   useEffect(() => {
-    if (sprintId) {
-      fetchProjects(sprintId)
-      fetchSprint(sprintId)
+    if (projectId) {
+      fetchTasks(projectId)
+      fetchProject(projectId)
     }
 
     return () => {
-      clearProjects()
+      clearTasks()
     }
-  }, [sprintId, fetchProjects, fetchSprint, clearProjects])
+  }, [projectId, fetchTasks, fetchProject, clearTasks])
 
   // Filter and search logic
-  const filteredProjects = projects
-    .filter((project) => {
+  const filteredTasks = tasks
+    .filter((task) => {
       const matchesSearch =
-        project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesStatus = statusFilter === "all" || project.status === statusFilter
-      const matchesPriority = priorityFilter === "all" || project.priority === priorityFilter
+        task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.description.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesStatus = statusFilter === "all" || task.status === statusFilter
+      const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter
 
       return matchesSearch && matchesStatus && matchesPriority
     })
     .sort((a, b) => {
       switch (sortBy) {
-        case "name":
-          return a.name.localeCompare(b.name)
-        case "progress":
-          return b.progress - a.progress
-        case "startDate":
-          return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        case "title":
+          return a.title.localeCompare(b.title)
+        case "dueDate":
+          if (!a.dueDate && !b.dueDate) return 0
+          if (!a.dueDate) return 1
+          if (!b.dueDate) return -1
+          return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
         case "priority":
           const priorityOrder = { Critical: 4, High: 3, Medium: 2, Low: 1 }
           return priorityOrder[b.priority] - priorityOrder[a.priority]
+        case "status":
+          return a.status.localeCompare(b.status)
         default:
           return 0
       }
@@ -81,29 +85,29 @@ export default function ProjectsPage() {
 
   const handleRefresh = () => {
     clearError()
-    fetchProjects(sprintId)
+    fetchTasks(projectId)
   }
 
   const clearFilters = () => {
     setSearchTerm("")
     setStatusFilter("all")
     setPriorityFilter("all")
-    setSortBy("name")
+    setSortBy("title")
   }
 
   const handleBack = () => {
-    router.push(`/tasksprint/${sprintId}`)
+    router.push(`/tasksprint/${workspaceId}/project`)
   }
 
-  const getStatusCount = (status: Project["status"]) => {
-    return projects.filter((project) => project.status === status).length
+  const getStatusCount = (status: Task["status"]) => {
+    return tasks.filter((task) => task.status === status).length
   }
 
-  const getPriorityCount = (priority: Project["priority"]) => {
-    return projects.filter((project) => project.priority === priority).length
+  const getPriorityCount = (priority: Task["priority"]) => {
+    return tasks.filter((task) => task.priority === priority).length
   }
 
-  if (loading && projects.length === 0) {
+  if (loading && tasks.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <header className="bg-white/80 backdrop-blur-md border-b">
@@ -122,7 +126,7 @@ export default function ProjectsPage() {
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-blue-600" />
-            <p className="text-gray-600">Loading projects...</p>
+            <p className="text-gray-600">Loading tasks...</p>
           </div>
         </div>
       </div>
@@ -179,7 +183,7 @@ export default function ProjectsPage() {
             </div>
             <Button variant="ghost" size="sm" onClick={handleBack}>
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Sprint
+              Back to Projects
             </Button>
           </div>
 
@@ -188,24 +192,24 @@ export default function ProjectsPage() {
               <RefreshCw className={`w-4 h-4 mr-2 ${loading ? "animate-spin" : ""}`} />
               Refresh
             </Button>
-            <ProjectForm sprintId={sprintId} />
+            <TaskForm projectId={projectId} />
           </div>
         </div>
       </motion.header>
 
       <div className="container mx-auto px-4 py-8">
-        {projects.length === 0 ? (
+        {tasks.length === 0 ? (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-green-100 to-blue-100 rounded-full flex items-center justify-center mb-4">
-                <FolderOpen className="w-8 h-8 text-green-600" />
+              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mb-4">
+                <CheckSquare className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">No Projects Yet</h3>
+              <h3 className="text-xl font-semibold mb-2">No Tasks Yet</h3>
               <p className="text-gray-600 mb-6">
-                Create your first project under{" "}
-                <span className="font-semibold">{currentSprint?.name || "this sprint"}</span>
+                Create your first task in{" "}
+                <span className="font-semibold">{currentProject?.name || "this project"}</span>
               </p>
-              <ProjectForm sprintId={sprintId} />
+              <TaskForm projectId={projectId} />
             </div>
           </div>
         ) : (
@@ -214,15 +218,15 @@ export default function ProjectsPage() {
             <motion.div variants={fadeInUp} className="mb-8">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                 <div>
-                  <h1 className="text-3xl font-bold mb-2">Projects in {currentSprint?.name || "Sprint"}</h1>
-                  <p className="text-gray-600">Manage projects within this sprint</p>
+                  <h1 className="text-3xl font-bold mb-2">Tasks in {currentProject?.name || "Project"}</h1>
+                  <p className="text-gray-600">Manage tasks within this project</p>
                 </div>
                 <div className="flex items-center space-x-4 mt-4 md:mt-0">
                   <Badge variant="secondary" className="text-sm">
-                    {projects.length} Total Projects
+                    {tasks.length} Total Tasks
                   </Badge>
                   <Badge variant="secondary" className="text-sm">
-                    {projects.filter((p) => p.status === "In Progress").length} Active
+                    {tasks.filter((t) => t.status === "In Progress").length} Active
                   </Badge>
                 </div>
               </div>
@@ -230,25 +234,20 @@ export default function ProjectsPage() {
               {/* Quick Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-gray-600">{getStatusCount("Todo")}</div>
+                  <div className="text-sm text-gray-600">Todo</div>
+                </div>
+                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
                   <div className="text-2xl font-bold text-blue-600">{getStatusCount("In Progress")}</div>
                   <div className="text-sm text-gray-600">In Progress</div>
                 </div>
                 <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-purple-600">{getStatusCount("In Review")}</div>
+                  <div className="text-sm text-gray-600">In Review</div>
+                </div>
+                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
                   <div className="text-2xl font-bold text-green-600">{getStatusCount("Completed")}</div>
                   <div className="text-sm text-gray-600">Completed</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-red-600">{getPriorityCount("High")}</div>
-                  <div className="text-sm text-gray-600">High Priority</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {projects.length > 0
-                      ? Math.round(projects.reduce((acc, project) => acc + project.progress, 0) / projects.length)
-                      : 0}
-                    %
-                  </div>
-                  <div className="text-sm text-gray-600">Avg Progress</div>
                 </div>
               </div>
             </motion.div>
@@ -261,7 +260,7 @@ export default function ProjectsPage() {
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
-                      placeholder="Search projects by name or description..."
+                      placeholder="Search tasks by title or description..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
@@ -277,10 +276,10 @@ export default function ProjectsPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="Not Started">Not Started</SelectItem>
+                      <SelectItem value="Todo">Todo</SelectItem>
                       <SelectItem value="In Progress">In Progress</SelectItem>
+                      <SelectItem value="In Review">In Review</SelectItem>
                       <SelectItem value="Completed">Completed</SelectItem>
-                      <SelectItem value="On Hold">On Hold</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -302,10 +301,10 @@ export default function ProjectsPage() {
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="name">Name</SelectItem>
-                      <SelectItem value="progress">Progress</SelectItem>
-                      <SelectItem value="startDate">Start Date</SelectItem>
+                      <SelectItem value="title">Title</SelectItem>
+                      <SelectItem value="dueDate">Due Date</SelectItem>
                       <SelectItem value="priority">Priority</SelectItem>
+                      <SelectItem value="status">Status</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -330,17 +329,17 @@ export default function ProjectsPage() {
             {/* Results Count */}
             <motion.div variants={fadeInUp} className="mb-6">
               <p className="text-gray-600">
-                Showing {filteredProjects.length} of {projects.length} projects
-                {filteredProjects.length !== projects.length && " (filtered)"}
+                Showing {filteredTasks.length} of {tasks.length} tasks
+                {filteredTasks.length !== tasks.length && " (filtered)"}
               </p>
             </motion.div>
 
-            {/* Projects Grid */}
-            {filteredProjects.length === 0 ? (
+            {/* Tasks Grid */}
+            {filteredTasks.length === 0 ? (
               <motion.div variants={fadeInUp} className="text-center py-12">
                 <div className="text-gray-500 mb-4">
                   <Filter className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-semibold mb-2">No projects found</h3>
+                  <h3 className="text-lg font-semibold mb-2">No tasks found</h3>
                   <p>Try adjusting your search or filter criteria</p>
                 </div>
                 <Button variant="outline" onClick={clearFilters}>
@@ -349,9 +348,9 @@ export default function ProjectsPage() {
               </motion.div>
             ) : (
               <motion.div variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <motion.div key={project.id} variants={fadeInUp} transition={{ delay: index * 0.1 }}>
-                    <ProjectCard project={project} />
+                {filteredTasks.map((task, index) => (
+                  <motion.div key={task.id} variants={fadeInUp} transition={{ delay: index * 0.1 }}>
+                    <TaskCard task={task} />
                   </motion.div>
                 ))}
               </motion.div>

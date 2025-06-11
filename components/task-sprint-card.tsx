@@ -48,7 +48,7 @@ export function TaskSprintCard({ sprint }: TaskSprintCardProps) {
   }
 
   return (
-    <Link href={`/tasksprint/sprints/${sprint._id}`}>
+    <Link href={`/tasksprint/${sprint._id}`}>
       <motion.div whileHover={{ y: -4, scale: 1.02 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
         <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20 cursor-pointer">
           <CardHeader className="pb-3">

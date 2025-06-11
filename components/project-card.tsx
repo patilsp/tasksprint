@@ -6,11 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Calendar, Users, CheckCircle, Edit, Trash2, DollarSign, Code } from "lucide-react"
+import { Calendar, Users, CheckCircle, Edit, Trash2, DollarSign, Code, ArrowRight } from "lucide-react"
 import type { Project } from "@/types/project"
 import { ProjectForm } from "./project-form"
 import { useProjectStore } from "@/store/useProjectStore"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 interface ProjectCardProps {
   project: Project
@@ -18,6 +19,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { deleteProject } = useProjectStore()
+  const router = useRouter()
 
   const getPriorityColor = (priority: Project["priority"]) => {
     switch (priority) {
@@ -58,6 +60,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   const handleEditClick = (e: React.MouseEvent) => {
     e.stopPropagation()
+  }
+
+  const handleViewTasks = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    router.push(`/tasksprint/${project.workspaceId}/project/${project.id}/tasks`)
   }
 
   return (
@@ -135,29 +142,41 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
 
-          <div className="flex justify-end space-x-2 pt-2">
-            <div onClick={handleEditClick}>
-              <ProjectForm
-                project={project}
-                mode="edit"
-                sprintId={project.sprintId}
-                trigger={
-                  <Button variant="outline" size="sm">
-                    <Edit className="w-4 h-4 mr-1" />
-                    Edit
-                  </Button>
-                }
-              />
-            </div>
+          <div className="flex justify-between items-center pt-2">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={handleDelete}
-              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+              onClick={handleViewTasks}
+              className="text-purple-600 hover:text-purple-700 hover:bg-purple-50"
             >
-              <Trash2 className="w-4 h-4 mr-1" />
-              Delete
+              View Tasks
+              <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
+
+            <div className="flex space-x-2">
+              <div onClick={handleEditClick}>
+                <ProjectForm
+                  project={project}
+                  mode="edit"
+                  sprintId={project.sprintId}
+                  trigger={
+                    <Button variant="outline" size="sm">
+                      <Edit className="w-4 h-4 mr-1" />
+                      Edit
+                    </Button>
+                  }
+                />
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDelete}
+                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+              >
+                <Trash2 className="w-4 h-4 mr-1" />
+                Delete
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
