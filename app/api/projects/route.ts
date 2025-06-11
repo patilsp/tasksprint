@@ -1,25 +1,24 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { connectToDB } from "@/utils/database"
 import Project from "@/models/Project"
 import mongoose from "mongoose"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request) {
   try {
     await connectToDB()
-    const { id } = params
+    
+    // Get sprintId from query parameters
+    const { searchParams } = new URL(request.url)
+    const sprintId = searchParams.get('sprintId')
 
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid project ID" }, { status: 400 })
-    }
+    // Build query
+    const query = sprintId ? { sprintId } : {}
 
-    const project = await Project.findById(id)
-    if (!project) {
-      return NextResponse.json({ error: "Project not found" }, { status: 404 })
-    }
+    // Find projects
+    const projects = await Project.find(query)
 
-    // Convert to plain object
-    const plainProject = {
+    // Convert to plain objects
+    const plainProjects = projects.map(project => ({
       id: project._id.toString(),
       name: project.name,
       description: project.description,
@@ -34,12 +33,12 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       sprintId: project.sprintId.toString(),
       budget: project.budget,
       technologies: project.technologies || [],
-    }
+    }))
 
-    return NextResponse.json(plainProject)
+    return NextResponse.json(plainProjects)
   } catch (error) {
-    console.error("Error fetching project:", error)
-    return NextResponse.json({ error: "Failed to fetch project" }, { status: 500 })
+    console.error("Error fetching projects:", error)
+    return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 })
   }
 }
 

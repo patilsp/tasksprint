@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { connectToDB } from "@/lib/database"
 import Project from "@/lib/models/project"
 
@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
 
     const project = new Project({
       ...body,
-      createdBy: body.createdBy || "user@example.com", // In real app, get from auth
+      createdBy: body.createdBy || "user@example.com",
     })
 
     await project.save()

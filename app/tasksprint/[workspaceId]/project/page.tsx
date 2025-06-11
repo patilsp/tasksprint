@@ -31,7 +31,7 @@ const staggerContainer = {
 export default function ProjectsPage() {
   const params = useParams()
   const router = useRouter()
-  const sprintId = params.id as string
+  const sprintId = params.workspaceId as string
 
   const { projects, loading, error, fetchProjects, clearError, clearProjects } = useProjectStore()
   const { currentSprint, fetchSprint } = useSprintStore()
