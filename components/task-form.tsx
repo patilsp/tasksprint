@@ -14,6 +14,15 @@ import { Plus, Loader2, X } from "lucide-react"
 import { useTaskStore } from "@/store/task-store"
 import type { CreateTaskData, Task } from "@/types/task"
 
+// Dummy users for the dropdown
+const DUMMY_USERS = [
+  { id: "1", name: "John Doe" },
+  { id: "2", name: "Jane Smith" },
+  { id: "3", name: "Mike Johnson" },
+  { id: "4", name: "Sarah Williams" },
+  { id: "5", name: "David Brown" },
+]
+
 interface TaskFormProps {
   task?: Task
   mode?: "create" | "edit"
@@ -167,12 +176,22 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
 
             <div className="space-y-2">
               <Label htmlFor="assignedTo">Assigned To</Label>
-              <Input
-                id="assignedTo"
+              <Select
                 value={formData.assignedTo}
-                onChange={(e) => handleInputChange("assignedTo", e.target.value)}
-                placeholder="Enter assignee name"
-              />
+                onValueChange={(value) => handleInputChange("assignedTo", value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select assignee" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">Unassigned</SelectItem>
+                  {DUMMY_USERS.map((user) => (
+                    <SelectItem key={user.id} value={user.name}>
+                      {user.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

@@ -5,7 +5,6 @@ const TaskSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      trim: true,
     },
     description: {
       type: String,
@@ -23,26 +22,20 @@ const TaskSchema = new mongoose.Schema(
     },
     assignedTo: {
       type: String,
-      trim: true,
+      default: "",
     },
     dueDate: {
       type: String,
     },
     estimatedHours: {
       type: Number,
-      min: 0,
+      default: 0,
     },
     actualHours: {
       type: Number,
-      min: 0,
       default: 0,
     },
-    tags: [
-      {
-        type: String,
-        trim: true,
-      },
-    ],
+    tags: [String],
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Project",
@@ -51,7 +44,7 @@ const TaskSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 )
 
 export default mongoose.models.Task || mongoose.model("Task", TaskSchema)

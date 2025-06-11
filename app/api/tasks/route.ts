@@ -1,7 +1,8 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { connectToDB } from "@/utils/database"
 import Task from "@/models/Task"
-import type { CreateTaskData } from "@/types/task"
+import { CreateTaskData } from "@/types/task"
+import mongoose from "mongoose"
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest) {
 
     let query = {}
     if (projectId) {
-      query = { projectId }
+      query = { projectId: new mongoose.Types.ObjectId(projectId) }
     }
 
     const tasks = await Task.find(query).sort({ createdAt: -1 })
@@ -50,24 +51,38 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const newTask = new Task(data)
-    await newTask.save()
+    // Create new task with proper data formatting
+    const taskData = {
+      title: data.title,
+      description: data.description || "",
+      status: data.status || "Todo",
+      priority: data.priority || "Medium",
+      assignedTo: data.assignedTo || "",
+      dueDate: data.dueDate || "",
+      estimatedHours: data.estimatedHours || 0,
+      actualHours: data.actualHours || 0,
+      tags: data.tags || [],
+      projectId: new mongoose.Types.ObjectId(data.projectId),
+    }
+
+    const newTask = new Task(taskData)
+    const savedTask = await newTask.save()
 
     // Convert to plain object
     const plainTask = {
-      id: newTask._id.toString(),
-      title: newTask.title,
-      description: newTask.description,
-      status: newTask.status,
-      priority: newTask.priority,
-      assignedTo: newTask.assignedTo,
-      dueDate: newTask.dueDate,
-      estimatedHours: newTask.estimatedHours,
-      actualHours: newTask.actualHours,
-      tags: newTask.tags || [],
-      projectId: newTask.projectId.toString(),
-      createdAt: newTask.createdAt?.toISOString(),
-      updatedAt: newTask.updatedAt?.toISOString(),
+      id: savedTask._id.toString(),
+      title: savedTask.title,
+      description: savedTask.description,
+      status: savedTask.status,
+      priority: savedTask.priority,
+      assignedTo: savedTask.assignedTo,
+      dueDate: savedTask.dueDate,
+      estimatedHours: savedTask.estimatedHours,
+      actualHours: savedTask.actualHours,
+      tags: savedTask.tags || [],
+      projectId: savedTask.projectId.toString(),
+      createdAt: savedTask.createdAt?.toISOString(),
+      updatedAt: savedTask.updatedAt?.toISOString(),
     }
 
     return NextResponse.json(plainTask, { status: 201 })

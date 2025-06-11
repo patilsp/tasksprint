@@ -28,18 +28,18 @@ const taskData = {
 }
 
 interface WorkspaceBreadcrumbProps {
-  workspaceId: string
+  sprintId: string
 }
 
-export function WorkspaceBreadcrumb({ workspaceId }: WorkspaceBreadcrumbProps) {
+export function WorkspaceBreadcrumb({ sprintId }: WorkspaceBreadcrumbProps) {
   const pathname = usePathname()
   const segments = pathname.split("/").filter(Boolean)
 
-  const workspace = workspaceData[workspaceId as keyof typeof workspaceData]
+  const workspace = workspaceData[sprintId as keyof typeof workspaceData]
 
   const breadcrumbItems = [
     { label: "Task Sprint", href: "/tasksprint" },
-    { label: workspace?.title || "Workspace", href: `/tasksprint/${workspaceId}` },
+    { label: workspace?.title || "Workspace", href: `/tasksprint/${sprintId}` },
   ]
 
   // Add project breadcrumb if we're in a project
@@ -49,7 +49,7 @@ export function WorkspaceBreadcrumb({ workspaceId }: WorkspaceBreadcrumbProps) {
     const project = projectData[projectId as keyof typeof projectData]
     breadcrumbItems.push({
       label: project?.name || "Project",
-      href: `/tasksprint/${workspaceId}/project/${projectId}`,
+      href: `/tasksprint/${sprintId}/project/${projectId}`,
     })
 
     // Add task breadcrumb if we're in a task
@@ -59,7 +59,7 @@ export function WorkspaceBreadcrumb({ workspaceId }: WorkspaceBreadcrumbProps) {
       const task = taskData[taskId as keyof typeof taskData]
       breadcrumbItems.push({
         label: task?.title || "Task",
-        href: `/tasksprint/${workspaceId}/project/${projectId}/task/${taskId}`,
+        href: `/tasksprint/${sprintId}/project/${projectId}/task/${taskId}`,
       })
     }
   }

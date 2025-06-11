@@ -64,7 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   const handleViewTasks = (e: React.MouseEvent) => {
     e.stopPropagation()
-    router.push(`/tasksprint/${project.workspaceId}/project/${project.id}/tasks`)
+    router.push(`/tasksprint/${project.sprintId}/project/${project.id}/tasks`)
   }
 
   return (

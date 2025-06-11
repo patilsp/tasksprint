@@ -1,12 +1,15 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { connectToDB } from "@/utils/database"
 import Sprint from "@/models/Sprint"
 import mongoose from "mongoose"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectToDB()
-    const { id } = params
+    const id = params.id
 
     // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -27,10 +30,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       startDate: sprint.startDate,
       endDate: sprint.endDate,
       progress: sprint.progress,
-      tasks: sprint.tasks,
-      completedTasks: sprint.completedTasks,
-      teamMembers: sprint.teamMembers,
       priority: sprint.priority,
+      sprintId: sprint._id.toString(),
     }
 
     return NextResponse.json(plainSprint)
@@ -40,10 +41,13 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectToDB()
-    const { id } = params
+    const id = params.id
     const data = await request.json()
 
     // Validate ObjectId
@@ -51,7 +55,11 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 })
     }
 
-    const updatedSprint = await Sprint.findByIdAndUpdate(id, data, { new: true, runValidators: true })
+    const updatedSprint = await Sprint.findByIdAndUpdate(
+      id,
+      data,
+      { new: true, runValidators: true }
+    )
 
     if (!updatedSprint) {
       return NextResponse.json({ error: "Sprint not found" }, { status: 404 })
@@ -66,10 +74,8 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       startDate: updatedSprint.startDate,
       endDate: updatedSprint.endDate,
       progress: updatedSprint.progress,
-      tasks: updatedSprint.tasks,
-      completedTasks: updatedSprint.completedTasks,
-      teamMembers: updatedSprint.teamMembers,
       priority: updatedSprint.priority,
+      sprintId: updatedSprint.sprintId.toString(),
     }
 
     return NextResponse.json(plainSprint)
@@ -79,10 +85,13 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     await connectToDB()
-    const { id } = params
+    const id = params.id
 
     // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {

@@ -31,7 +31,7 @@ const staggerContainer = {
 export default function TasksPage() {
   const params = useParams()
   const router = useRouter()
-  const workspaceId = params.workspaceId as string
+  const sprintId = params.sprintId as string
   const projectId = params.projectId as string
 
   const { tasks, loading, error, fetchTasks, clearError, clearTasks } = useTaskStore()
@@ -96,7 +96,7 @@ export default function TasksPage() {
   }
 
   const handleBack = () => {
-    router.push(`/tasksprint/${workspaceId}/project`)
+    router.push(`/tasksprint/${sprintId}/project`)
   }
 
   const getStatusCount = (status: Task["status"]) => {

@@ -20,21 +20,21 @@ import { toast } from "react-hot-toast"
 interface CreateProjectModalProps {
   isOpen: boolean
   onClose: () => void
-  workspaceId: string
+  sprintId: string
 }
 
-export function CreateProjectModal({ isOpen, onClose, workspaceId }: CreateProjectModalProps) {
+export function CreateProjectModal({ isOpen, onClose, sprintId }: CreateProjectModalProps) {
   const { project, setProject, createProject, isLoading, error: storeError } = useProjectStore()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
 
-  // Reset project state and form error when modal opens with a new workspaceId or just opens
+  // Reset project state and form error when modal opens with a new sprintId or just opens
   useEffect(() => {
     if (isOpen) {
-      setProject({ workspaceId: workspaceId, name: '', description: '', startDate: undefined, dueDate: undefined, status: 'Not Started', assignedTo: [], budget: 0, priority: 'Medium', tags: [], tasks: 0, progress: 0 }); // Ensure workspaceId is set on open and other fields are reset
+      setProject({ sprintId: sprintId, name: '', description: '', startDate: undefined, dueDate: undefined, status: 'Not Started', assignedTo: [], budget: 0, priority: 'Medium', tags: [], tasks: 0, progress: 0 }); // Ensure sprintId is set on open and other fields are reset
       setFormError(null); // Clear any previous form errors
     }
-  }, [isOpen, workspaceId, setProject]);
+  }, [isOpen, sprintId, setProject]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,7 +47,7 @@ export function CreateProjectModal({ isOpen, onClose, workspaceId }: CreateProje
         setFormError("Project Name is required.");
         return;
       }
-      if (!project.workspaceId) {
+      if (!project.sprintId) {
         setFormError("Workspace ID is required.");
         return;
       }
@@ -333,7 +333,7 @@ export function CreateProjectModal({ isOpen, onClose, workspaceId }: CreateProje
                   </Button>
                   <Button
                     type="submit"
-                    disabled={isSubmitting || isLoading || !project.name || !project.workspaceId || !project.priority}
+                    disabled={isSubmitting || isLoading || !project.name || !project.sprintId || !project.priority}
                   >
                     {isSubmitting || isLoading ? (
                       <>

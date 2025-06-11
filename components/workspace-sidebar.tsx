@@ -41,11 +41,11 @@ const workspaceData = {
 }
 
 interface WorkspaceSidebarProps {
-  workspaceId: string
+  sprintId: string
 }
 
-export function WorkspaceSidebar({ workspaceId }: WorkspaceSidebarProps) {
-  const workspace = workspaceData[workspaceId as keyof typeof workspaceData]
+export function WorkspaceSidebar({ sprintId }: WorkspaceSidebarProps) {
+  const workspace = workspaceData[sprintId as keyof typeof workspaceData]
 
   if (!workspace) {
     return null
@@ -54,22 +54,22 @@ export function WorkspaceSidebar({ workspaceId }: WorkspaceSidebarProps) {
   const navigationItems = [
     {
       title: "Overview",
-      url: `/tasksprint/${workspaceId}`,
+      url: `/tasksprint/${sprintId}`,
       icon: Home,
     },
     {
       title: "Projects",
-      url: `/tasksprint/${workspaceId}`,
+      url: `/tasksprint/${sprintId}`,
       icon: FolderOpen,
     },
     {
       title: "Team",
-      url: `/tasksprint/${workspaceId}/team`,
+      url: `/tasksprint/${sprintId}/team`,
       icon: Users,
     },
     {
       title: "Settings",
-      url: `/tasksprint/${workspaceId}/settings`,
+      url: `/tasksprint/${sprintId}/settings`,
       icon: Settings,
     },
   ]
@@ -115,7 +115,7 @@ export function WorkspaceSidebar({ workspaceId }: WorkspaceSidebarProps) {
                 {workspace.projects.map((project) => (
                   <SidebarMenuItem key={project.id}>
                     <SidebarMenuButton asChild>
-                      <Link href={`/tasksprint/${workspaceId}/project/${project.id}`}>
+                      <Link href={`/tasksprint/${sprintId}/project/${project.id}`}>
                         <FolderOpen />
                         <span>{project.name}</span>
                       </Link>

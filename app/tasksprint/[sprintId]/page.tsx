@@ -40,7 +40,7 @@ export default function SprintDetailPage() {
   const router = useRouter()
   const { currentSprint, loading, error, fetchSprint, deleteSprint, clearCurrentSprint } = useSprintStore()
 
-  const sprintId = params.workspaceId as string
+  const sprintId = params.sprintId as string
 
   useEffect(() => {
     if (sprintId) {
