@@ -1,130 +1,166 @@
-import { motion } from "framer-motion"
-import { Calendar, Clock, Users, AlertTriangle, Tag, DollarSign } from "lucide-react"
-import { format } from "date-fns"
-import { cn } from "@/lib/utils"
+"use client"
+
+import type React from "react"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
+import { Calendar, Users, CheckCircle, Edit, Trash2, DollarSign, Code } from "lucide-react"
+import type { Project } from "@/types/project"
+import { ProjectForm } from "./project-form"
+import { useProjectStore } from "@/store/project-store"
+import { motion } from "framer-motion"
 
 interface ProjectCardProps {
-  project: {
-    name: string
-    description?: string
-    startDate?: string
-    dueDate?: string
-    status: "Not Started" | "In Progress" | "Completed"
-    priority: "High" | "Medium" | "Low"
-    assignedTo?: string[]
-    budget?: number
-    tags?: string[]
-    progress?: number
-  }
-  onClick?: () => void
+  project: Project
 }
 
-export function ProjectCard({ project, onClick }: ProjectCardProps) {
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Not Started":
-        return "bg-gray-100 text-gray-700"
-      case "In Progress":
-        return "bg-blue-100 text-blue-700"
-      case "Completed":
-        return "bg-green-100 text-green-700"
+export function ProjectCard({ project }: ProjectCardProps) {
+  const { deleteProject } = useProjectStore()
+
+  const getPriorityColor = (priority: Project["priority"]) => {
+    switch (priority) {
+      case "Critical":
+        return "bg-red-500"
+      case "High":
+        return "bg-orange-500"
+      case "Medium":
+        return "bg-yellow-500"
+      case "Low":
+        return "bg-green-500"
       default:
-        return "bg-gray-100 text-gray-700"
+        return "bg-gray-500"
     }
   }
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "High":
-        return "bg-red-100 text-red-700"
-      case "Medium":
-        return "bg-yellow-100 text-yellow-700"
-      case "Low":
-        return "bg-green-100 text-green-700"
+  const getStatusColor = (status: Project["status"]) => {
+    switch (status) {
+      case "Completed":
+        return "bg-green-100 text-green-800"
+      case "In Progress":
+        return "bg-blue-100 text-blue-800"
+      case "On Hold":
+        return "bg-yellow-100 text-yellow-800"
+      case "Not Started":
+        return "bg-gray-100 text-gray-800"
       default:
-        return "bg-gray-100 text-gray-700"
+        return "bg-gray-100 text-gray-800"
     }
+  }
+
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (confirm("Are you sure you want to delete this project?")) {
+      await deleteProject(project.id)
+    }
+  }
+
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.02 }}
-      className={cn(
-        "bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-all duration-200",
-        onClick && "cursor-pointer"
-      )}
-      onClick={onClick}
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">{project.name}</h3>
-          {project.description && (
-            <p className="text-sm text-gray-600 line-clamp-2">{project.description}</p>
-          )}
-        </div>
-        <Badge className={cn("px-3 py-1 rounded-full text-xs font-medium", getStatusColor(project.status))}>
-          {project.status}
-        </Badge>
-      </div>
+    <motion.div whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.2 }}>
+      <Card className="hover:shadow-lg transition-all duration-300">
+        <CardHeader className="pb-3">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <CardTitle className="text-lg mb-2">{project.name}</CardTitle>
+              <p className="text-sm text-gray-600 line-clamp-2">{project.description}</p>
+            </div>
+            <div className="flex items-center space-x-2 ml-4">
+              <Badge className={getPriorityColor(project.priority)}>{project.priority}</Badge>
+              <Badge variant="secondary" className={getStatusColor(project.status)}>
+                {project.status}
+              </Badge>
+            </div>
+          </div>
+        </CardHeader>
 
-      <div className="space-y-4">
-        <div className="flex items-center gap-4 text-sm text-gray-600">
-          {project.startDate && (
-            <div className="flex items-center gap-1">
-              <Calendar className="h-4 w-4" />
-              <span>{format(new Date(project.startDate), "MMM dd, yyyy")}</span>
-            </div>
-          )}
-          {project.dueDate && (
-            <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              <span>{format(new Date(project.dueDate), "MMM dd, yyyy")}</span>
-            </div>
-          )}
-        </div>
-
-        <div className="flex items-center gap-4">
-          {project.assignedTo && project.assignedTo.length > 0 && (
-            <div className="flex items-center gap-1 text-sm text-gray-600">
-              <Users className="h-4 w-4" />
-              <span>{project.assignedTo.length} members</span>
-            </div>
-          )}
-          {project.budget && (
-            <div className="flex items-center gap-1 text-sm text-gray-600">
-              <DollarSign className="h-4 w-4" />
-              <span>${project.budget.toLocaleString()}</span>
-            </div>
-          )}
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Badge className={cn("px-2 py-0.5 rounded-full text-xs font-medium", getPriorityColor(project.priority))}>
-            <AlertTriangle className="h-3 w-3 mr-1" />
-            {project.priority} Priority
-          </Badge>
-          {project.tags && project.tags.length > 0 && (
-            <div className="flex items-center gap-1 text-sm text-gray-600">
-              <Tag className="h-4 w-4" />
-              <span>{project.tags.join(", ")}</span>
-            </div>
-          )}
-        </div>
-
-        {project.progress !== undefined && (
+        <CardContent className="space-y-4">
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600">Progress</span>
-              <span className="font-medium text-gray-900">{project.progress}%</span>
+            <div className="flex justify-between text-sm">
+              <span>Progress</span>
+              <span>{project.progress}%</span>
             </div>
             <Progress value={project.progress} className="h-2" />
           </div>
-        )}
-      </div>
+
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="flex items-center space-x-2">
+              <CheckCircle className="w-4 h-4 text-green-600" />
+              <span>
+                {project.completedTasks}/{project.tasks} tasks
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Users className="w-4 h-4 text-blue-600" />
+              <span>{project.assignedMembers} members</span>
+            </div>
+          </div>
+
+          {project.budget && project.budget > 0 && (
+            <div className="flex items-center space-x-2 text-sm text-gray-600">
+              <DollarSign className="w-4 h-4" />
+              <span>Budget: ${project.budget.toLocaleString()}</span>
+            </div>
+          )}
+
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
+            <Calendar className="w-4 h-4" />
+            <span>
+              {project.startDate} - {project.endDate}
+            </span>
+          </div>
+
+          {project.technologies && project.technologies.length > 0 && (
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 text-sm text-gray-600">
+                <Code className="w-4 h-4" />
+                <span>Technologies:</span>
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {project.technologies.slice(0, 3).map((tech) => (
+                  <Badge key={tech} variant="outline" className="text-xs">
+                    {tech}
+                  </Badge>
+                ))}
+                {project.technologies.length > 3 && (
+                  <Badge variant="outline" className="text-xs">
+                    +{project.technologies.length - 3} more
+                  </Badge>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-end space-x-2 pt-2">
+            <div onClick={handleEditClick}>
+              <ProjectForm
+                project={project}
+                mode="edit"
+                sprintId={project.sprintId}
+                trigger={
+                  <Button variant="outline" size="sm">
+                    <Edit className="w-4 h-4 mr-1" />
+                    Edit
+                  </Button>
+                }
+              />
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDelete}
+              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            >
+              <Trash2 className="w-4 h-4 mr-1" />
+              Delete
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </motion.div>
   )
-} 
+}
