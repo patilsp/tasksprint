@@ -1,11 +1,11 @@
 "use client"
 
 import type React from "react"
-
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Calendar, User, Clock, Edit, Trash2, Timer } from "lucide-react"
+import { Calendar, User, Clock, Edit, Trash2, Timer, Eye } from "lucide-react"
 import type { Task } from "@/types/task"
 import { TaskForm } from "./task-form"
 import { useTaskStore } from "@/store/task-store"
@@ -140,6 +140,12 @@ export function TaskCard({ task }: TaskCardProps) {
           )}
 
           <div className="flex justify-end space-x-2 pt-2">
+            <Link href={`/tasksprint/${task.workspaceId}/project/${task.projectId}/tasks/${task.id}`}>
+              <Button variant="outline" size="sm">
+                <Eye className="w-4 h-4 mr-1" />
+                View Details
+              </Button>
+            </Link>
             <div onClick={handleEditClick}>
               <TaskForm
                 task={task}

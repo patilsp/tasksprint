@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { connectToDB } from "@/utils/database"
 import Task from "@/models/Task"
 import mongoose from "mongoose"
