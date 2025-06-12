@@ -24,13 +24,11 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
   const [formData, setFormData] = useState<CreateSprintData>({
     name: sprint?.name || "",
     description: sprint?.description || "",
-    status: sprint?.status || "Not Started",
+    status: sprint?.status || "PLANNING",
     startDate: sprint?.startDate || "",
     endDate: sprint?.endDate || "",
-    tasks: sprint?.tasks || 0,
-    completedTasks: sprint?.completedTasks || 0,
-    teamMembers: sprint?.teamMembers || 1,
-    priority: sprint?.priority || "Medium",
+    progress: sprint?.progress || 0,
+    priority: sprint?.priority || "MEDIUM"
   })
 
   const { createSprint, updateSprint, loading } = useSprintStore()
@@ -51,13 +49,11 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
         setFormData({
           name: "",
           description: "",
-          status: "Not Started",
+          status: "PLANNING",
           startDate: "",
           endDate: "",
-          tasks: 0,
-          completedTasks: 0,
-          teamMembers: 1,
-          priority: "Medium",
+          progress: 0,
+          priority: "MEDIUM"
         })
       }
     } catch (error) {
@@ -107,10 +103,9 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Low">Low</SelectItem>
-                  <SelectItem value="Medium">Medium</SelectItem>
-                  <SelectItem value="High">High</SelectItem>
-                  <SelectItem value="Critical">Critical</SelectItem>
+                  <SelectItem value="LOW">Low</SelectItem>
+                  <SelectItem value="MEDIUM">Medium</SelectItem>
+                  <SelectItem value="HIGH">High</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -138,10 +133,10 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Not Started">Not Started</SelectItem>
-                  <SelectItem value="In Progress">In Progress</SelectItem>
-                  <SelectItem value="Completed">Completed</SelectItem>
-                  <SelectItem value="On Hold">On Hold</SelectItem>
+                  <SelectItem value="PLANNING">Planning</SelectItem>
+                  <SelectItem value="ACTIVE">Active</SelectItem>
+                  <SelectItem value="COMPLETED">Completed</SelectItem>
+                  <SelectItem value="CANCELLED">Cancelled</SelectItem>
                 </SelectContent>
               </Select>
             </div>
