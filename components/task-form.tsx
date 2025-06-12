@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,15 +12,6 @@ import { Badge } from "@/components/ui/badge"
 import { Plus, Loader2, X } from "lucide-react"
 import { useTaskStore } from "@/store/task-store"
 import type { CreateTaskData, Task } from "@/types/task"
-
-// Dummy users for the dropdown
-const DUMMY_USERS = [
-  { id: "1", name: "John Doe" },
-  { id: "2", name: "Jane Smith" },
-  { id: "3", name: "Mike Johnson" },
-  { id: "4", name: "Sarah Williams" },
-  { id: "5", name: "David Brown" },
-]
 
 interface TaskFormProps {
   task?: Task
@@ -37,7 +27,6 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
     description: task?.description || "",
     status: task?.status || "Todo",
     priority: task?.priority || "Medium",
-    assignedTo: task?.assignedTo || "",
     dueDate: task?.dueDate || "",
     estimatedHours: task?.estimatedHours || 0,
     actualHours: task?.actualHours || 0,
@@ -59,14 +48,12 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
       }
 
       setOpen(false)
-      // Reset form for create mode
       if (mode === "create") {
         setFormData({
           title: "",
           description: "",
           status: "Todo",
           priority: "Medium",
-          assignedTo: "",
           dueDate: "",
           estimatedHours: 0,
           actualHours: 0,
@@ -80,21 +67,19 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
     }
   }
 
-  const handleInputChange = (field: keyof CreateTaskData, value: string | number | string[]) => {
+  const handleInputChange = (field: keyof CreateTaskData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const addTag = () => {
-    if (newTag.trim() && !formData.tags?.includes(newTag.trim())) {
-      const updatedTags = [...(formData.tags || []), newTag.trim()]
-      handleInputChange("tags", updatedTags)
+    if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
+      handleInputChange("tags", [...formData.tags, newTag.trim()])
       setNewTag("")
     }
   }
 
   const removeTag = (tag: string) => {
-    const updatedTags = formData.tags?.filter((t) => t !== tag) || []
-    handleInputChange("tags", updatedTags)
+    handleInputChange("tags", formData.tags.filter((t) => t !== tag))
   }
 
   const defaultTrigger = (
@@ -129,7 +114,7 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
               <Label htmlFor="priority">Priority</Label>
               <Select
                 value={formData.priority}
-                onValueChange={(value) => handleInputChange("priority", value as CreateTaskData["priority"])}
+                onValueChange={(value) => handleInputChange("priority", value)}
               >
                 <SelectTrigger>
                   <SelectValue />
@@ -138,7 +123,6 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
                   <SelectItem value="Low">Low</SelectItem>
                   <SelectItem value="Medium">Medium</SelectItem>
                   <SelectItem value="High">High</SelectItem>
-                  <SelectItem value="Critical">Critical</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -160,7 +144,7 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
               <Label htmlFor="status">Status</Label>
               <Select
                 value={formData.status}
-                onValueChange={(value) => handleInputChange("status", value as CreateTaskData["status"])}
+                onValueChange={(value) => handleInputChange("status", value)}
               >
                 <SelectTrigger>
                   <SelectValue />
@@ -169,33 +153,11 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
                   <SelectItem value="Todo">Todo</SelectItem>
                   <SelectItem value="In Progress">In Progress</SelectItem>
                   <SelectItem value="In Review">In Review</SelectItem>
-                  <SelectItem value="Completed">Completed</SelectItem>
+                  <SelectItem value="Done">Done</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="assignedTo">Assigned To</Label>
-              <Select
-                value={formData.assignedTo}
-                onValueChange={(value) => handleInputChange("assignedTo", value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select assignee" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="">Unassigned</SelectItem>
-                  {DUMMY_USERS.map((user) => (
-                    <SelectItem key={user.id} value={user.name}>
-                      {user.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label htmlFor="dueDate">Due Date</Label>
               <Input
@@ -205,7 +167,9 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
                 onChange={(e) => handleInputChange("dueDate", e.target.value)}
               />
             </div>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="estimatedHours">Estimated Hours</Label>
               <Input
@@ -214,7 +178,9 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
                 min="0"
                 step="0.5"
                 value={formData.estimatedHours}
-                onChange={(e) => handleInputChange("estimatedHours", Number.parseFloat(e.target.value) || 0)}
+                onChange={(e) =>
+                  handleInputChange("estimatedHours", Number.parseFloat(e.target.value) || 0)
+                }
               />
             </div>
 
@@ -226,12 +192,13 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
                 min="0"
                 step="0.5"
                 value={formData.actualHours}
-                onChange={(e) => handleInputChange("actualHours", Number.parseFloat(e.target.value) || 0)}
+                onChange={(e) =>
+                  handleInputChange("actualHours", Number.parseFloat(e.target.value) || 0)
+                }
               />
             </div>
           </div>
 
-          {/* Tags Section */}
           <div className="space-y-2">
             <Label>Tags</Label>
             <div className="flex gap-2">
@@ -245,7 +212,7 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
                 Add
               </Button>
             </div>
-            {formData.tags && formData.tags.length > 0 && (
+            {formData.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-2">
                 {formData.tags.map((tag) => (
                   <Badge key={tag} variant="secondary" className="flex items-center gap-1">
@@ -275,3 +242,4 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
     </Dialog>
   )
 }
+ 

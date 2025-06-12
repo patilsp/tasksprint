@@ -2,9 +2,8 @@ export interface Task {
   id: string
   title: string
   description: string
-  status: "Todo" | "In Progress" | "In Review" | "Completed"
-  priority: "Low" | "Medium" | "High" | "Critical"
-  assignedTo?: string
+  status: "Todo" | "In Progress" | "In Review" | "Done"
+  priority: "Low" | "Medium" | "High"
   dueDate?: string
   estimatedHours?: number
   actualHours?: number
@@ -19,7 +18,6 @@ export interface CreateTaskData {
   description: string
   status: Task["status"]
   priority: Task["priority"]
-  assignedTo?: string
   dueDate?: string
   estimatedHours?: number
   actualHours?: number

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { connectToDB } from "@/utils/database"
 import Task from "@/models/Task"
-import { CreateTaskData } from "@/types/task"
 import mongoose from "mongoose"
 
 export async function GET(request: NextRequest) {
@@ -10,28 +9,31 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const projectId = searchParams.get("projectId")
 
-    let query = {}
-    if (projectId) {
-      query = { projectId: new mongoose.Types.ObjectId(projectId) }
+    if (!projectId) {
+      return NextResponse.json({ error: "Project ID is required" }, { status: 400 })
+  }
+
+    // Validate projectId
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      return NextResponse.json({ error: "Invalid project ID" }, { status: 400 })
     }
 
-    const tasks = await Task.find(query).sort({ createdAt: -1 })
+    const tasks = await Task.find({ projectId }).sort({ createdAt: -1 })
 
-    // Convert MongoDB documents to plain objects
-    const plainTasks = tasks.map((task) => ({
+    // Convert to plain objects
+    const plainTasks = tasks.map(task => ({
       id: task._id.toString(),
       title: task.title,
       description: task.description,
       status: task.status,
       priority: task.priority,
-      assignedTo: task.assignedTo,
+      projectId: task.projectId.toString(),
       dueDate: task.dueDate,
       estimatedHours: task.estimatedHours,
       actualHours: task.actualHours,
-      tags: task.tags || [],
-      projectId: task.projectId.toString(),
-      createdAt: task.createdAt?.toISOString(),
-      updatedAt: task.updatedAt?.toISOString(),
+      tags: task.tags,
+      createdAt: task.createdAt,
+      updatedAt: task.updatedAt
     }))
 
     return NextResponse.json(plainTasks)
@@ -44,50 +46,59 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await connectToDB()
-    const data: CreateTaskData = await request.json()
+    const data = await request.json()
 
     // Validate required fields
     if (!data.title || !data.projectId) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+      return NextResponse.json(
+        { error: "Title and project ID are required" },
+        { status: 400 }
+      )
     }
 
-    // Create new task with proper data formatting
-    const taskData = {
+    // Validate projectId
+    if (!mongoose.Types.ObjectId.isValid(data.projectId)) {
+      return NextResponse.json({ error: "Invalid project ID" }, { status: 400 })
+    }
+
+    // Create task with proper data transformation
+    const task = await Task.create({
       title: data.title,
       description: data.description || "",
       status: data.status || "Todo",
       priority: data.priority || "Medium",
-      assignedTo: data.assignedTo || "",
-      dueDate: data.dueDate || "",
+      projectId: new mongoose.Types.ObjectId(data.projectId),
+      dueDate: data.dueDate || null,
       estimatedHours: data.estimatedHours || 0,
       actualHours: data.actualHours || 0,
-      tags: data.tags || [],
-      projectId: new mongoose.Types.ObjectId(data.projectId),
-    }
-
-    const newTask = new Task(taskData)
-    const savedTask = await newTask.save()
+      tags: data.tags || []
+    })
 
     // Convert to plain object
     const plainTask = {
-      id: savedTask._id.toString(),
-      title: savedTask.title,
-      description: savedTask.description,
-      status: savedTask.status,
-      priority: savedTask.priority,
-      assignedTo: savedTask.assignedTo,
-      dueDate: savedTask.dueDate,
-      estimatedHours: savedTask.estimatedHours,
-      actualHours: savedTask.actualHours,
-      tags: savedTask.tags || [],
-      projectId: savedTask.projectId.toString(),
-      createdAt: savedTask.createdAt?.toISOString(),
-      updatedAt: savedTask.updatedAt?.toISOString(),
+      id: task._id.toString(),
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      priority: task.priority,
+      projectId: task.projectId.toString(),
+      dueDate: task.dueDate,
+      estimatedHours: task.estimatedHours,
+      actualHours: task.actualHours,
+      tags: task.tags,
+      createdAt: task.createdAt,
+      updatedAt: task.updatedAt
     }
 
     return NextResponse.json(plainTask, { status: 201 })
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error creating task:", error)
+    if (error.name === 'ValidationError') {
+      return NextResponse.json({ 
+        error: "Validation failed", 
+        details: Object.values(error.errors).map((err: any) => err.message)
+      }, { status: 400 })
+    }
     return NextResponse.json({ error: "Failed to create task" }, { status: 500 })
   }
 }

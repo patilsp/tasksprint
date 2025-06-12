@@ -98,7 +98,7 @@ const Welcome = () => {
                       </p>
                     ) : (
                       <div className="flex justify-center gap-2">
-                        <AttendanceDialog />
+                        Test
                       </div>
                     )}
                   </div>
