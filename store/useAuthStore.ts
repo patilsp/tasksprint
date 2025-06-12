@@ -2,8 +2,14 @@ import { create } from 'zustand'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+}
+
 interface AuthState {
-  user: null | { email: string }
+  user: User | null
   isLoading: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
@@ -27,7 +33,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: async () => {
     set({ isLoading: true })
     try {
-      await axios.post('/api/logout')
+      await axios.get('/api/logout')
       set({ user: null, isLoading: false })
       toast.success('Logout Successful')
     } catch (error) {

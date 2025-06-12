@@ -3,9 +3,9 @@ import { UserModel } from "@/lib/models/User.models";
 import { GenerateToken } from "@/lib/services/Token.service";
 import { NextRequest, NextResponse } from "next/server";
 
-connectToDB();
 export const POST = async (request: NextRequest) => {
   try {
+    await connectToDB();
     const { email, password } = await request.json();
 
     const existUser = await UserModel.findOne({ email });
@@ -32,7 +32,14 @@ export const POST = async (request: NextRequest) => {
     const token = await GenerateToken(existUser._id);
 
     const response = NextResponse.json(
-      { msg: "User logged in successfully" },
+      { 
+        msg: "User logged in successfully",
+        user: {
+          _id: existUser._id,
+          name: existUser.name,
+          email: existUser.email
+        }
+      },
       {
         status: 201,
       }
