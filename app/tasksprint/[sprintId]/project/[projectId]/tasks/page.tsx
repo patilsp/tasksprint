@@ -74,7 +74,7 @@ export default function TasksPage() {
           if (!b.dueDate) return -1
           return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
         case "priority":
-          const priorityOrder = { Critical: 4, High: 3, Medium: 2, Low: 1 }
+          const priorityOrder = { High: 3, Medium: 2, Low: 1 }
           return priorityOrder[b.priority] - priorityOrder[a.priority]
         case "status":
           return a.status.localeCompare(b.status)
@@ -127,35 +127,6 @@ export default function TasksPage() {
           <div className="text-center">
             <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-blue-600" />
             <p className="text-gray-600">Loading tasks...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <header className="bg-white/80 backdrop-blur-md border-b">
-          <div className="container mx-auto px-4 h-16 flex items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                TaskSprint
-              </span>
-            </div>
-          </div>
-        </header>
-
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="text-red-600 mb-4">Error: {error}</div>
-            <Button onClick={handleRefresh}>
-              <RefreshCw className="w-4 h-4 mr-2" />
-              Try Again
-            </Button>
           </div>
         </div>
       </div>
@@ -232,129 +203,89 @@ export default function TasksPage() {
               </div>
 
               {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-gray-600">{getStatusCount("Todo")}</div>
-                  <div className="text-sm text-gray-600">Todo</div>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">Todo</div>
+                  <div className="text-2xl font-bold">{getStatusCount("Todo")}</div>
                 </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-600">{getStatusCount("In Progress")}</div>
-                  <div className="text-sm text-gray-600">In Progress</div>
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">In Progress</div>
+                  <div className="text-2xl font-bold">{getStatusCount("In Progress")}</div>
                 </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-purple-600">{getStatusCount("In Review")}</div>
-                  <div className="text-sm text-gray-600">In Review</div>
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">In Review</div>
+                  <div className="text-2xl font-bold">{getStatusCount("In Review")}</div>
                 </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-green-600">{getStatusCount("Completed")}</div>
-                  <div className="text-sm text-gray-600">Completed</div>
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">Done</div>
+                  <div className="text-2xl font-bold">{getStatusCount("Done")}</div>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Search and Filters */}
-            <motion.div variants={fadeInUp} className="bg-white/60 backdrop-blur-sm rounded-lg p-6 mb-8">
-              <div className="flex flex-col lg:flex-row gap-4">
-                {/* Search */}
-                <div className="flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <Input
-                      placeholder="Search tasks by title or description..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
+              {/* Filters */}
+              <div className="bg-white rounded-lg p-4 shadow-sm mb-6">
+                <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0">
+                  <div className="flex-1">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                      <Input
+                        placeholder="Search tasks..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <Select value={statusFilter} onValueChange={setStatusFilter}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter by status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Status</SelectItem>
+                        <SelectItem value="Todo">Todo</SelectItem>
+                        <SelectItem value="In Progress">In Progress</SelectItem>
+                        <SelectItem value="In Review">In Review</SelectItem>
+                        <SelectItem value="Done">Done</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter by priority" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Priority</SelectItem>
+                        <SelectItem value="Low">Low</SelectItem>
+                        <SelectItem value="Medium">Medium</SelectItem>
+                        <SelectItem value="High">High</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="title">Title</SelectItem>
+                        <SelectItem value="dueDate">Due Date</SelectItem>
+                        <SelectItem value="priority">Priority</SelectItem>
+                        <SelectItem value="status">Status</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Button variant="outline" size="sm" onClick={clearFilters}>
+                      <Filter className="w-4 h-4 mr-2" />
+                      Clear Filters
+                    </Button>
                   </div>
                 </div>
-
-                {/* Filters */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Select value={statusFilter} onValueChange={setStatusFilter}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="Todo">Todo</SelectItem>
-                      <SelectItem value="In Progress">In Progress</SelectItem>
-                      <SelectItem value="In Review">In Review</SelectItem>
-                      <SelectItem value="Completed">Completed</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Priority" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Priority</SelectItem>
-                      <SelectItem value="Critical">Critical</SelectItem>
-                      <SelectItem value="High">High</SelectItem>
-                      <SelectItem value="Medium">Medium</SelectItem>
-                      <SelectItem value="Low">Low</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Sort by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="title">Title</SelectItem>
-                      <SelectItem value="dueDate">Due Date</SelectItem>
-                      <SelectItem value="priority">Priority</SelectItem>
-                      <SelectItem value="status">Status</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Button variant="outline" onClick={clearFilters} className="w-full sm:w-auto">
-                    <Filter className="w-4 h-4 mr-2" />
-                    Clear
-                  </Button>
-                </div>
               </div>
-
-              {/* Active Filters Display */}
-              {(searchTerm || statusFilter !== "all" || priorityFilter !== "all") && (
-                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
-                  <span className="text-sm text-gray-600">Active filters:</span>
-                  {searchTerm && <Badge variant="secondary">Search: "{searchTerm}"</Badge>}
-                  {statusFilter !== "all" && <Badge variant="secondary">Status: {statusFilter}</Badge>}
-                  {priorityFilter !== "all" && <Badge variant="secondary">Priority: {priorityFilter}</Badge>}
-                </div>
-              )}
             </motion.div>
 
-            {/* Results Count */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <p className="text-gray-600">
-                Showing {filteredTasks.length} of {tasks.length} tasks
-                {filteredTasks.length !== tasks.length && " (filtered)"}
-              </p>
+            {/* Task List */}
+            <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredTasks.map((task) => (
+                <TaskCard key={task._id} task={task} />
+              ))}
             </motion.div>
-
-            {/* Tasks Grid */}
-            {filteredTasks.length === 0 ? (
-              <motion.div variants={fadeInUp} className="text-center py-12">
-                <div className="text-gray-500 mb-4">
-                  <Filter className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-semibold mb-2">No tasks found</h3>
-                  <p>Try adjusting your search or filter criteria</p>
-                </div>
-                <Button variant="outline" onClick={clearFilters}>
-                  Clear all filters
-                </Button>
-              </motion.div>
-            ) : (
-              <motion.div variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredTasks.map((task, index) => (
-                  <motion.div key={task.id} variants={fadeInUp} transition={{ delay: index * 0.1 }}>
-                    <TaskCard task={task} />
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
           </motion.div>
         )}
       </div>

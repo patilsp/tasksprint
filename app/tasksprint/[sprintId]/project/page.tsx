@@ -72,7 +72,7 @@ export default function ProjectsPage() {
         case "startDate":
           return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
         case "priority":
-          const priorityOrder = { Critical: 4, High: 3, Medium: 2, Low: 1 }
+          const priorityOrder = { High: 3, Medium: 2, Low: 1 }
           return priorityOrder[b.priority] - priorityOrder[a.priority]
         default:
           return 0
@@ -129,35 +129,6 @@ export default function ProjectsPage() {
     )
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <header className="bg-white/80 backdrop-blur-md border-b">
-          <div className="container mx-auto px-4 h-16 flex items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                TaskSprint
-              </span>
-            </div>
-          </div>
-        </header>
-
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="text-red-600 mb-4">Error: {error}</div>
-            <Button onClick={handleRefresh}>
-              <RefreshCw className="w-4 h-4 mr-2" />
-              Try Again
-            </Button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Header */}
@@ -197,12 +168,12 @@ export default function ProjectsPage() {
         {projects.length === 0 ? (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-green-100 to-blue-100 rounded-full flex items-center justify-center mb-4">
-                <FolderOpen className="w-8 h-8 text-green-600" />
+              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mb-4">
+                <FolderOpen className="w-8 h-8 text-purple-600" />
               </div>
               <h3 className="text-xl font-semibold mb-2">No Projects Yet</h3>
               <p className="text-gray-600 mb-6">
-                Create your first project under{" "}
+                Create your first project in{" "}
                 <span className="font-semibold">{currentSprint?.name || "this sprint"}</span>
               </p>
               <ProjectForm sprintId={sprintId} />
@@ -228,134 +199,89 @@ export default function ProjectsPage() {
               </div>
 
               {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-600">{getStatusCount("In Progress")}</div>
-                  <div className="text-sm text-gray-600">In Progress</div>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">Not Started</div>
+                  <div className="text-2xl font-bold">{getStatusCount("Not Started")}</div>
                 </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-green-600">{getStatusCount("Completed")}</div>
-                  <div className="text-sm text-gray-600">Completed</div>
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">In Progress</div>
+                  <div className="text-2xl font-bold">{getStatusCount("In Progress")}</div>
                 </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-red-600">{getPriorityCount("High")}</div>
-                  <div className="text-sm text-gray-600">High Priority</div>
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">Completed</div>
+                  <div className="text-2xl font-bold">{getStatusCount("Completed")}</div>
                 </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {projects.length > 0
-                      ? Math.round(projects.reduce((acc, project) => acc + project.progress, 0) / projects.length)
-                      : 0}
-                    %
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="text-sm text-gray-600 mb-1">On Hold</div>
+                  <div className="text-2xl font-bold">{getStatusCount("On Hold")}</div>
+                </div>
+              </div>
+
+              {/* Filters */}
+              <div className="bg-white rounded-lg p-4 shadow-sm mb-6">
+                <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0">
+                  <div className="flex-1">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                      <Input
+                        placeholder="Search projects..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-600">Avg Progress</div>
+                  <div className="flex items-center space-x-4">
+                    <Select value={statusFilter} onValueChange={setStatusFilter}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter by status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Status</SelectItem>
+                        <SelectItem value="Not Started">Not Started</SelectItem>
+                        <SelectItem value="In Progress">In Progress</SelectItem>
+                        <SelectItem value="Completed">Completed</SelectItem>
+                        <SelectItem value="On Hold">On Hold</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter by priority" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Priority</SelectItem>
+                        <SelectItem value="Low">Low</SelectItem>
+                        <SelectItem value="Medium">Medium</SelectItem>
+                        <SelectItem value="High">High</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="name">Name</SelectItem>
+                        <SelectItem value="progress">Progress</SelectItem>
+                        <SelectItem value="startDate">Start Date</SelectItem>
+                        <SelectItem value="priority">Priority</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Button variant="outline" size="sm" onClick={clearFilters}>
+                      <Filter className="w-4 h-4 mr-2" />
+                      Clear Filters
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Search and Filters */}
-            <motion.div variants={fadeInUp} className="bg-white/60 backdrop-blur-sm rounded-lg p-6 mb-8">
-              <div className="flex flex-col lg:flex-row gap-4">
-                {/* Search */}
-                <div className="flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <Input
-                      placeholder="Search projects by name or description..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-
-                {/* Filters */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Select value={statusFilter} onValueChange={setStatusFilter}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="Not Started">Not Started</SelectItem>
-                      <SelectItem value="In Progress">In Progress</SelectItem>
-                      <SelectItem value="Completed">Completed</SelectItem>
-                      <SelectItem value="On Hold">On Hold</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Priority" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Priority</SelectItem>
-                      <SelectItem value="Critical">Critical</SelectItem>
-                      <SelectItem value="High">High</SelectItem>
-                      <SelectItem value="Medium">Medium</SelectItem>
-                      <SelectItem value="Low">Low</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Sort by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="name">Name</SelectItem>
-                      <SelectItem value="progress">Progress</SelectItem>
-                      <SelectItem value="startDate">Start Date</SelectItem>
-                      <SelectItem value="priority">Priority</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Button variant="outline" onClick={clearFilters} className="w-full sm:w-auto">
-                    <Filter className="w-4 h-4 mr-2" />
-                    Clear
-                  </Button>
-                </div>
-              </div>
-
-              {/* Active Filters Display */}
-              {(searchTerm || statusFilter !== "all" || priorityFilter !== "all") && (
-                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
-                  <span className="text-sm text-gray-600">Active filters:</span>
-                  {searchTerm && <Badge variant="secondary">Search: "{searchTerm}"</Badge>}
-                  {statusFilter !== "all" && <Badge variant="secondary">Status: {statusFilter}</Badge>}
-                  {priorityFilter !== "all" && <Badge variant="secondary">Priority: {priorityFilter}</Badge>}
-                </div>
-              )}
+            {/* Project List */}
+            <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProjects.map((project) => (
+                <ProjectCard key={project._id} project={project} />
+              ))}
             </motion.div>
-
-            {/* Results Count */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <p className="text-gray-600">
-                Showing {filteredProjects.length} of {projects.length} projects
-                {filteredProjects.length !== projects.length && " (filtered)"}
-              </p>
-            </motion.div>
-
-            {/* Projects Grid */}
-            {filteredProjects.length === 0 ? (
-              <motion.div variants={fadeInUp} className="text-center py-12">
-                <div className="text-gray-500 mb-4">
-                  <Filter className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-semibold mb-2">No projects found</h3>
-                  <p>Try adjusting your search or filter criteria</p>
-                </div>
-                <Button variant="outline" onClick={clearFilters}>
-                  Clear all filters
-                </Button>
-              </motion.div>
-            ) : (
-              <motion.div variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <motion.div key={project.id} variants={fadeInUp} transition={{ delay: index * 0.1 }}>
-                    <ProjectCard project={project} />
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
           </motion.div>
         )}
       </div>
