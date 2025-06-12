@@ -7,7 +7,6 @@ import NextTopLoader from 'nextjs-toploader';
 import Providers from '@/components/layout/providers';
 import { auth } from '@/auth';
 
-// Load the Roboto font
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,10 +15,7 @@ export const metadata: Metadata = {
 		template: `%s - Task Sprint`,
 	},
 	description: "Task Sprint is a simple employee management system application",
-	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "white" },
-		{ media: "(prefers-color-scheme: dark)", color: "black" },
-	],
+
   icons: {
 		icon: "/favicon.png",
 		shortcut: "/favicon.png",
@@ -47,7 +43,7 @@ export default async function RootLayout({
             {children}
           </div>
         </Providers>
-        <Toaster className="bottom-right"/>
+        <Toaster className="bottom"/>
       </body>
     </html>
   );

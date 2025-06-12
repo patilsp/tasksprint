@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,13 +17,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import axios from 'axios';
 import { useUserStore } from '@/store/useUserStore';
 
 const Welcome = () => {
   const { user, fetchUser } = useUserStore();
-  const [attendanceData, setAttendanceData] = useState([]);
-
   const loggedInUserId = user?._id;
 
   return (
@@ -90,17 +87,9 @@ const Welcome = () => {
                   width={180}
                 />
                 <div className="flex flex-col items-center text-center md:text-start md:items-start">
-                  <h3 className="text-white text-xl font-bold mb-4">Today's Attendance</h3>
+                  <h3 className="text-white text-xl font-bold mb-4">Blog Posts</h3>
                   <div className="w-full flex flex-row gap-3">
-                    {loggedInUserId && attendanceData.length > 0 ? (
-                      <p className="text-center text-white bg-green-500 px-4 py-2 rounded shadow border border-white text-sm font-medium">
-                        ✅ You are marked present for today
-                      </p>
-                    ) : (
-                      <div className="flex justify-center gap-2">
-                        Test
-                      </div>
-                    )}
+                    Test
                   </div>
                 </div>
               </CardContent>

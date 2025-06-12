@@ -32,7 +32,6 @@ const UpdateCustomer = () => {
         const data = await response.json();
         setCustomer(data); 
       } catch (error) {
-        console.error("Failed to fetch customer details:", error);
         toast.error("Failed to fetch customer details.");
       }
     };
@@ -56,7 +55,7 @@ const UpdateCustomer = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(customer), // Pass the entire customer object
+        body: JSON.stringify(customer),
       });
 
       const responseData = await response.json();

@@ -3,44 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import UserAuthForm from '@/components/forms/user-auth-form';
+import UserAuthForm from '@/components/user-auth-form';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 
 export default function AuthenticationPage() {
-  const [quote, setQuote] = useState({ post_title: '', post_content: '' });
-
-  // Function to fetch all posts and select a random quote
-  const fetchQuote = async () => {
-    try {
-      const response = await fetch('/api/post');
-      if (response.ok) {
-        const posts = await response.json();
-        if (posts.length > 0) {
-          const randomIndex = Math.floor(Math.random() * posts.length);
-          setQuote(posts[randomIndex]);
-        } else {
-          setQuote({ post_title: "No quotes available", post_content: "" });
-        }
-      } else {
-        console.error('Failed to fetch posts');
-        setQuote({ post_title: "Failed to fetch quote", post_content: "" });
-      }
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      setQuote({ post_title: "Error fetching quote", post_content: "" });
-    }
-  };
-
-  useEffect(() => {
-    fetchQuote();
-    const interval = setInterval(() => {
-      fetchQuote();
-    }, 3600000);
-    return () => clearInterval(interval);
-  }, []);
-
+  
   return (
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
@@ -76,15 +45,7 @@ export default function AuthenticationPage() {
 
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            {quote.post_title && quote.post_content ? (
-              <>
-                <footer className="text-sm">— {quote.post_title}</footer> 
-                <p className="text-lg">&ldquo;{quote.post_content}&rdquo;</p>
-                
-              </>
-            ) : (
-              <p>Loading quote...</p>
-            )}
+            <p>Loading quote...</p>
           </blockquote>
         </div>
       </div>
