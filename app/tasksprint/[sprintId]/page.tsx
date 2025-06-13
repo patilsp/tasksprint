@@ -30,6 +30,8 @@ import { motion } from "framer-motion"
 import type { Sprint } from "@/types/sprint"
 import { ProjectForm } from "@/components/project-form"
 import { ProjectsList } from "@/components/project-list"
+import InviteUserDialog from "@/components/InviteUserDialog"
+
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -376,10 +378,7 @@ export default function SprintDetailPage() {
                     Projects in this Sprint
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <Button variant="outline" size="sm" onClick={() => router.push(`/tasksprint/${sprintId}/project`)}>
-                      View All Projects
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                    <InviteUserDialog sprintId={sprintId} />
                     <ProjectForm sprintId={sprintId} />
                     <Button variant="outline" size="sm">                      
                       <Settings className="w-4 h-4" />
