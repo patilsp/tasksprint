@@ -129,7 +129,7 @@ export default function TaskSprintLanding() {
             className="text-center max-w-4xl mx-auto"
           >
             <motion.div variants={fadeInUp}>
-              <Badge variant="secondary" className="mb-4">
+              <Badge variant="secondary" className="mb-4 border1">
                 🚀 New: AI-powered task insights
               </Badge>
             </motion.div>
@@ -149,7 +149,7 @@ export default function TaskSprintLanding() {
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+              className="flex flex-row gap-4 justify-center items-center mb-12"
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
@@ -271,7 +271,7 @@ export default function TaskSprintLanding() {
               },
             ].map((feature, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-lg transition-all duration-300 border bg-white/50 backdrop-blur-sm">
+                <Card className="h-full hover:shadow-lg transition-all duration-300 border1 bg-white/50 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className="mb-4">
                       {feature.icon}

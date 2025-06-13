@@ -217,9 +217,9 @@ body {
   }
 }
 
-/* .border{
+.border1{
   border: 1px solid #ec540e;
-} */
+}
 .btn-primary {
   background: linear-gradient(140.14deg, #ec540e 15.05%, #d6361f 114.99%)
       padding-box,

@@ -9,7 +9,6 @@ export const GET = async (request, { params }) => {
 
         return new Response(JSON.stringify(customer), { status: 200 });
     } catch (error) {
-        console.error("Error fetching customer details:", error);
         return new Response("Internal Server Error", { status: 500 });
     }
 };
@@ -45,19 +44,16 @@ export const PATCH = async (request, { params }) => {
       await existingCustomer.save();
       return new Response("Successfully updated the Customer", { status: 200 });
     } catch (error) {
-      console.error("Error updating customer:", error);
       return new Response("Error Updating Customer", { status: 500 });
     }
   };
   
 
 export const DELETE = async (request, { params }) => {
-    console.log("Request Parameters:", params); // Log the parameters
-
     try {
         await connectToDB();
 
-        const customerId = params.id; // Extract the ID from params
+        const customerId = params.id;
 
         if (!customerId) {
             return new Response("Customer ID is required", { status: 400 });
@@ -71,8 +67,7 @@ export const DELETE = async (request, { params }) => {
 
         return new Response("Customer deleted successfully", { status: 200 });
     } catch (error) {
-        console.error("Error deleting customer:", error);
-        return new Response("Error deleting Customer", { status: 500 });
+        return new Response("Error deleting Customer", error);
     }
 };
 

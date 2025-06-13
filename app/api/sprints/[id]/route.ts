@@ -1,28 +1,28 @@
-import { NextRequest, NextResponse } from "next/server"
-import { connectToDB } from "@/utils/database"
-import Sprint from "@/models/Sprint"
-import mongoose from "mongoose"
+import { NextRequest, NextResponse } from "next/server";
+import { connectToDB } from "@/utils/database";
+import Sprint from "@/models/Sprint";
+import mongoose from "mongoose";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+type Params = {
+  params: { id: string };
+};
+
+// ✅ GET
+export async function GET(_req: NextRequest, { params }: Params) {
   try {
-    await connectToDB()
-    const id = params.id
+    await connectToDB();
+    const { id } = params;
 
-    // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 })
+      return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 });
     }
 
-    const sprint = await Sprint.findById(id)
+    const sprint = await Sprint.findById(id);
     if (!sprint) {
-      return NextResponse.json({ error: "Sprint not found" }, { status: 404 })
+      return NextResponse.json({ error: "Sprint not found" }, { status: 404 });
     }
 
-    // Convert to plain object
-    const plainSprint = {
+    return NextResponse.json({
       id: sprint._id.toString(),
       name: sprint.name,
       description: sprint.description,
@@ -31,81 +31,65 @@ export async function GET(
       endDate: sprint.endDate,
       progress: sprint.progress,
       priority: sprint.priority,
-      sprintId: sprint._id.toString(),
-    }
-
-    return NextResponse.json(plainSprint)
-  } catch (error) {
-    console.error("Error fetching sprint:", error)
-    return NextResponse.json({ error: "Failed to fetch sprint" }, { status: 500 })
+    });
+  } catch (err) {
+    return NextResponse.json({ error: "Failed to fetch sprint" }, { status: 500 });
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+// ✅ PUT
+export async function PUT(req: NextRequest, { params }: Params) {
   try {
-    await connectToDB()
-    const id = params.id
-    const data = await request.json()
+    await connectToDB();
+    const { id } = params;
+    const body = await req.json();
 
-    // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 })
+      return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 });
     }
 
-    const updatedSprint = await Sprint.findByIdAndUpdate(
-      id,
-      data,
-      { new: true, runValidators: true }
-    )
+    const updated = await Sprint.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
 
-    if (!updatedSprint) {
-      return NextResponse.json({ error: "Sprint not found" }, { status: 404 })
+    if (!updated) {
+      return NextResponse.json({ error: "Sprint not found" }, { status: 404 });
     }
 
-    // Convert to plain object
-    const plainSprint = {
-      id: updatedSprint._id.toString(),
-      name: updatedSprint.name,
-      description: updatedSprint.description,
-      status: updatedSprint.status,
-      startDate: updatedSprint.startDate,
-      endDate: updatedSprint.endDate,
-      progress: updatedSprint.progress,
-      priority: updatedSprint.priority,
-      sprintId: updatedSprint.sprintId.toString(),
-    }
-
-    return NextResponse.json(plainSprint)
-  } catch (error) {
-    console.error("Error updating sprint:", error)
-    return NextResponse.json({ error: "Failed to update sprint" }, { status: 500 })
+    return NextResponse.json({
+      id: updated._id.toString(),
+      name: updated.name,
+      description: updated.description,
+      status: updated.status,
+      startDate: updated.startDate,
+      endDate: updated.endDate,
+      progress: updated.progress,
+      priority: updated.priority,
+    });
+  } catch (err) {
+    return NextResponse.json({ error: "Failed to update sprint" }, { status: 500 });
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+// ✅ DELETE
+export async function DELETE(_req: NextRequest, { params }: Params) {
   try {
-    await connectToDB()
-    const id = params.id
+    await connectToDB();
+    const { id } = params;
 
-    // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 })
+      return NextResponse.json({ error: "Invalid sprint ID" }, { status: 400 });
     }
 
-    const deletedSprint = await Sprint.findByIdAndDelete(id)
-    if (!deletedSprint) {
-      return NextResponse.json({ error: "Sprint not found" }, { status: 404 })
+    const deleted = await Sprint.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return NextResponse.json({ error: "Sprint not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ message: "Sprint deleted successfully" })
-  } catch (error) {
-    console.error("Error deleting sprint:", error)
-    return NextResponse.json({ error: "Failed to delete sprint" }, { status: 500 })
+    return NextResponse.json({ message: "Sprint deleted successfully" });
+  } catch (err) {
+    return NextResponse.json({ error: "Failed to delete sprint" }, { status: 500 });
   }
 }
