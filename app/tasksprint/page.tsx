@@ -181,48 +181,21 @@ export default function SprintsPage() {
                   <h1 className="text-xl font-bold mb-2">Sprint Dashboard</h1>
                   <p className="text-gray-600">Manage and track your project sprints</p>
                 </div>
-                <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                {/* <div className="flex items-center space-x-4 mt-4 md:mt-0">
                   <Badge variant="secondary" className="text-sm">
                     {sprints.length} Total Sprints
                   </Badge>
                   <Badge variant="secondary" className="text-sm">
                     {sprints.filter((s) => s.status === "In Progress").length} Active
                   </Badge>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-600">{getStatusCount("In Progress")}</div>
-                  <div className="text-sm text-gray-600">In Progress</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-green-600">{getStatusCount("Completed")}</div>
-                  <div className="text-sm text-gray-600">Completed</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-red-600">{getPriorityCount("High")}</div>
-                  <div className="text-sm text-gray-600">High Priority</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {Math.round(sprints.reduce((acc, sprint) => acc + sprint.progress, 0) / sprints.length)}%
-                  </div>
-                  <div className="text-sm text-gray-600">Avg Progress</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Search and Filters */}
-            <motion.div variants={fadeInUp} className="bg-white/60 backdrop-blur-sm rounded-lg p-6 mb-8">
-              <div className="flex flex-col lg:flex-row gap-4">
+                </div> */}
+               <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
-                      placeholder="Search sprints by name or description..."
+                      placeholder="Search sprints here..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
@@ -231,7 +204,7 @@ export default function SprintsPage() {
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <Select value={statusFilter} onValueChange={setStatusFilter}>
                     <SelectTrigger className="w-full sm:w-[140px]">
                       <SelectValue placeholder="Status" />
@@ -245,48 +218,19 @@ export default function SprintsPage() {
                     </SelectContent>
                   </Select>
 
-                  <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Priority" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Priority</SelectItem>
-                      <SelectItem value="Critical">Critical</SelectItem>
-                      <SelectItem value="High">High</SelectItem>
-                      <SelectItem value="Medium">Medium</SelectItem>
-                      <SelectItem value="Low">Low</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-          
-
                   <Button variant="outline" onClick={clearFilters} className="w-full sm:w-auto">
-                    <Filter className="w-4 h-4 mr-2" />
-                    Clear
+                    <Filter className="w-4 h-4" />
+                    
                   </Button>
                 </div>
               </div>
 
-              {/* Active Filters Display */}
-              {(searchTerm || statusFilter !== "all" || priorityFilter !== "all") && (
-                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
-                  <span className="text-sm text-gray-600">Active filters:</span>
-                  {searchTerm && <Badge variant="secondary">Search: "{searchTerm}"</Badge>}
-                  {statusFilter !== "all" && <Badge variant="secondary">Status: {statusFilter}</Badge>}
-                  {priorityFilter !== "all" && <Badge variant="secondary">Priority: {priorityFilter}</Badge>}
-                </div>
-              )}
+          
+              </div>
+
+             
             </motion.div>
 
-            {/* Results Count */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <p className="text-gray-600">
-                Showing {filteredSprints.length} of {sprints.length} sprints
-                {filteredSprints.length !== sprints.length && " (filtered)"}
-              </p>
-            </motion.div>
-
-            {/* Sprint Grid */}
             {filteredSprints.length === 0 ? (
               <motion.div variants={fadeInUp} className="text-center py-12">
                 <div className="text-gray-500 mb-4">

@@ -77,9 +77,7 @@ export function SprintCard({ sprint }: SprintCardProps) {
             </div>
             <div className="flex items-center space-x-2 ml-0 md:ml-4 py-2 md:py-0">
               <Badge className={getPriorityColor(sprint.priority)}>{sprint.priority}</Badge>
-              <Badge variant="secondary" className={getStatusColor(sprint.status)}>
-                {sprint.status}
-              </Badge>
+             
             </div>
           </div>
         </CardHeader>
@@ -111,23 +109,25 @@ export function SprintCard({ sprint }: SprintCardProps) {
               <span>{sprint.teamMembers || 0} members</span>
             </div>
           </div>
-
+          <div className="flex justify-between items-center pt-2">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <Calendar className="w-4 h-4" />
-            <span>
-              {new Date(sprint.startDate).toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-              })} - {new Date(sprint.endDate).toLocaleDateString('en-GB', {
+            <span> {new Date(sprint.endDate).toLocaleDateString('en-GB', {
                 day: '2-digit',
                 month: '2-digit',
                 year: 'numeric'
               })}
             </span>
           </div>
+          <div>
+          <Badge variant="secondary" className={getStatusColor(sprint.status)}>
+                {sprint.status}
+              </Badge>
 
-          <div className="flex justify-between items-center pt-2">
+          </div>
+          </div>
+
+          {/* <div className="flex justify-between items-center pt-2">
             <Button
               variant="ghost"
               size="sm"
@@ -161,7 +161,7 @@ export function SprintCard({ sprint }: SprintCardProps) {
                 Delete
               </Button>
             </div>
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     </motion.div>
