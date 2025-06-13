@@ -107,18 +107,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           </div>
 
-          {project.budget && project.budget > 0 && (
+          
+          <div className="flex item-center justify-between gap-2">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <DollarSign className="w-4 h-4" />
-              <span>Budget: ${project.budget.toLocaleString()}</span>
-            </div>
-          )}
+              <Calendar className="w-4 h-4" />
+              <span>
+                {new Date(project.startDate).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric'
+                })} - {new Date(project.endDate).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric'
+                })}
+              </span>
 
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Calendar className="w-4 h-4" />
-            <span>
-              {project.startDate} - {project.endDate}
-            </span>
+              {project.budget && project.budget > 0 && (
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <DollarSign className="w-4 h-4" />
+                  <span>Budget: ${project.budget.toLocaleString()}</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {project.technologies && project.technologies.length > 0 && (

@@ -33,6 +33,26 @@ const sprintSchema = new mongoose.Schema({
     type: String,
     enum: ["LOW", "MEDIUM", "HIGH"],
     default: "MEDIUM",
+  },
+  tasks: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  completedTasks: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  projects: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  teamMembers: {
+    type: Number,
+    default: 0,
+    min: 0,
   }
 }, {
   timestamps: true,

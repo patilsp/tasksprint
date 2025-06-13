@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Zap, Users, BarChart3, ArrowRight, Star, Play, Menu, X } from "lucide-react"
 import Link from "next/link"
+import Image from "next/Image"
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 
@@ -43,12 +44,13 @@ export default function TaskSprintLanding() {
       >
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Zap className="w-5 h-5 text-white" />
-            </div>
+          <Link href="/" target="_blank"className="flex item-center">
+            <Image src="/images/logo.png" height={35} width={35} alt="logo" className="object-contain" />
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               TaskSprint
             </span>
+          </Link>
+           
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -152,15 +154,15 @@ export default function TaskSprintLanding() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
+                  className="btn-primary border-white px-8 py-3"
                 >
-                  Start Free Trial
+                  Start Free
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </motion.div>
 
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" size="lg" className="px-8 py-3">
+                <Button variant="outline" size="lg" className="px-6 py-1  hover:[background-color:#ec540e] hover:text-white hover:border-white">
                   <Play className="mr-2 w-4 h-4" />
                   Watch Demo
                 </Button>
@@ -269,7 +271,7 @@ export default function TaskSprintLanding() {
               },
             ].map((feature, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-lg transition-all duration-300 border-0 bg-white/50 backdrop-blur-sm">
+                <Card className="h-full hover:shadow-lg transition-all duration-300 border bg-white/50 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className="mb-4">
                       {feature.icon}
@@ -297,7 +299,7 @@ export default function TaskSprintLanding() {
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
               Join thousands of productive teams already using TaskSprint to get more done.
             </p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div>
               <Button size="lg" variant="secondary" className="px-8 py-3">
                 Start Your Free Trial
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -386,7 +388,7 @@ export default function TaskSprintLanding() {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 TaskSprint. All rights reserved.</p>
+            <p>&copy; 2025 TaskSprint. All rights reserved.</p>
           </div>
         </div>
       </footer>

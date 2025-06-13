@@ -175,7 +175,7 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="tasks">Total Tasks</Label>
               <Input
@@ -198,7 +198,7 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
                 onChange={(e) => handleInputChange("completedTasks", Number.parseInt(e.target.value) || 0)}
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="flex justify-end space-x-2 pt-4">
             <Button type="button" variant="outline" onClick={() => setOpen(false)} disabled={loading}>

@@ -47,14 +47,14 @@ const Login = () => {
   return (
     <div className="relative h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url(/images/bg/bg.png)" }}>
       <div className="w-full h-screen flex items-center justify-center px-4">
-        <Card className="rounded-lg text-card-foreground mx-auto max-w-md bg-transparent shadow-none md:shadow-lg border border-none md:border-white backdrop-blur-xl">
+        <Card className="rounded-lg text-card-foreground mx-auto max-w-md bg-transparent shadow-none md:shadow-lg border md:border-white backdrop-blur-xl">
           <CardHeader className="text-center">
             <div className="flex justify-center m-auto">
                 <Image
                       src="/images/logo.png"
-                      width={70}
-                      height={70}
-                      className="object-contain mb-2"
+                      width={50}
+                      height={50}
+                      className="object-contain mb-4"
                       alt="logo"
                   />
             </div>

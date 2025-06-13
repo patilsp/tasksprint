@@ -72,8 +72,8 @@ export function SprintCard({ sprint }: SprintCardProps) {
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <CardTitle className="text-lg mb-2 group-hover:text-blue-600 transition-colors">{sprint.name}</CardTitle>
-              <p className="text-sm text-gray-600 line-clamp-2">{sprint.description}</p>
+              <CardTitle className="text-lg mb-2 group-hover:text-blue-600 transition-colors truncate max-w-[220px]">{sprint.name}</CardTitle>
+              <p className="text-sm text-gray-600 line-clamp-2 truncate max-w-[500px]">{sprint.description}</p>
             </div>
             <div className="flex items-center space-x-2 ml-4">
               <Badge className={getPriorityColor(sprint.priority)}>{sprint.priority}</Badge>
@@ -93,23 +93,37 @@ export function SprintCard({ sprint }: SprintCardProps) {
             <Progress value={sprint.progress} className="h-2" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="grid grid-cols-3 flex-row gap-4 text-sm">
             <div className="flex items-center space-x-2">
               <CheckCircle className="w-4 h-4 text-green-600" />
               <span>
-                {sprint.completedTasks}/{sprint.tasks} tasks
+                {sprint.completedTasks || 0}/{sprint.tasks || 0} tasks
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <CheckCircle className="w-4 h-4 text-green-600" />
+              <span>
+                {sprint.projects || 0} Projects
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <Users className="w-4 h-4 text-blue-600" />
-              <span>{sprint.teamMembers} members</span>
+              <span>{sprint.teamMembers || 0} members</span>
             </div>
           </div>
 
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <Calendar className="w-4 h-4" />
             <span>
-              {sprint.startDate} - {sprint.endDate}
+              {new Date(sprint.startDate).toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+              })} - {new Date(sprint.endDate).toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+              })}
             </span>
           </div>
 
