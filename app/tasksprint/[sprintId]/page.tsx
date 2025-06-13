@@ -273,72 +273,70 @@ export default function SprintDetailPage() {
                   </div>
                   <Progress value={currentSprint.progress} className="h-3" />
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4 mt-2">
+                  <motion.div variants={fadeInUp}>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="flex items-center space-x-3">
+                          <div className="p-2 bg-blue-100 rounded-lg">
+                            <Calendar className="w-6 h-6 text-blue-600" />
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-600">Duration</p>
+                            <p className="font-semibold">
+                              {new Date(currentSprint.startDate).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                              })} - {new Date(currentSprint.endDate).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
+                  <motion.div variants={fadeInUp}>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="flex items-center space-x-3">
+                          <div className="p-2 bg-green-100 rounded-lg">
+                            <Users className="w-6 h-6 text-green-600" />
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-600">Team Size</p>
+                            <p className="font-semibold">{currentSprint.teamMembers} members</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
+                  <motion.div variants={fadeInUp}>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="flex items-center space-x-3">
+                          <div className={`p-2 rounded-lg ${daysRemaining > 0 ? "bg-orange-100" : "bg-red-100"}`}>
+                            <Clock className={`w-6 h-6 ${daysRemaining > 0 ? "text-orange-600" : "text-red-600"}`} />
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-600">Time Remaining</p>
+                            <p className="font-semibold">{daysRemaining > 0 ? `${daysRemaining} days` : "Overdue"}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Sprint Details Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <motion.div variants={fadeInUp}>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Calendar className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Duration</p>
-                      <p className="font-semibold">
-                        {new Date(currentSprint.startDate).toLocaleDateString('en-GB', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric'
-                        })} - {new Date(currentSprint.endDate).toLocaleDateString('en-GB', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric'
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={fadeInUp}>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                      <Users className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Team Size</p>
-                      <p className="font-semibold">{currentSprint.teamMembers} members</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={fadeInUp}>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-3">
-                    <div className={`p-2 rounded-lg ${daysRemaining > 0 ? "bg-orange-100" : "bg-red-100"}`}>
-                      <Clock className={`w-6 h-6 ${daysRemaining > 0 ? "text-orange-600" : "text-red-600"}`} />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Time Remaining</p>
-                      <p className="font-semibold">{daysRemaining > 0 ? `${daysRemaining} days` : "Overdue"}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-
-          {/* Task Breakdown */}
           <motion.div variants={fadeInUp}>
             <Card>
               <CardHeader>
@@ -380,9 +378,11 @@ export default function SprintDetailPage() {
                   <div className="flex items-center space-x-2">
                     <InviteUserDialog sprintId={sprintId} />
                     <ProjectForm sprintId={sprintId} />
-                    <Button variant="outline" size="sm">                      
-                      <Settings className="w-4 h-4" />
-                    </Button>
+                    <Link href={`/tasksprint/${sprintId}/settings`}>
+                      <Button variant="outline" size="sm">
+                        <Settings className="w-4 h-4" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardHeader>
