@@ -18,7 +18,7 @@ import {
   Target,
   AlertCircle,
 } from "lucide-react";
-import { useTaskStore } from "@/store/task-store";
+import { useTaskStore } from "@/store/useTaskStore";
 import { TaskForm } from "@/components/task-form";
 import { motion } from "framer-motion";
 import type { Task } from "@/types/task";

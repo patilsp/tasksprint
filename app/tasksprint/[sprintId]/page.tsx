@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import Image from "next/Image"
+import Image from "next/image"
 import { useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Zap, Users, BarChart3, ArrowRight, Star, Play, Menu, X } from "lucide-react"
 import Link from "next/link"
-import Image from "next/Image"
+import Image from "next/image"
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 

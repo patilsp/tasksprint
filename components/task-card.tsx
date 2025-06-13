@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, User, Clock, Edit, Trash2, Timer, Eye } from "lucide-react"
 import type { Task } from "@/types/task"
 import { TaskForm } from "./task-form"
-import { useTaskStore } from "@/store/task-store"
+import { useTaskStore } from "@/store/useTaskStore"
 import { motion } from "framer-motion"
 
 interface TaskCardProps {
