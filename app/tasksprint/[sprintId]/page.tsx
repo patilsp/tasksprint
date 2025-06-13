@@ -22,6 +22,7 @@ import {
   AlertCircle,
   FolderOpen,
   ArrowRight,
+  Settings,
 } from "lucide-react"
 import { useSprintStore } from "@/store/useSprintStore"
 import { SprintForm } from "@/components/sprint-form"
@@ -184,12 +185,12 @@ export default function SprintDetailPage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
+            <Link href="/" target="_blank"className="flex item-center">
+              <Image src="/images/logo.png" height={35} width={35} alt="logo" className="object-contain" />
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 TaskSprint
               </span>
+            </Link>
             </div>
             <Separator orientation="vertical" className="h-6" />
             <Button variant="ghost" size="sm" onClick={handleBack}>
@@ -238,7 +239,7 @@ export default function SprintDetailPage() {
           <motion.div variants={fadeInUp} className="mb-8">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
               <div className="flex-1">
-                <h1 className="text-3xl font-bold mb-2">{currentSprint.name}</h1>
+                <h1 className="text-xl font-bold mb-2">{currentSprint.name}</h1>
                 <p className="text-gray-600 text-lg">{currentSprint.description}</p>
               </div>
               <div className="flex items-center space-x-3 mt-4 md:mt-0">
@@ -380,6 +381,9 @@ export default function SprintDetailPage() {
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                     <ProjectForm sprintId={sprintId} />
+                    <Button variant="outline" size="sm">                      
+                      <Settings className="w-4 h-4" />
+                    </Button>
                   </div>
                 </div>
               </CardHeader>

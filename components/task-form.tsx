@@ -83,7 +83,7 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
   }
 
   const defaultTrigger = (
-    <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+    <Button>
       <Plus className="w-4 h-4 mr-2" />
       Add New Task
     </Button>
@@ -231,7 +231,7 @@ export function TaskForm({ task, mode = "create", trigger, projectId }: TaskForm
             <Button
               type="submit"
               disabled={loading || !formData.title.trim()}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+              
             >
               {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               {mode === "create" ? "Create Task" : "Update Task"}

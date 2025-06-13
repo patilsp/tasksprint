@@ -1,38 +1,27 @@
 import mongoose from "mongoose"
 
-const MONGODB_URI = process.env.MONGODB_URI
+let isConnected = false; // track the connection
 
-if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable inside .env")
-}
-
-let cached = global.mongoose
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null }
-}
-
-export async function connectToDB() {
-  if (cached.conn) {
-    return cached.conn
+export const connectToDB = async () => {
+  
+  if (isConnected) {
+    console.log('MongoDB is already connected');
+    return;
   }
 
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    }
-
-    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
-      return mongoose
-    })
+  if (!process.env.MONGO_URL) {
+    throw new Error('MONGO_URL is not defined in the environment variables');
   }
 
   try {
-    cached.conn = await cached.promise
-  } catch (e) {
-    cached.promise = null
-    throw e
-  }
+    await mongoose.connect(process.env.MONGO_URL, {
+      dbName: "tasksprint",
+    });
 
-  return cached.conn
-} 
+    isConnected = true;
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    throw error; // Re-throw the error for proper error handling
+  }
+}; 

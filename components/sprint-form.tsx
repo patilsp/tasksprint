@@ -66,7 +66,7 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
   }
 
   const defaultTrigger = (
-    <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+    <Button>
       <Plus className="w-4 h-4 mr-2" />
       Add New Sprint
     </Button>
@@ -207,7 +207,6 @@ export function SprintForm({ sprint, mode = "create", trigger }: SprintFormProps
             <Button
               type="submit"
               disabled={loading || !formData.name.trim()}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
             >
               {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               {mode === "create" ? "Create Sprint" : "Update Sprint"}

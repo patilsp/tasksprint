@@ -178,7 +178,7 @@ export default function SprintsPage() {
             <motion.div variants={fadeInUp} className="mb-8">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                 <div>
-                  <h1 className="text-3xl font-bold mb-2">Sprint Dashboard</h1>
+                  <h1 className="text-xl font-bold mb-2">Sprint Dashboard</h1>
                   <p className="text-gray-600">Manage and track your project sprints</p>
                 </div>
                 <div className="flex items-center space-x-4 mt-4 md:mt-0">
@@ -258,17 +258,7 @@ export default function SprintsPage() {
                     </SelectContent>
                   </Select>
 
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-full sm:w-[140px]">
-                      <SelectValue placeholder="Sort by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="name">Name</SelectItem>
-                      <SelectItem value="progress">Progress</SelectItem>
-                      <SelectItem value="startDate">Start Date</SelectItem>
-                      <SelectItem value="priority">Priority</SelectItem>
-                    </SelectContent>
-                  </Select>
+          
 
                   <Button variant="outline" onClick={clearFilters} className="w-full sm:w-auto">
                     <Filter className="w-4 h-4 mr-2" />
@@ -305,7 +295,7 @@ export default function SprintsPage() {
                   <p>Try adjusting your search or filter criteria</p>
                 </div>
                 <Button variant="outline" onClick={clearFilters}>
-                  Clear all filters
+                  Clear
                 </Button>
               </motion.div>
             ) : (

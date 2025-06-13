@@ -70,12 +70,12 @@ export function SprintCard({ sprint }: SprintCardProps) {
     <motion.div whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.2 }}>
       <Card className="hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={handleCardClick}>
         <CardHeader className="pb-3">
-          <div className="flex items-start justify-between">
+          <div className="flex-col md:flex-row flex items-start justify-between">
             <div className="flex-1">
               <CardTitle className="text-lg mb-2 group-hover:text-blue-600 transition-colors truncate max-w-[220px]">{sprint.name}</CardTitle>
               <p className="text-sm text-gray-600 line-clamp-2 truncate max-w-[500px]">{sprint.description}</p>
             </div>
-            <div className="flex items-center space-x-2 ml-4">
+            <div className="flex items-center space-x-2 ml-0 md:ml-4 py-2 md:py-0">
               <Badge className={getPriorityColor(sprint.priority)}>{sprint.priority}</Badge>
               <Badge variant="secondary" className={getStatusColor(sprint.status)}>
                 {sprint.status}

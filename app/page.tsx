@@ -23,7 +23,7 @@ const staggerContainer = {
   },
 }
 
-export default function TaskSprintLanding() {
+export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const heroRef = useRef(null)
   const featuresRef = useRef(null)

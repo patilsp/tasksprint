@@ -1,5 +1,6 @@
 "use client"
-
+import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,7 @@ import { ProjectCard } from "@/components/project-card"
 import { ProjectForm } from "@/components/project-form"
 import type { Project } from "@/types/project"
 import { motion } from "framer-motion"
+
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -109,12 +111,12 @@ export default function ProjectsPage() {
         <header className="bg-white/80 backdrop-blur-md border-b">
           <div className="container mx-auto px-4 h-16 flex items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
+            <Link href="/" target="_blank"className="flex item-center">
+              <Image src="/images/logo.png" height={35} width={35} alt="logo" className="object-contain" />
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 TaskSprint
               </span>
+            </Link>
             </div>
           </div>
         </header>
@@ -256,17 +258,7 @@ export default function ProjectsPage() {
                         <SelectItem value="High">High</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Select value={sortBy} onValueChange={setSortBy}>
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Sort by" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="name">Name</SelectItem>
-                        <SelectItem value="progress">Progress</SelectItem>
-                        <SelectItem value="startDate">Start Date</SelectItem>
-                        <SelectItem value="priority">Priority</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    
                     <Button variant="outline" size="sm" onClick={clearFilters}>
                       <Filter className="w-4 h-4 mr-2" />
                       Clear Filters
