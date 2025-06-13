@@ -47,14 +47,17 @@ export default function SprintDetailPage() {
   const sprintId = params.sprintId as string
 
   useEffect(() => {
-    if (sprintId) {
-      fetchSprint(sprintId)
+    if (!sprintId) {
+      router.push("/tasksprint")
+      return
     }
+
+    fetchSprint(sprintId)
 
     return () => {
       clearCurrentSprint()
     }
-  }, [sprintId, fetchSprint, clearCurrentSprint])
+  }, [sprintId, fetchSprint, clearCurrentSprint, router])
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this sprint?")) {

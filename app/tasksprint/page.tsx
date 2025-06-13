@@ -14,6 +14,7 @@ import { SprintForm } from "@/components/sprint-form"
 import { EmptyState } from "@/components/empty-state"
 import type { Sprint } from "@/types/sprint"
 import { motion } from "framer-motion"
+import { UserNav } from "@/components/user-nav"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -166,6 +167,11 @@ export default function SprintsPage() {
           <div className="flex items-center space-x-3">           
             <SprintForm />
           </div>
+
+        <div>
+            <UserNav />
+          </div>
+         
         </div>
       </motion.header>
 
