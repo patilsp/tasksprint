@@ -12,9 +12,9 @@
 
 ## Overview
 
-This is a starter template using the following stack:
+✅ Tech Stack Summary:
 
-- Framework - [Next.js 14](https://nextjs.org/13)
+- Framework: [Next.js 15 (App Router, TypeScript)](https://nextjs.org/13)
 - Language - [TypeScript](https://www.typescriptlang.org)
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Components - [Shadcn-ui](https://ui.shadcn.com)
